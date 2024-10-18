@@ -1,47 +1,38 @@
-package com.capgeticket.resteventos.model;
+package com.capgeticket.resteventos.response;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 
-@Entity
-@Table(name = "evento")
-public class Evento {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "Id")
+public class EventoDto implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
 	private Long id;
 
-	@Column(name = "Nombre")
 	private String nombre;
 
-	@Column(name = "Descripcion")
 	private String descripcion;
 
-	@Column(name = "genero")
 	private String genero;
 
-	@Column(name = "Fecha evento")
 	private LocalDateTime fecha_evento;
 
-	@Column(name = "Precio minimo")
 	private double precio_min;
 
-	@Column(name = "Precio maximo")
 	private double precio_max;
 
-	@Column(name = "Localidad")
 	private String localidad;
 
-	@Column(name = "Recinto")
 	private String recinto;
 
-	public Evento(Long id, String nombre, String descripcion, String genero, LocalDateTime fecha_evento,
+	public EventoDto() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public EventoDto(Long id, String nombre, String descripcion, String genero, LocalDateTime fecha_evento,
 			double precio_min, double precio_max, String localidad, String recinto) {
 		super();
 		this.id = id;
@@ -53,10 +44,6 @@ public class Evento {
 		this.precio_max = precio_max;
 		this.localidad = localidad;
 		this.recinto = recinto;
-	}
-
-	public Evento() {
-		super();
 	}
 
 	public Long getId() {
@@ -133,7 +120,7 @@ public class Evento {
 
 	@Override
 	public String toString() {
-		return "Evento [id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", genero=" + genero
+		return "EventoDto [id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", genero=" + genero
 				+ ", fecha_evento=" + fecha_evento + ", precio_min=" + precio_min + ", precio_max=" + precio_max
 				+ ", localidad=" + localidad + ", recinto=" + recinto + "]";
 	}
