@@ -3,9 +3,7 @@ package com.capgeticket.resteventos.response;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-import jakarta.persistence.Column;
-
-public class EventoDto implements Serializable {
+public class EventoResponse implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -27,24 +25,6 @@ public class EventoDto implements Serializable {
 
 	private String recinto;
 
-	public EventoDto() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	public EventoDto(Long id, String nombre, String descripcion, String genero, LocalDateTime fecha_evento,
-			double precio_min, double precio_max, String localidad, String recinto) {
-		super();
-		this.id = id;
-		this.nombre = nombre;
-		this.descripcion = descripcion;
-		this.genero = genero;
-		this.fecha_evento = fecha_evento;
-		this.precio_min = precio_min;
-		this.precio_max = precio_max;
-		this.localidad = localidad;
-		this.recinto = recinto;
-	}
 
 	public Long getId() {
 		return id;
