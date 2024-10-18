@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-=======
+
 ### Eclipse ###
 .metadata
 bin/
@@ -67,7 +66,6 @@ local.properties
 .sts4-cache/
 
 ### Java ###
->>>>>>> 3924e4734035e85cdc7fac50f6fb68e72b58cbf6
 # Compiled class file
 *.class
 
@@ -77,12 +75,6 @@ local.properties
 # BlueJ files
 *.ctxt
 
-<<<<<<< HEAD
-### STS ###
-.metadata/
-
-=======
->>>>>>> 3924e4734035e85cdc7fac50f6fb68e72b58cbf6
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
@@ -98,3 +90,4 @@ local.properties
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+
