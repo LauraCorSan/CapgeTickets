@@ -1,4 +1,4 @@
-package modelo;
+package com.capgeticket.resteventos.model;
 
 import java.time.LocalDateTime;
 

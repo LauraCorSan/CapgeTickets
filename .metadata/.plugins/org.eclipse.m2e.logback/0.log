@@ -447,3 +447,7 @@ org.eclipse.core.runtime.CoreException: Could not resolve artifact org.springfra
 2024-10-18 12:27:33,726 [Worker-7: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
 2024-10-18 12:27:33,736 [Worker-7: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
 2024-10-18 12:27:33,742 [Worker-7: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\ecantone\CapgeTickets\RestEventos\src\test\resources
+2024-10-18 12:41:29,829 [Worker-36: Building] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.capgeticket:RestEventos:0.0.1-SNAPSHOT @ C:\Users\ecantone\CapgeTickets\RestEventos\pom.xml.
+2024-10-18 12:41:33,428 [Worker-36: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-10-18 12:41:33,457 [Worker-36: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-10-18 12:41:33,465 [Worker-36: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\ecantone\CapgeTickets\RestEventos\src\test\resources
