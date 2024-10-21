@@ -12,12 +12,13 @@ import com.capgeticket.resteventos.error.EventoInvalidoException;
 import com.capgeticket.resteventos.model.Evento;
 import com.capgeticket.resteventos.repository.EventoRepository;
 
+import jakarta.persistence.EntityNotFoundException;
+
 /**
  * Clase: EventoServiceImpl Descripción: clase de servicio que utiliza el
  * repositorio para la gestion de datos Fecha: 18/10/24 Versión: 2.0 Autores:
  * Laura Gregorio, Laura Cordero, Elena, Guillermo, Veronica
  */
-
 @Service
 public class EventoServiceImpl implements EventoService {
 
@@ -39,6 +40,24 @@ public class EventoServiceImpl implements EventoService {
 		validarEvento(evento);
 		return eventoRepository.save(evento);
 	}
+	
+	/**
+	 * LLama al repositorio, encuentra un evento por id y si está presente lo elimina, si no lanza excepción
+	 * @param id
+	 * @return objeto evento 
+	 */
+
+	public Evento eliminarEvento(Long id) {
+		Optional<Evento> eventoOpt = eventoRepository.findById(id);
+		if (eventoOpt.isPresent()) {
+			Evento evento = eventoOpt.get();
+			eventoRepository.delete(evento);
+			return evento;
+
+		} else {
+			throw new EntityNotFoundException("Evento no encontrado con ID: " + id);
+		}
+	}
 
 	/**
 	 * Se encarga de validar los campos del evento para poder añadirlo
@@ -46,7 +65,6 @@ public class EventoServiceImpl implements EventoService {
 	 * @author lgregori
 	 * @param evento
 	 */
-
 	private void validarEvento(Evento evento) {
 		if (evento.getNombre() == null || evento.getNombre().trim().isEmpty()) {
 			throw new EventoInvalidoException("El nombre del evento no puede estar vacío.");
@@ -110,6 +128,7 @@ public class EventoServiceImpl implements EventoService {
 
 	/**
 	 * Llama al repositorio de evento para realizar la búsqueda de todos los eventos
+	 * @author elena
 	 * @return Lista de Evento
 	 */
 	@Override

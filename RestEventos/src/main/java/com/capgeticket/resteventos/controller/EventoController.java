@@ -12,6 +12,10 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 
+import org.apache.hc.core5.http.HttpStatus;
+
+import org.springframework.web.bind.annotation.DeleteMapping;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -22,7 +26,6 @@ import com.capgeticket.resteventos.service.EventoService;
 import com.capgeticket.resteventos.adapter.EventoAdapter;
 import com.capgeticket.resteventos.error.EventoNotFoundException;
 
-import com.capgeticket.resteventos.repository.EventoRepository;
 import com.capgeticket.resteventos.response.EventoResponse;
 
 import com.capgeticket.resteventos.model.Evento;
@@ -50,22 +53,24 @@ public class EventoController {
 	 * @return Un evento adaptado
 	 */
 	@PutMapping("/modificar/{id}")
-	public EventoResponse modificarEvento(@PathVariable Long id, @RequestBody EventoResponse evento){
+	public EventoResponse modificarEvento(@PathVariable Long id, @RequestBody EventoResponse evento) {
 		final Optional<Evento> e = eventoService.buscarPorId(id);
-		if(e.isEmpty())throw new EventoNotFoundException("El id "+id+" no se ha encontrado");
-		
+		if (e.isEmpty())
+			throw new EventoNotFoundException("El id " + id + " no se ha encontrado");
+
 		evento.setId(id);
 		Evento event = eventoService.aniadirEvento(eventoAdapter.toEntity(evento));
 		return eventoAdapter.toDTO(event);
- 
+
 	}
- 
+
 	/**
 	 * Llama al servicio de evento para realizar la operacion de guardado
 	 * 
 	 * @param Recibe un objeto de tipo Evento en formato json
 	 * @return Un evento fto
 	 */
+
 	@PostMapping("/aniadir")
 	public EventoResponse aniadirEvento(@RequestBody Evento evento) {
 		Evento e = eventoService.aniadirEvento(evento);
@@ -100,6 +105,29 @@ public class EventoController {
 	public EventoResponse detallesEvento(@PathVariable Long id) {
 		Evento evento = eventoService.detallesEvento(id);
 		return eventoAdapter.toDTO(evento);
+	}
+
+	/**
+	 * Elimina un evento específico basado en su ID.
+	 * 
+	 * @param id El ID del evento que se desea eliminar.
+	 * @return Una respuesta HTTP que indica el resultado de la operación: - Código
+	 *         200: Si el evento fue eliminado correctamente. - Código 404: Si no se
+	 *         encontró el evento con el ID proporcionado.
+	 */
+	@DeleteMapping("/delete/{id}")
+	public ResponseEntity<String> deleteEvento(@PathVariable Long id) {
+		try {
+			Evento eventoEliminado = eventoService.eliminarEvento(id);
+
+			if (eventoEliminado == null) {
+				return ResponseEntity.status(HttpStatus.SC_NOT_FOUND).body("Evento no encontrado.");
+			}
+
+			return ResponseEntity.ok("Evento eliminado correctamente.");
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.SC_INTERNAL_SERVER_ERROR).body("Error al eliminar el evento.");
+		}
 	}
 
 }
