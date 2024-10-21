@@ -3,12 +3,11 @@ package com.capgeticket.resteventos.service;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.capgeticket.resteventos.adapter.EventoAdapter;
 import com.capgeticket.resteventos.error.EventoInvalidoException;
+import com.capgeticket.resteventos.error.EventoNotFoundException;
 import com.capgeticket.resteventos.model.Evento;
 import com.capgeticket.resteventos.repository.EventoRepository;
 
@@ -111,7 +110,7 @@ public class EventoServiceImpl implements EventoService {
 	@Override
 	public Evento detallesEvento(Long id) {
 		return eventoRepository.findById(id)
-				.orElseThrow(() -> new RuntimeException("Evento no encontrado con id: " + id));
+	            .orElseThrow(() -> new EventoNotFoundException("El id " + id + " no se ha encontrado")); 
 
 	}
 

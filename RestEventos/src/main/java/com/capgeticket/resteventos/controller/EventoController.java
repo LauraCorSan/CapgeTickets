@@ -103,8 +103,12 @@ public class EventoController {
 	 */
 	@GetMapping("/{id}")
 	public EventoResponse detallesEvento(@PathVariable Long id) {
-		Evento evento = eventoService.detallesEvento(id);
-		return eventoAdapter.toDTO(evento);
+
+		if (id < 0) {
+	        throw new EventoNotFoundException("El id " + id + " no se ha encontrado"); // Lanza la excepción si el ID es inválido
+	    }
+	    Evento evento = eventoService.detallesEvento(id);
+	    return eventoAdapter.toDTO(evento);
 	}
 
 	/**
@@ -115,7 +119,7 @@ public class EventoController {
 	 *         200: Si el evento fue eliminado correctamente. - Código 404: Si no se
 	 *         encontró el evento con el ID proporcionado.
 	 */
-	@DeleteMapping("/delete/{id}")
+	@DeleteMapping("/eliminar/{id}")
 	public ResponseEntity<String> deleteEvento(@PathVariable Long id) {
 		try {
 			Evento eventoEliminado = eventoService.eliminarEvento(id);

@@ -1,6 +1,7 @@
 package com.capgeticket.resteventos;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -21,8 +22,17 @@ import com.capgeticket.resteventos.model.Evento;
 import com.capgeticket.resteventos.repository.EventoRepository;
 import com.capgeticket.resteventos.service.EventoService;
 
+
+/**
+ * Clase: EliminarEventoTest 
+ * Descripción: clase de tests del método de eliminar
+ * evento, comprueba que se realice correctamente o no
+ * Fecha: 21/10/24 
+ * Versión: 1.0 
+ * Autores: Elena y Guillermo
+ */
 @ExtendWith(MockitoExtension.class) 
-public class EliminarEventoTest {
+public class EliminarEventoTests {
 	@Mock
     private EventoRepository eventoRepository;  
 
