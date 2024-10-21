@@ -11,7 +11,7 @@ import com.capgeticket.resteventos.model.Evento;
  * ApiRest 
  * Fecha: 18/10/24 
  * Versión: 1.0 
- * Autores:
+ * Autores: Laura Cordero
  */
 
 @Repository

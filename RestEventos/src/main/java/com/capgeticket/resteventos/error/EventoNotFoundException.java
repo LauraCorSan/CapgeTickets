@@ -1,20 +1,20 @@
 package com.capgeticket.resteventos.error;
 
 /**
- * Clase: EventoNotFound
+ * Clase: EventoNotFoundException
  * Descripción: excepción personalizada si no se encuentra un evento
  * Fecha: 21/10/24
  * Versión: 1.0
  * Autores: Laura Gregorio y Laura Cordero
  */
-public class EventoNotFound extends RuntimeException {
+public class EventoNotFoundException extends RuntimeException {
 	private static final long serialVersionUID = 1L;
 
-	public EventoNotFound() {
+	public EventoNotFoundException() {
 		super("Evento no encontrado :(");
 	}
 
-	public EventoNotFound(Long id) {
+	public EventoNotFoundException(Long id) {
 		super("Evento con id " + id + " no encontrado");
 	}
 
