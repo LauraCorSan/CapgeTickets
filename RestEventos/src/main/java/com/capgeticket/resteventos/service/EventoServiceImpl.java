@@ -16,7 +16,7 @@ public class EventoServiceImpl implements EventoService{
      * @return Resultado de la llamada al metodo save en repositorio
      */
 	@Override
-	public Evento save(Evento evento) {
+	public Evento aniadirEvento (Evento evento) {
 		return repository.save(evento);	
 	}
 	

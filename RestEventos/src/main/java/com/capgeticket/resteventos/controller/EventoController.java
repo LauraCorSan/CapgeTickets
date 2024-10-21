@@ -26,7 +26,7 @@ public class EventoController {
      * @return Un evento adaptado 
      */
 	@PutMapping
-	public void editUser(@PathVariable Long id, @RequestBody Evento evento) {
+	public void modificarEvento(@PathVariable Long id, @RequestBody Evento evento) {
 		final Evento e = service.findById(id).orElseThrow();
 		e = service.save(evento);
         return eventoAdapter.of(e);
