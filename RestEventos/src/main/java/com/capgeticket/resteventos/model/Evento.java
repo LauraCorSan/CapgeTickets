@@ -14,11 +14,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * Clase: Evento
- * Descripción: modelo Evento con sus atributos
- * Fecha: 21/10/24
- * Versión: 1.0
- * Autores: Laura Gregorio
+ * Clase: Evento Descripción: modelo Evento con sus atributos Fecha: 21/10/24
+ * Versión: 1.0 Autores: Laura Gregorio
  */
 @Builder
 @Data
@@ -56,78 +53,4 @@ public class Evento {
 	@Column(name = "recinto")
 	private String recinto;
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public String getDescripcion() {
-		return descripcion;
-	}
-
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
-
-	public String getGenero() {
-		return genero;
-	}
-
-	public void setGenero(String genero) {
-		this.genero = genero;
-	}
-
-	public LocalDateTime getFecha_evento() {
-		return fecha_evento;
-	}
-
-	public void setFecha_evento(LocalDateTime fecha_evento) {
-		this.fecha_evento = fecha_evento;
-	}
-
-	public double getPrecio_min() {
-		return precio_min;
-	}
-
-	public void setPrecio_min(double precio_min) {
-		this.precio_min = precio_min;
-	}
-
-	public double getPrecio_max() {
-		return precio_max;
-	}
-
-	public void setPrecio_max(double precio_max) {
-		this.precio_max = precio_max;
-	}
-
-	public String getLocalidad() {
-		return localidad;
-	}
-
-	public void setLocalidad(String localidad) {
-		this.localidad = localidad;
-	}
-
-	public String getRecinto() {
-		return recinto;
-	}
-
-	public void setRecinto(String recinto) {
-		this.recinto = recinto;
-	}
-
-	
-	
 }

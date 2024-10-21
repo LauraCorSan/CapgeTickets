@@ -1,6 +1,9 @@
 package com.capgeticket.resteventos;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.junit.jupiter.api.Test;
+
 import org.springframework.boot.test.context.SpringBootTest;
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -20,6 +23,10 @@ public class RestEventosApplicationTests {
 
 	 	@Mock
 	    private EventoRepository eventoRepository;
+	@Test
+	void shouldBeAlwaysTrue() {
+		assertThat(true).isTrue();
+	}	
 
 	    @InjectMocks
 	    private EventoServiceImpl eventoService;
