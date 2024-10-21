@@ -2,6 +2,7 @@ package com.capgeticket.resteventos.response;
 
 import java.io.Serializable;
 
+
 import java.time.LocalDateTime;
 
 import lombok.AllArgsConstructor;
