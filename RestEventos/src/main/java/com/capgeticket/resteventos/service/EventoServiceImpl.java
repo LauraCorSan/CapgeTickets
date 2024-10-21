@@ -28,7 +28,8 @@ public class EventoServiceImpl implements EventoService {
 
 	/**
 	 * Llama al repositorio de evento para realizar la operacion de guardado
-	 *
+	 * 
+	 * @author lgregori
 	 * @param Recibe un objeto de tipo Evento
 	 * @return Resultado de la llamada al metodo save en repositorio
 	 */
@@ -41,6 +42,7 @@ public class EventoServiceImpl implements EventoService {
 	/**
 	 * Se encarga de validar los campos del evento para poder añadirlo
 	 * 
+	 * @author lgregori
 	 * @param evento
 	 */
 
