@@ -11,11 +11,11 @@ public class EventoNotFound extends RuntimeException {
 	private static final long serialVersionUID = 1L;
 
 	public EventoNotFound() {
-		super("Evento no encontrado :(");
+		super("Evento no encontrado! D:");
 	}
 
 	public EventoNotFound(Long id) {
-		super("Evento con id " + id + " no encontrado");
+		super("Evento con id " + id + " no encontrado! D:");
 	}
 
 }
