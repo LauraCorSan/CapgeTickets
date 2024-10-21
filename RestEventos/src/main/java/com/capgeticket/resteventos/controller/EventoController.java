@@ -30,9 +30,15 @@ public class EventoController {
 		return eventoAdapter.toDTO(e);
 	}
 	
-	@GetMapping("/evento/{id}")
+	/**
+	 * Busca los detalles de un evento por su ID.
+	 * @author vparragr
+	 * @param id El ID del evento que se desea buscar.
+	 * @return El objeto correspondiente al ID proporcionado.
+	 */
+	@GetMapping("/{id}")
 	public EventoResponse detallesEvento(@PathVariable Long id) {
-        final Evento evento = eventoService.detallesEvento(id);
+         Evento evento = eventoService.detallesEvento(id);
         return eventoAdapter.toDTO(evento);
     }
 

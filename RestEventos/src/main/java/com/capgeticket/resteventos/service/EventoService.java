@@ -6,6 +6,8 @@ public interface EventoService {
 	
 	public Evento aniadirEvento(Evento evento);
 	
+	
+	//Obtiene los detalles de un evento por su ID.
 	public Evento detallesEvento(Long id);
 
 }
