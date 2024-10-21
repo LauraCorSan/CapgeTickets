@@ -1,12 +1,29 @@
 package com.capgeticket.resteventos.response;
 
 import java.io.Serializable;
+
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import com.capgeticket.resteventos.model.Evento;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+/**
+ * Clase: EventoResponse
+ * Descripción: clase dto con los datos más relevantes
+ * Fecha: 21/10/24
+ * Versión: 1.0
+ * Autores: Laura Gregorio
+ */
+@Builder
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class EventoResponse implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -123,10 +140,5 @@ public class EventoResponse implements Serializable {
         eventoResponse.setRecinto(evento.getRecinto());
         return eventoResponse;
     }
-
-	
-
-
-	
 
 }
