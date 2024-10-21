@@ -5,7 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.capgeticket.resteventos.model.Evento;
 
-<<<<<<< HEAD
 /**
  * Interfaz: EventoRepository Descripción: Interfaz que extiende JpaRepository
  * por lo que Spring ya contiene implementación de los metodos mas usuales de
@@ -14,7 +13,6 @@ import com.capgeticket.resteventos.model.Evento;
  * Versión: 1.0 
  * Autores: Laura Cordero
  */
-=======
 import org.springframework.stereotype.Repository;
 
 

@@ -10,12 +10,10 @@ package com.capgeticket.resteventos.error;
 public class EventoNotFoundException extends RuntimeException {
 	private static final long serialVersionUID = 1L;
 
-	public EventoNotFoundException() {
-		super("Evento no encontrado :(");
+	public EventoNotFoundException(String message) {
+		super("{ \"error\": \"Evento no encontrado.\", \"details\": \"" + message + "\" }");
 	}
 
-	public EventoNotFoundException(Long id) {
-		super("Evento con id " + id + " no encontrado");
-	}
+
 
 }

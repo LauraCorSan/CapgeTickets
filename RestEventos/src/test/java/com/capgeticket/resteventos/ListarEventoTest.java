@@ -44,8 +44,8 @@ class ListarEventoTest {
         evento1.setNombre("Concierto de Rock");
         evento1.setDescripcion("Descripción del concierto de rock.");
         evento1.setGenero("Rock");
-        evento1.setPrecio_min(20.0);
-        evento1.setPrecio_max(60.0);
+        evento1.setPrecioMin(20.0);
+        evento1.setPrecioMax(60.0);
         evento1.setLocalidad("Madrid");
         evento1.setRecinto("Palacio de los Deportes");
 
@@ -54,8 +54,8 @@ class ListarEventoTest {
         evento2.setNombre("Concierto de Jazz");
         evento2.setDescripcion("Descripción del concierto de jazz.");
         evento2.setGenero("Jazz");
-        evento2.setPrecio_min(15.0);
-        evento2.setPrecio_max(45.0);
+        evento2.setPrecioMin(15.0);
+        evento2.setPrecioMax(45.0);
         evento2.setLocalidad("Madrid");
         evento2.setRecinto("Palacio de los Deportes");
     }
@@ -67,9 +67,7 @@ class ListarEventoTest {
     @Test
     void testGetEventoAll_ReturnsListOfEventos() {
         when(eventoRepository.findAll()).thenReturn(Arrays.asList(evento1, evento2));
-        when(eventoAdapter.of(Arrays.asList(evento1, evento2)))
-                .thenReturn(Arrays.asList(EventoResponse.of(evento1), EventoResponse.of(evento2)));
-
+   
         ResponseEntity<List<EventoResponse>> response = eventoController.getEventoAll();
 
         assertNotNull(response);

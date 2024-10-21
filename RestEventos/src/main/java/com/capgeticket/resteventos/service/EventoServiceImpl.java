@@ -1,6 +1,7 @@
 package com.capgeticket.resteventos.service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,19 +57,19 @@ public class EventoServiceImpl implements EventoService {
 		{
 			throw new EventoInvalidoException("El género del evento no puede estar vacío.");
 		}
-		if (evento.getFecha_evento() == null) {
+		if (evento.getFechaEvento() == null) {
 			throw new EventoInvalidoException("La fecha del evento no puede ser nula.");
 		}
-		if (evento.getFecha_evento().isBefore(LocalDateTime.now())) {
+		if (evento.getFechaEvento().isBefore(LocalDateTime.now())) {
 			throw new EventoInvalidoException("La fecha del evento no puede ser en el pasado.");
 		}
-		if (evento.getPrecio_min() < 0) {
+		if (evento.getPrecioMin() < 0) {
 			throw new EventoInvalidoException("El precio mínimo no puede ser negativo.");
 		}
-		if (evento.getPrecio_max() < 0) {
+		if (evento.getPrecioMax() < 0) {
 			throw new EventoInvalidoException("El precio máximo no puede ser negativo.");
 		}
-		if (evento.getPrecio_min() > evento.getPrecio_max()) {
+		if (evento.getPrecioMin() > evento.getPrecioMax()) {
 			throw new EventoInvalidoException("El precio mínimo no puede ser mayor que el precio máximo.");
 		}
 		if (evento.getLocalidad() == null || evento.getLocalidad().trim().isEmpty()) {
@@ -105,5 +106,14 @@ public class EventoServiceImpl implements EventoService {
 	@Override
 	public Optional<Evento> buscarPorId(Long id) {
 		return eventoRepository.findById(id);
+	}
+
+	/**
+	 * Llama al repositorio de evento para realizar la búsqueda de todos los eventos
+	 * @return Lista de Evento
+	 */
+	@Override
+	public List<Evento> buscarTodos() {
+		return eventoRepository.findAll();
 	}
 }

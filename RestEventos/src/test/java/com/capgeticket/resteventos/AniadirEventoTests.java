@@ -43,9 +43,9 @@ public class AniadirEventoTests {
 		evento.setNombre("Concierto");
 		evento.setDescripcion("Concierto de rock.");
 		evento.setGenero("Rock");
-		evento.setFecha_evento(LocalDateTime.now().plusDays(1));
-		evento.setPrecio_min(10.0);
-		evento.setPrecio_max(50.0);
+		evento.setFechaEvento(LocalDateTime.now().plusDays(1));
+		evento.setPrecioMin(10.0);
+		evento.setPrecioMax(50.0);
 		evento.setLocalidad("Madrid");
 		evento.setRecinto("Palacio de los Deportes");
 	}
@@ -63,9 +63,9 @@ public class AniadirEventoTests {
 		assertEquals(evento.getNombre(), result.getNombre());
 		assertEquals(evento.getDescripcion(), result.getDescripcion());
 		assertEquals(evento.getGenero(), result.getGenero());
-		assertEquals(evento.getFecha_evento(), result.getFecha_evento());
-		assertEquals(evento.getPrecio_min(), result.getPrecio_min());
-		assertEquals(evento.getPrecio_max(), result.getPrecio_max());
+		assertEquals(evento.getFechaEvento(), result.getFechaEvento());
+		assertEquals(evento.getPrecioMin(), result.getPrecioMin());
+		assertEquals(evento.getPrecioMax(), result.getPrecioMax());
 		assertEquals(evento.getLocalidad(), result.getLocalidad());
 		assertEquals(evento.getRecinto(), result.getRecinto());
 	}
@@ -89,7 +89,7 @@ public class AniadirEventoTests {
 	 */
 	@Test
 	public void invalidaData() {
-		evento.setFecha_evento(LocalDateTime.now().minusDays(1));
+		evento.setFechaEvento(LocalDateTime.now().minusDays(1));
 
 		EventoInvalidoException exception = assertThrows(EventoInvalidoException.class, () -> {
 			eventoService.aniadirEvento(evento);

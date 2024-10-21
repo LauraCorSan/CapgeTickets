@@ -1,5 +1,6 @@
 package com.capgeticket.resteventos.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.capgeticket.resteventos.model.Evento;
@@ -21,5 +22,7 @@ public interface EventoService {
 	public Evento detallesEvento(Long id);
 
 	public Optional<Evento> buscarPorId(Long id);
+	
+	public List<Evento> buscarTodos();
 
 }
