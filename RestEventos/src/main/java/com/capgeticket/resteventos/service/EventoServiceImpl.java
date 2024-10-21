@@ -9,6 +9,12 @@ public class EventoServiceImpl implements EventoService{
 	@Autowired
 	EventoRepository repository;
 
+	 /**
+     * Llama al repositorio de evento para realizar la operacion de guardado
+     *
+     * @param Recibe un objeto de tipo Evento
+     * @return Resultado de la llamada al metodo save en repositorio
+     */
 	@Override
 	public Evento save(Evento evento) {
 		return repository.save(evento);	
