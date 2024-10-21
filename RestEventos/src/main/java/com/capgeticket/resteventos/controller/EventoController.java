@@ -72,8 +72,12 @@ public class EventoController {
 	 */
 	@GetMapping("/{id}")
 	public EventoResponse detallesEvento(@PathVariable Long id) {
-		Evento evento = eventoService.detallesEvento(id);
-		return eventoAdapter.toDTO(evento);
+		if (id < 0) {
+	        throw new EventoNotFoundException(id); // Lanza la excepción si el ID es inválido
+	    }
+
+	    Evento evento = eventoService.detallesEvento(id);
+	    return eventoAdapter.toDTO(evento);
 	}
 
 }

@@ -16,7 +16,7 @@ import org.mockito.MockitoAnnotations;
 import com.capgeticket.resteventos.model.Evento;
 import com.capgeticket.resteventos.repository.EventoRepository;
 import com.capgeticket.resteventos.service.EventoServiceImpl;
-
+import com.capgeticket.resteventos.error.EventoNotFoundException;
 
 /**
  * Clase: eventoDetallesTests 
@@ -29,55 +29,50 @@ import com.capgeticket.resteventos.service.EventoServiceImpl;
 
 public class eventoDetallesTests {
 
-	@Mock
-	private EventoRepository eventoRepository;
+    @Mock
+    private EventoRepository eventoRepository;
 
-	@InjectMocks
-	private EventoServiceImpl eventoService;
+    @InjectMocks
+    private EventoServiceImpl eventoService;
 
-	private Evento evento;
-	
-	 @BeforeEach
-	    void setUp() {
-		 // Inicializa los mocks
-	        MockitoAnnotations.openMocks(this); 
-	    }
-	 
-		/**
-		 * Test que comprueba si un evento existe y 
-		 * lo devuelve correctamente
-		 */
-	 
-	 @Test
-	    void testDetallesEventoExistente() {
+    private Evento evento;
 
-	        Long eventoId = 1L;
-	        Evento evento = new Evento();
-	        evento.setId(eventoId);
+    @BeforeEach
+    void setUp() {
+        // Inicializa los mocks
+        MockitoAnnotations.openMocks(this); 
+    }
 
-	        when(eventoRepository.findById(eventoId)).thenReturn(Optional.of(evento));
-	        Evento resultado = eventoService.detallesEvento(eventoId);
+    /**
+     * Test que comprueba si un evento existe y 
+     * lo devuelve correctamente
+     */
+    @Test
+    void testDetallesEventoExistente() {
+        Long eventoId = 1L;
+        Evento evento = new Evento();
+        evento.setId(eventoId);
 
-	        assertNotNull(resultado);
-	        assertEquals(eventoId, resultado.getId());
-	    }
+        when(eventoRepository.findById(eventoId)).thenReturn(Optional.of(evento));
+        Evento resultado = eventoService.detallesEvento(eventoId);
 
-		/**
-		 * Test que comprueba un ID incorrecto
-		 */
-	    @Test
-	    void testDetallesEventoNoExistente() {
+        assertNotNull(resultado);
+        assertEquals(eventoId, resultado.getId());
+    }
 
-	        Long eventoId = 2L;
+    /**
+     * Test que comprueba un ID que no existe
+     */
+    @Test
+    void testDetallesEventoNoExistente() {
+        Long eventoId = 2L;
 
-	        when(eventoRepository.findById(eventoId)).thenReturn(Optional.empty());
+        when(eventoRepository.findById(eventoId)).thenReturn(Optional.empty());
 
-	        Exception exception = assertThrows(RuntimeException.class, () -> {
-	            eventoService.detallesEvento(eventoId);
-	        });
+        EventoNotFoundException exception = assertThrows(EventoNotFoundException.class, () -> {
+            eventoService.detallesEvento(eventoId);
+        });
 
-	        assertEquals("Evento no encontrado: " + eventoId, exception.getMessage());
-	    }
-	
-	
+        assertEquals("Evento con id " + eventoId + " no encontrado", exception.getMessage());
+    }
 }

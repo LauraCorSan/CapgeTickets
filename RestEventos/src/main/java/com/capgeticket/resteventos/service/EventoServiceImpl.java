@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.capgeticket.resteventos.adapter.EventoAdapter;
 import com.capgeticket.resteventos.error.EventoInvalidoException;
+import com.capgeticket.resteventos.error.EventoNotFoundException;
 import com.capgeticket.resteventos.model.Evento;
 import com.capgeticket.resteventos.repository.EventoRepository;
 
@@ -89,10 +90,10 @@ public class EventoServiceImpl implements EventoService {
 
 	@Override
 	public Evento detallesEvento(Long id) {
-		return eventoRepository.findById(id)
-				.orElseThrow(() -> new RuntimeException("Evento no encontrado con id: " + id));
-
+	    return eventoRepository.findById(id)
+	            .orElseThrow(() -> new EventoNotFoundException(id)); // Excepción personalizada
 	}
+
 
 	/**
 	 * Llama al repositorio de evento para realizar la búsqueda por id
