@@ -12,6 +12,7 @@ public class EventoInvalidoException extends RuntimeException{
 
 	    public EventoInvalidoException(String message) {
 	        super("{ \"error\": \"Solicitud incorrecta.\", \"details\": \""+ message+"\" }");
+
 	    }
 
 }
