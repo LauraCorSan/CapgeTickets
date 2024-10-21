@@ -126,8 +126,13 @@ public class EventoResponse implements Serializable {
 				+ ", localidad=" + localidad + ", recinto=" + recinto + "]";
 	}
 
-	// Método para convertir un Evento en EventoResponse
-    public static EventoResponse of(Evento evento) {
+	/**
+	 * Convierte un objeto Evento en un objeto EventoResponse.
+	 *
+	 * @param evento El objeto Evento que se desea convertir.
+	 * @return Un objeto EventoResponse que representa la información del evento.
+	 */
+	public static EventoResponse of(Evento evento) {
         EventoResponse eventoResponse = new EventoResponse();
         eventoResponse.setId(evento.getId());
         eventoResponse.setNombre(evento.getNombre());

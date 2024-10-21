@@ -4,6 +4,7 @@ package com.capgeticket.resteventos.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,16 +37,25 @@ public class EventoController {
 	 @Autowired
 		private EventoService eventoService;
 	
-	@GetMapping("/")
-	 public List<EventoResponse> getEventoAll() {
-        // Usa el adapter para convertir la lista de eventos
-        return eventoAdapter.of(eventoRepository.findAll());
-    }
+	 
+	 /**
+	     * Solicitud GET para listar todos los eventos.
+	     *
+	     * @return Una lista de objetos EventoResponse que representan todos los eventos.
+	     */
+	    @GetMapping("/listarEventos")
+	    public ResponseEntity<List<EventoResponse>> getEventoAll() {
+	        List<EventoResponse> eventos = eventoAdapter.of(eventoRepository.findAll());
+
+	        if (eventos.isEmpty()) {
+	            return ResponseEntity.notFound().build(); 
+	        }
+
+	        return ResponseEntity.ok(eventos); 
+	    }
+
 
 	
-
-	
-
 	@PostMapping("/aniadir")
 	public EventoResponse aniadirEvento(@RequestBody Evento evento) {
 		Evento e = eventoService.aniadirEvento(evento);

@@ -20,7 +20,12 @@ import com.capgeticket.resteventos.response.EventoResponse;
 @Component
 public class EventoAdapter {
 	
-	// Convierte un solo objeto Evento a EventoResponse
+	/**
+	 * Convierte un objeto Evento en un objeto EventoResponse.
+	 *
+	 * @param evento El objeto Evento que se va a convertir.
+	 * @return El objeto EventoResponse resultante.
+	 */
     public EventoResponse of(Evento evento) {
         EventoResponse eventoResponse = new EventoResponse();
         eventoResponse.setId(evento.getId());
@@ -34,8 +39,14 @@ public class EventoAdapter {
         eventoResponse.setRecinto(evento.getRecinto());
         return eventoResponse;
     }
+    
 
-    // Convierte una lista de Evento a una lista de EventoResponse
+   /**
+     * Convierte una lista de objetos Evento en una lista de objetos EventoResponse.
+     *
+     * @param eventos La lista de objetos Evento que se van a convertir.
+     * @return Una lista de objetos EventoResponse resultantes.
+     */
     public List<EventoResponse> of(List<Evento> eventos) {
         return eventos.stream()
                 .map(this::of)  // Usa el método 'of' para cada Evento
