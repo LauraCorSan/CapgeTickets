@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.capgeticket.resteventos.service.EventoService;
 import com.capgeticket.resteventos.adapter.EventoAdapter;
-import com.capgeticket.resteventos.error.EventoNotFound;
+import com.capgeticket.resteventos.error.EventoNotFoundException;
 import com.capgeticket.resteventos.model.Evento;
 import com.capgeticket.resteventos.response.EventoResponse;
 
@@ -36,14 +36,14 @@ public class EventoController {
 
 	/**
 	 * Llama al servicio de evento para realizar la operacion de guardado
-	 *
+	 * lanza una excepción si no encuentra el evento
 	 * @param Recibe un objeto de tipo Evento en formato json
 	 * @return Un evento adaptado
 	 */
 	@PutMapping("/modificar/{id}")
 	public EventoResponse modificarEvento(@PathVariable Long id, @RequestBody Evento evento){
 		final Optional<Evento> e = eventoService.buscarPorId(id);
-		e.orElseThrow(EventoNotFound::new);
+		e.orElseThrow(EventoNotFoundException::new);
 		
 		evento.setId(id);
 		Evento event = eventoService.aniadirEvento(evento);
@@ -51,7 +51,11 @@ public class EventoController {
 
 	}
 	
-
+	/**
+	 * Llama al servicio de evento para realizar la operacion de guardado
+	 * @param Recibe un objeto de tipo Evento en formato json
+	 * @return Un evento fto
+	 */
 	@PostMapping("/aniadir")
 	public EventoResponse aniadirEvento(@RequestBody Evento evento) {
 		Evento e = eventoService.aniadirEvento(evento);
