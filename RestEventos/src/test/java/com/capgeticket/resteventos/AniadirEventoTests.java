@@ -50,6 +50,9 @@ public class AniadirEventoTests {
 		evento.setRecinto("Palacio de los Deportes");
 	}
 
+	/**
+	 * Test que comprueba si un evento se ha creado correctamente
+	 */
 	@Test
 	public void eventCreatedSuccess() {
 		when(eventoRepository.save(evento)).thenReturn(evento);
@@ -67,6 +70,9 @@ public class AniadirEventoTests {
 		assertEquals(evento.getRecinto(), result.getRecinto());
 	}
 
+	/**
+	 * Test que comprueba si los campos del evento están vacíos salta la excepción correspondiente
+	 */
 	@Test
 	public void incompleteData() {
 		evento.setNombre(null);
@@ -75,9 +81,12 @@ public class AniadirEventoTests {
 			eventoService.aniadirEvento(evento);
 		});
 
-		assertEquals("El nombre del evento no puede estar vacío.", exception.getMessage());
+		assertEquals("{error: El nombre del evento no puede estar vacío. }", exception.getMessage());
 	}
 
+	/**
+	 * Test que comprueba si los campos del evento son incorrectos salta la excepción correspondiente
+	 */
 	@Test
 	public void invalidaData() {
 		evento.setFecha_evento(LocalDateTime.now().minusDays(1));
@@ -86,6 +95,6 @@ public class AniadirEventoTests {
 			eventoService.aniadirEvento(evento);
 		});
 
-		assertEquals("La fecha del evento no puede ser en el pasado.", exception.getMessage());
+		assertEquals("{error: La fecha del evento no puede ser en el pasado. }", exception.getMessage());
 	}
 }
