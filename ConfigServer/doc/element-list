@@ -1,0 +1,10 @@
+com.capgeticket.configserver
+com.capgeticket.eurekaserver
+com.capgeticket.resteventos
+com.capgeticket.resteventos.adapter
+com.capgeticket.resteventos.config
+com.capgeticket.resteventos.controller
+com.capgeticket.resteventos.model
+com.capgeticket.resteventos.repository
+com.capgeticket.resteventos.response
+com.capgeticket.resteventos.service
