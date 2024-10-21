@@ -5,16 +5,19 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
+
+
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.capgeticket.resteventos.service.EventoService;
 import com.capgeticket.resteventos.adapter.EventoAdapter;
+import com.capgeticket.resteventos.error.EventoNotFound;
 import com.capgeticket.resteventos.model.Evento;
 import com.capgeticket.resteventos.response.EventoResponse;
 
-import org.springframework.web.bind.annotation.PostMapping;
 
 /**
  * Clase: EventoController Descripción: clase de control (recepcion y
@@ -38,11 +41,10 @@ public class EventoController {
 	 * @return Un evento adaptado
 	 */
 	@PutMapping("/modificar/{id}")
-	public EventoResponse modificarEvento(@PathVariable Long id, @RequestBody Evento evento) throws Exception{
+	public EventoResponse modificarEvento(@PathVariable Long id, @RequestBody Evento evento){
 		final Optional<Evento> e = eventoService.buscarPorId(id);
-		if (!e.isPresent()) {
-			return ;
-		}
+		e.orElseThrow(EventoNotFound::new) ;
+			
 		Evento event = eventoService.aniadirEvento(evento);
 		return eventoAdapter.toDTO(event);
 
