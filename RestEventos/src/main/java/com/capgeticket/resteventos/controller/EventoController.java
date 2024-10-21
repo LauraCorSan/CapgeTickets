@@ -12,11 +12,15 @@ import com.capgeticket.resteventos.adapter.EventoAdapter;
 import com.capgeticket.resteventos.model.Evento;
 import com.capgeticket.resteventos.response.EventoResponse;
 
+import org.springframework.web.bind.annotation.PostMapping;
+
+
+
 @RestController
 @RequestMapping("/evento")
 public class EventoController {
 	@Autowired
-	private EventoService service;
+	private EventoService eventoService;
 	
 	@Autowired 
     private EventoAdapter eventoAdapter;
@@ -30,8 +34,15 @@ public class EventoController {
 	@PutMapping
 	public EventoResponse modificarEvento(@PathVariable Long id, @RequestBody Evento evento) {
 		//final Evento e = service.findById(id).orElseThrow();
-		Evento e = service.aniadirEvento(evento);
-        return eventoAdapter.of(e);
+		Evento e = eventoService.aniadirEvento(evento);
+        return eventoAdapter.toDTO(e);
+	}
+
+
+	@PostMapping("/aniadir")
+	public EventoResponse aniadirEvento(@RequestBody Evento evento) {
+		Evento e = eventoService.aniadirEvento(evento);
+		return eventoAdapter.toDTO(e);
 	}
 
 }
