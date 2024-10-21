@@ -7,4 +7,6 @@ public interface EventoService {
 	
 	public Evento aniadirEvento(Evento evento);
 
+	public Evento eliminarEvento(Long id);
+
 }

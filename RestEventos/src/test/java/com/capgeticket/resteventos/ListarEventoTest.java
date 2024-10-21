@@ -92,7 +92,7 @@ class ListarEventoTest {
         ResponseEntity<List<EventoResponse>> response = eventoController.getEventoAll();
 
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
-        assertNull(response.getBody()); // No debería haber cuerpo
+        assertNull(response.getBody()); 
     }
     
     /**
@@ -101,7 +101,6 @@ class ListarEventoTest {
      */
     @Test
     void testGetEventoAll_BadRequest_Returns400() {
-        // Simula que el repositorio lanza una excepción al intentar obtener la lista
         doThrow(new RuntimeException("Error en la solicitud")).when(eventoRepository).findAll();
 
         ResponseEntity<List<EventoResponse>> response;
