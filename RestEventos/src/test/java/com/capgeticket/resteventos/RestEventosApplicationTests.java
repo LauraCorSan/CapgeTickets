@@ -12,15 +12,7 @@ class RestEventosApplicationTests {
 	@Test
 	void shouldBeAlwaysTrue() {
 		assertThat(true).isTrue();
-	}
-	
-<<<<<<< HEAD
-=======
-	@Test
-	void shouldBeAlwaysTrue() {
-		assertThat(true).isTrue();
-	}
->>>>>>> 9291e4a6127ea877f7b6ab55efb756544c29f338
+	}	
 	
 
 }

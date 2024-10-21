@@ -43,8 +43,9 @@ public class EventoController {
 	@PutMapping("/modificar/{id}")
 	public EventoResponse modificarEvento(@PathVariable Long id, @RequestBody Evento evento){
 		final Optional<Evento> e = eventoService.buscarPorId(id);
-		e.orElseThrow(EventoNotFound::new) ;
-			
+		e.orElseThrow(EventoNotFound::new);
+		
+		evento.setId(id);
 		Evento event = eventoService.aniadirEvento(evento);
 		return eventoAdapter.toDTO(event);
 
