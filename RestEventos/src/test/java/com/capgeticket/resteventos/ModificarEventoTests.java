@@ -1,6 +1,7 @@
 package com.capgeticket.resteventos;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 import static org.mockito.Mockito.when;
 
 import java.time.LocalDateTime;
@@ -11,29 +12,27 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import com.capgeticket.resteventos.controller.EventoController;
 import com.capgeticket.resteventos.error.EventoInvalidoException;
+import com.capgeticket.resteventos.error.EventoNotFoundException;
 import com.capgeticket.resteventos.model.Evento;
 import com.capgeticket.resteventos.repository.EventoRepository;
-import com.capgeticket.resteventos.service.EventoService;
+import com.capgeticket.resteventos.response.EventoResponse;
 import com.capgeticket.resteventos.service.EventoServiceImpl;
 
-/**
- * Clase: AniadirEventoTests Descripción: clase de tests del método de añadir
- * evento, comprueba que se realice correctamente, si los datos estan
- * incompletos o si estan incorrectos 
- * Fecha: 21/10/24 
- * Versión: 1.0 Autores:
- * Laura Gregorio
- */
-public class AniadirEventoTests {
+class ModificarEventoTests {
 
 	@Mock
 	private EventoRepository eventoRepository;
 
-	@InjectMocks
+	@Mock
 	private EventoServiceImpl eventoService;
+	
+	@InjectMocks
+	private EventoController eventoController;
 
 	private Evento evento;
+	private EventoResponse eventoMod;
 
 	@BeforeEach
 	public void setUp() {
@@ -48,31 +47,55 @@ public class AniadirEventoTests {
 		evento.setPrecioMax(50.0);
 		evento.setLocalidad("Madrid");
 		evento.setRecinto("Palacio de los Deportes");
+		
+		eventoMod = new EventoResponse();
+		evento.setNombre("Musical Rey Leon");
+		evento.setDescripcion("Un musical");
+		evento.setGenero("Musical");
+		evento.setFechaEvento(LocalDateTime.now().plusDays(1));
+		evento.setPrecioMax(10.0);
+		evento.setPrecioMax(50.0);
+		evento.setLocalidad("Madrid");
+		evento.setRecinto("Teatro Gran Via");
 	}
 
 	@Test
 	public void eventCreatedSuccess() {
-		when(eventoRepository.save(evento)).thenReturn(evento);
+		when(eventoService.aniadirEvento(evento)).thenReturn(evento);
 
-		Evento result = eventoService.aniadirEvento(evento);
-
+		EventoResponse result = eventoController.modificarEvento(evento.getId(), eventoMod);
+		
 		assertEquals(evento.getId(), result.getId());
-		assertEquals(evento.getNombre(), result.getNombre());
-		assertEquals(evento.getDescripcion(), result.getDescripcion());
-		assertEquals(evento.getGenero(), result.getGenero());
+		assertNotEquals(evento.getNombre(), result.getNombre());
+		assertNotEquals(evento.getDescripcion(), result.getDescripcion());
+		assertNotEquals(evento.getGenero(), result.getGenero());
 		assertEquals(evento.getFechaEvento(), result.getFechaEvento());
 		assertEquals(evento.getPrecioMin(), result.getPrecioMin());
 		assertEquals(evento.getPrecioMax(), result.getPrecioMax());
 		assertEquals(evento.getLocalidad(), result.getLocalidad());
-		assertEquals(evento.getRecinto(), result.getRecinto());
+		assertNotEquals(evento.getRecinto(), result.getRecinto());
 	}
+	
+	@Test
+	public void notFoundEvento() {
+		when(eventoService.aniadirEvento(evento)).thenReturn(evento);
+		Long id=1234L;
+
+		EventoNotFoundException exception = assertThrows(EventoNotFoundException.class, () -> {
+			eventoController.modificarEvento(id, eventoMod);
+		});
+
+		assertEquals("El id 1234 no se ha encontrado", exception.getMessage());
+	}
+	
 
 	@Test
 	public void incompleteData() {
-		evento.setNombre(null);
+		when(eventoService.aniadirEvento(evento)).thenReturn(evento);
+		eventoMod.setNombre(null);
 
 		EventoInvalidoException exception = assertThrows(EventoInvalidoException.class, () -> {
-			eventoService.aniadirEvento(evento);
+			eventoController.modificarEvento(evento.getId(), eventoMod);
 		});
 
 		assertEquals("El nombre del evento no puede estar vacío.", exception.getMessage());
@@ -80,12 +103,14 @@ public class AniadirEventoTests {
 
 	@Test
 	public void invalidaData() {
-		evento.setFechaEvento(LocalDateTime.now().minusDays(1));
+		when(eventoService.aniadirEvento(evento)).thenReturn(evento);
+		eventoMod.setFechaEvento(LocalDateTime.now().minusDays(1));
 
 		EventoInvalidoException exception = assertThrows(EventoInvalidoException.class, () -> {
-			eventoService.aniadirEvento(evento);
+			eventoController.modificarEvento(evento.getId(), eventoMod);
 		});
 
 		assertEquals("La fecha del evento no puede ser en el pasado.", exception.getMessage());
 	}
+
 }

@@ -37,16 +37,16 @@ public class EventoController {
 	/**
 	 * Llama al servicio de evento para realizar la operacion de guardado
 	 * lanza una excepción si no encuentra el evento
-	 * @param Recibe un objeto de tipo Evento en formato json
-	 * @return Un evento adaptado
+	 * @param Recibe un id del objeto a editar y objeto de tipo Evento en formato json
+	 * @return Un evento dto
 	 */
 	@PutMapping("/modificar/{id}")
-	public EventoResponse modificarEvento(@PathVariable Long id, @RequestBody Evento evento){
+	public EventoResponse modificarEvento(@PathVariable Long id, @RequestBody EventoResponse evento){
 		final Optional<Evento> e = eventoService.buscarPorId(id);
-		e.orElseThrow(EventoNotFoundException::new);
+		if(e.isEmpty())throw new EventoNotFoundException("El id "+id+" no se ha encontrado");
 		
 		evento.setId(id);
-		Evento event = eventoService.aniadirEvento(evento);
+		Evento event = eventoService.aniadirEvento(eventoAdapter.toEntity(evento));
 		return eventoAdapter.toDTO(event);
 
 	}
@@ -54,7 +54,7 @@ public class EventoController {
 	/**
 	 * Llama al servicio de evento para realizar la operacion de guardado
 	 * @param Recibe un objeto de tipo Evento en formato json
-	 * @return Un evento fto
+	 * @return Un evento dto
 	 */
 	@PostMapping("/aniadir")
 	public EventoResponse aniadirEvento(@RequestBody Evento evento) {

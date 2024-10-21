@@ -14,8 +14,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * Clase: Evento Descripción: modelo Evento con sus atributos Fecha: 21/10/24
- * Versión: 1.0 Autores: Laura Gregorio
+ * Clase: Evento 
+ * Descripción: modelo Evento con sus atributos 
+ * Fecha: 21/10/24
+ * Versión: 1.0 
+ * Autores: Laura Gregorio
  */
 @Builder
 @Data
@@ -39,13 +42,13 @@ public class Evento {
 	private String genero;
 
 	@Column(name = "fecha_evento")
-	private LocalDateTime fecha_evento;
+	private LocalDateTime fechaEvento;
 
 	@Column(name = "precio_min")
-	private double precio_min;
+	private double precioMin;
 
 	@Column(name = "precio_max")
-	private double precio_max;
+	private double precioMax;
 
 	@Column(name = "localidad")
 	private String localidad;

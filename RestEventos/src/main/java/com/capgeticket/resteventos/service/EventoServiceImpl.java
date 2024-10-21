@@ -53,19 +53,19 @@ public class EventoServiceImpl implements EventoService {
 		if (evento.getGenero() == null || evento.getGenero().trim().isEmpty()) {
 			throw new EventoInvalidoException("El género del evento no puede estar vacío.");
 		}
-		if (evento.getFecha_evento() == null) {
+		if (evento.getFechaEvento() == null) {
 			throw new EventoInvalidoException("La fecha del evento no puede ser nula.");
 		}
-		if (evento.getFecha_evento().isBefore(LocalDateTime.now())) {
+		if (evento.getFechaEvento().isBefore(LocalDateTime.now())) {
 			throw new EventoInvalidoException("La fecha del evento no puede ser en el pasado.");
 		}
-		if (evento.getPrecio_min() < 0) {
+		if (evento.getPrecioMin() < 0) {
 			throw new EventoInvalidoException("El precio mínimo no puede ser negativo.");
 		}
-		if (evento.getPrecio_max() < 0) {
+		if (evento.getPrecioMax() < 0) {
 			throw new EventoInvalidoException("El precio máximo no puede ser negativo.");
 		}
-		if (evento.getPrecio_min() > evento.getPrecio_max()) {
+		if (evento.getPrecioMin() > evento.getPrecioMax()) {
 			throw new EventoInvalidoException("El precio mínimo no puede ser mayor que el precio máximo.");
 		}
 		if (evento.getLocalidad() == null || evento.getLocalidad().trim().isEmpty()) {

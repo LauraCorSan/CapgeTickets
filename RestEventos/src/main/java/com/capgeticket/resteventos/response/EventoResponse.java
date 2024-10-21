@@ -32,11 +32,11 @@ public class EventoResponse implements Serializable {
 
 	private String genero;
 
-	private LocalDateTime fecha_evento;
+	private LocalDateTime fechaEvento;
 
-	private double precio_min;
+	private double precioMin;
 
-	private double precio_max;
+	private double precioMax;
 
 	private String localidad;
 
