@@ -2,6 +2,10 @@ package com.capgeticket.resteventos.response;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import com.capgeticket.resteventos.model.Evento;
 
 public class EventoResponse implements Serializable {
 
@@ -104,5 +108,25 @@ public class EventoResponse implements Serializable {
 				+ ", fecha_evento=" + fecha_evento + ", precio_min=" + precio_min + ", precio_max=" + precio_max
 				+ ", localidad=" + localidad + ", recinto=" + recinto + "]";
 	}
+
+	// Método para convertir un Evento en EventoResponse
+    public static EventoResponse of(Evento evento) {
+        EventoResponse eventoResponse = new EventoResponse();
+        eventoResponse.setId(evento.getId());
+        eventoResponse.setNombre(evento.getNombre());
+        eventoResponse.setDescripcion(evento.getDescripcion());
+        eventoResponse.setGenero(evento.getGenero());
+        eventoResponse.setFecha_evento(evento.getFecha_evento());
+        eventoResponse.setPrecio_min(evento.getPrecio_min());
+        eventoResponse.setPrecio_max(evento.getPrecio_max());
+        eventoResponse.setLocalidad(evento.getLocalidad());
+        eventoResponse.setRecinto(evento.getRecinto());
+        return eventoResponse;
+    }
+
+	
+
+
+	
 
 }
