@@ -19,5 +19,8 @@ public class EventoServiceImpl implements EventoService {
 		return eventoRepository.save(evento);
 	}
 
-
+	@Override
+	public Evento eliminarEvento(Evento evento) {
+		return (Evento) eventoRepository;
+	}
 }

@@ -80,6 +80,11 @@
 			<version>1.18.28</version> 
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>com.capgeticket</groupId>
+			<artifactId>ConfigServer</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 	<dependencyManagement>
 		<dependencies>

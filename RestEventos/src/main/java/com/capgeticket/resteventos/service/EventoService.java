@@ -6,5 +6,6 @@ import com.capgeticket.resteventos.response.EventoResponse;
 public interface EventoService {
 	
 	public Evento aniadirEvento(Evento evento);
+	public Evento eliminarEvento(Evento evento);
 
 }
