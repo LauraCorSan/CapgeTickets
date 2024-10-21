@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.capgeticket.resteventos.service.EventoService;
+import com.capgeticket.resteventos.adapter.EventoAdapter;
 import com.capgeticket.resteventos.model.Evento;
+import com.capgeticket.resteventos.response.EventoResponse;
 
 @RestController
 @RequestMapping("/evento")
@@ -26,9 +28,10 @@ public class EventoController {
      * @return Un evento adaptado 
      */
 	@PutMapping
-	public void modificarEvento(@PathVariable Long id, @RequestBody Evento evento) {
-		final Evento e = service.findById(id).orElseThrow();
-		e = service.save(evento);
+	public EventoResponse modificarEvento(@PathVariable Long id, @RequestBody Evento evento) {
+		//final Evento e = service.findById(id).orElseThrow();
+		Evento e = service.aniadirEvento(evento);
         return eventoAdapter.of(e);
 	}
+
 }
