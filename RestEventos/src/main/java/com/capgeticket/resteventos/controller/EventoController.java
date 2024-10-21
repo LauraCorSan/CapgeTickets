@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 <<<<<<< HEAD
+<<<<<<< HEAD
 import org.springframework.web.bind.annotation.GetMapping;
 =======
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,6 +12,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 
 
 >>>>>>> refs/remotes/origin/lauraG
+=======
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+>>>>>>> refs/remotes/origin/Vero
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -74,5 +79,16 @@ public class EventoController {
 	        return eventoAdapter.toDTO(eventoEliminado);
 }
 
+	/**
+	 * Busca los detalles de un evento por su ID.
+	 * @author vparragr
+	 * @param id El ID del evento que se desea buscar.
+	 * @return El objeto correspondiente al ID proporcionado.
+	 */
+	@GetMapping("/{id}")
+	public EventoResponse detallesEvento(@PathVariable Long id) {
+         Evento evento = eventoService.detallesEvento(id);
+        return eventoAdapter.toDTO(evento);
+    }
 
 }

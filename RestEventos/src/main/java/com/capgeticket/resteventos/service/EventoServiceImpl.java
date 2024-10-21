@@ -11,6 +11,7 @@ import com.capgeticket.resteventos.error.EventoInvalidoException;
 import com.capgeticket.resteventos.model.Evento;
 import com.capgeticket.resteventos.repository.EventoRepository;
 
+<<<<<<< HEAD
 /**
  * Clase: EventoServiceImpl Descripción: clase de servicio que utiliza el
  * repositorio para la gestion de datos 
@@ -19,6 +20,8 @@ import com.capgeticket.resteventos.repository.EventoRepository;
  * Autores:
  * Laura Gregorio, Laura Cordero, Elena, Guillermo, Veronica
  */
+=======
+>>>>>>> refs/remotes/origin/Vero
 
 @Service
 public class EventoServiceImpl implements EventoService {
@@ -46,6 +49,7 @@ public class EventoServiceImpl implements EventoService {
 	 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	@Override
 	public Evento eliminarEvento(Evento evento) {
 		return (Evento) eventoRepository;
@@ -54,6 +58,25 @@ public class EventoServiceImpl implements EventoService {
 		if (evento.getNombre() == null || evento.getNombre().trim().isEmpty()) {
 			throw new EventoInvalidoException("El nombre del evento no puede estar vacío.");
 		}
+=======
+	
+	/**
+	 * Busca los detalles de un evento por su ID.
+	 * @author vparragr
+	 * @param id El ID del evento que se desea buscar.
+	 * @return El objeto correspondiente al ID proporcionado.
+	 * @throws RuntimeException si no se encuentra un evento con el ID proporcionado.
+	 */
+	
+	  @Override 
+	  public Evento detallesEvento(Long id) { 
+		  return eventoRepository.findById(id)
+			        .orElseThrow(() -> new RuntimeException("Evento no encontrado con id: " + id));
+	  
+	  }
+	 
+
+>>>>>>> refs/remotes/origin/Vero
 
 		if (evento.getGenero() == null || evento.getGenero().trim().isEmpty()) {
 			throw new EventoInvalidoException("El género del evento no puede estar vacío.");
