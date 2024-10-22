@@ -1,10 +1,7 @@
 package com.capgeticket.resteventos.response;
 
 import java.io.Serializable;
-
-
 import java.time.LocalDateTime;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -42,5 +39,8 @@ public class EventoResponse implements Serializable {
 	private String localidad;
 
 	private String recinto;
+
+
+
 
 }

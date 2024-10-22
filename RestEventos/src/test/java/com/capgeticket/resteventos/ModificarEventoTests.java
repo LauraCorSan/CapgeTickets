@@ -14,6 +14,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import com.capgeticket.resteventos.adapter.EventoAdapter;
+
 import com.capgeticket.resteventos.controller.EventoController;
 import com.capgeticket.resteventos.error.EventoInvalidoException;
 import com.capgeticket.resteventos.error.EventoNotFoundException;
@@ -22,6 +23,14 @@ import com.capgeticket.resteventos.repository.EventoRepository;
 import com.capgeticket.resteventos.response.EventoResponse;
 import com.capgeticket.resteventos.service.EventoServiceImpl;
 
+/**
+ * Clase: ModificarEventoTests 
+ * Descripción: clase de tests del método de modificar evento, comprueba que se realice correctamente, si los datos estan
+ * incompletos o no se encuentra el evento a modificar
+ * Fecha: 21/10/24 
+ * Versión: 2.0 
+ * Autores: Laura Cordero
+ */
 class ModificarEventoTests {
 
 	@Mock
@@ -42,7 +51,6 @@ class ModificarEventoTests {
 	@BeforeEach
 	public void setUp() {
 		MockitoAnnotations.openMocks(this);
-
 		evento = new Evento();
 		evento.setId(1L);
 		evento.setNombre("Concierto");
@@ -118,7 +126,4 @@ class ModificarEventoTests {
 
 	    assertEquals("{ \"error\": \"Solicitud incorrecta.\", \"details\": \"El nombre del evento no puede estar vacío.\" }", exception.getMessage());
 	}
-	
-	
-	
 }

@@ -1,6 +1,8 @@
 package com.capgeticket.resteventos;
 
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
 import java.time.LocalDateTime;
@@ -14,7 +16,6 @@ import org.mockito.MockitoAnnotations;
 import com.capgeticket.resteventos.error.EventoInvalidoException;
 import com.capgeticket.resteventos.model.Evento;
 import com.capgeticket.resteventos.repository.EventoRepository;
-import com.capgeticket.resteventos.service.EventoService;
 import com.capgeticket.resteventos.service.EventoServiceImpl;
 
 /**
@@ -22,8 +23,8 @@ import com.capgeticket.resteventos.service.EventoServiceImpl;
  * evento, comprueba que se realice correctamente, si los datos estan
  * incompletos o si estan incorrectos 
  * Fecha: 21/10/24 
- * Versión: 1.0 Autores:
- * Laura Gregorio
+ * Versión: 1.0 
+ * Autores: Laura Gregorio
  */
 public class AniadirEventoTests {
 
@@ -44,7 +45,7 @@ public class AniadirEventoTests {
 		evento.setDescripcion("Concierto de rock.");
 		evento.setGenero("Rock");
 		evento.setFechaEvento(LocalDateTime.now().plusDays(1));
-		evento.setPrecioMax(10.0);
+		evento.setPrecioMin(10.0);
 		evento.setPrecioMax(50.0);
 		evento.setLocalidad("Madrid");
 		evento.setRecinto("Palacio de los Deportes");

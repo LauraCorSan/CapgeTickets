@@ -7,6 +7,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+/**
+ * Clase: GlobalExceptionHandler
+ * Descripción: gestionar excepciones customizadas
+ * Fecha: 21/10/24
+ * Versión: 1.0
+ * Autores: Laura Gregorio y Laura Cordero
+ */
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
