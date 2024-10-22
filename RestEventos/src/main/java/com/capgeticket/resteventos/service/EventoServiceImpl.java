@@ -11,7 +11,6 @@ import com.capgeticket.resteventos.error.EventoInvalidoException;
 import com.capgeticket.resteventos.model.Evento;
 import com.capgeticket.resteventos.repository.EventoRepository;
 
-<<<<<<< HEAD
 /**
  * Clase: EventoServiceImpl Descripción: clase de servicio que utiliza el
  * repositorio para la gestion de datos 
@@ -20,9 +19,6 @@ import com.capgeticket.resteventos.repository.EventoRepository;
  * Autores:
  * Laura Gregorio, Laura Cordero, Elena, Guillermo, Veronica
  */
-=======
->>>>>>> refs/remotes/origin/Vero
-
 @Service
 public class EventoServiceImpl implements EventoService {
 
@@ -48,17 +44,16 @@ public class EventoServiceImpl implements EventoService {
 	 * @param evento
 	 */
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 	@Override
 	public Evento eliminarEvento(Evento evento) {
 		return (Evento) eventoRepository;
-=======
+	}
+		
 	private void validarEvento(Evento evento) {
 		if (evento.getNombre() == null || evento.getNombre().trim().isEmpty()) {
 			throw new EventoInvalidoException("El nombre del evento no puede estar vacío.");
 		}
-=======
+	}
 	
 	/**
 	 * Busca los detalles de un evento por su ID.
@@ -73,10 +68,7 @@ public class EventoServiceImpl implements EventoService {
 		  return eventoRepository.findById(id)
 			        .orElseThrow(() -> new RuntimeException("Evento no encontrado con id: " + id));
 	  
-	  }
-	 
-
->>>>>>> refs/remotes/origin/Vero
+	  
 
 		if (evento.getGenero() == null || evento.getGenero().trim().isEmpty()) {
 			throw new EventoInvalidoException("El género del evento no puede estar vacío.");
@@ -102,7 +94,7 @@ public class EventoServiceImpl implements EventoService {
 		if (evento.getRecinto() == null || evento.getRecinto().trim().isEmpty()) {
 			throw new EventoInvalidoException("El recinto no puede estar vacío.");
 		}
-	}
+	
 
 	/**
 	 * Llama al repositorio de evento para realizar la búsqueda por id
@@ -113,6 +105,6 @@ public class EventoServiceImpl implements EventoService {
 	@Override
 	public Optional<Evento> buscarPorId(Long id) {
 		return eventoRepository.findById(id);
->>>>>>> refs/remotes/origin/lauraG
 	}
 }
+
