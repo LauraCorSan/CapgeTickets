@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,6 +13,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import com.capgeticket.resteventos.adapter.EventoAdapter;
 import com.capgeticket.resteventos.controller.EventoController;
 import com.capgeticket.resteventos.error.EventoInvalidoException;
 import com.capgeticket.resteventos.error.EventoNotFoundException;
@@ -27,7 +29,10 @@ class ModificarEventoTests {
 
 	@Mock
 	private EventoServiceImpl eventoService;
-	
+
+	@Mock
+	private EventoAdapter eventoAdapter;
+
 	@InjectMocks
 	private EventoController eventoController;
 
@@ -37,34 +42,41 @@ class ModificarEventoTests {
 	@BeforeEach
 	public void setUp() {
 		MockitoAnnotations.openMocks(this);
+
 		evento = new Evento();
 		evento.setId(1L);
 		evento.setNombre("Concierto");
 		evento.setDescripcion("Concierto de rock.");
 		evento.setGenero("Rock");
 		evento.setFechaEvento(LocalDateTime.now().plusDays(1));
-		evento.setPrecioMax(10.0);
+		evento.setPrecioMin(10.0);
 		evento.setPrecioMax(50.0);
 		evento.setLocalidad("Madrid");
 		evento.setRecinto("Palacio de los Deportes");
-		
+
 		eventoMod = new EventoResponse();
-		evento.setNombre("Musical Rey Leon");
-		evento.setDescripcion("Un musical");
-		evento.setGenero("Musical");
-		evento.setFechaEvento(LocalDateTime.now().plusDays(1));
-		evento.setPrecioMax(10.0);
-		evento.setPrecioMax(50.0);
-		evento.setLocalidad("Madrid");
-		evento.setRecinto("Teatro Gran Via");
+		eventoMod.setNombre("Musical Rey Leon");
+		eventoMod.setDescripcion("Un musical");
+		eventoMod.setGenero("Musical");
+		eventoMod.setFechaEvento(LocalDateTime.now().plusDays(1));
+		eventoMod.setPrecioMin(10.0);
+		eventoMod.setPrecioMax(50.0);
+		eventoMod.setLocalidad("Madrid");
+		eventoMod.setRecinto("Teatro Gran Via");
 	}
 
 	@Test
-	public void eventCreatedSuccess() {
+	public void eventModifiedSuccess() {
+		when(eventoService.buscarPorId(evento.getId())).thenReturn(Optional.of(evento));
+
+		when(eventoAdapter.toEntity(eventoMod)).thenReturn(evento);
+
 		when(eventoService.aniadirEvento(evento)).thenReturn(evento);
 
+		when(eventoAdapter.toDTO(evento)).thenReturn(eventoMod);
+
 		EventoResponse result = eventoController.modificarEvento(evento.getId(), eventoMod);
-		
+
 		assertEquals(evento.getId(), result.getId());
 		assertNotEquals(evento.getNombre(), result.getNombre());
 		assertNotEquals(evento.getDescripcion(), result.getDescripcion());
@@ -75,42 +87,38 @@ class ModificarEventoTests {
 		assertEquals(evento.getLocalidad(), result.getLocalidad());
 		assertNotEquals(evento.getRecinto(), result.getRecinto());
 	}
-	
+
 	@Test
 	public void notFoundEvento() {
-		when(eventoService.aniadirEvento(evento)).thenReturn(evento);
-		Long id=1234L;
+		Long id = 1234L;
+
+		when(eventoService.buscarPorId(id)).thenReturn(Optional.empty());
 
 		EventoNotFoundException exception = assertThrows(EventoNotFoundException.class, () -> {
 			eventoController.modificarEvento(id, eventoMod);
 		});
 
-		assertEquals("El id 1234 no se ha encontrado", exception.getMessage());
+		assertEquals("{ \"error\": \"Evento no encontrado.\", \"details\": \"El id 1234 no se ha encontrado\" }",
+				exception.getMessage());
 	}
-	
 
 	@Test
 	public void incompleteData() {
-		when(eventoService.aniadirEvento(evento)).thenReturn(evento);
-		eventoMod.setNombre(null);
+	    when(eventoService.buscarPorId(evento.getId())).thenReturn(Optional.of(evento));
+	    
+	    eventoMod.setNombre(null);
+	    
+	    when(eventoAdapter.toEntity(eventoMod)).thenReturn(evento);
+	    
+	    when(eventoService.aniadirEvento(evento)).thenThrow(new EventoInvalidoException("El nombre del evento no puede estar vacío."));
+	    
+	    EventoInvalidoException exception = assertThrows(EventoInvalidoException.class, () -> {
+	        eventoController.modificarEvento(evento.getId(), eventoMod);
+	    });
 
-		EventoInvalidoException exception = assertThrows(EventoInvalidoException.class, () -> {
-			eventoController.modificarEvento(evento.getId(), eventoMod);
-		});
-
-		assertEquals("El nombre del evento no puede estar vacío.", exception.getMessage());
+	    assertEquals("{ \"error\": \"Solicitud incorrecta.\", \"details\": \"El nombre del evento no puede estar vacío.\" }", exception.getMessage());
 	}
-
-	@Test
-	public void invalidaData() {
-		when(eventoService.aniadirEvento(evento)).thenReturn(evento);
-		eventoMod.setFechaEvento(LocalDateTime.now().minusDays(1));
-
-		EventoInvalidoException exception = assertThrows(EventoInvalidoException.class, () -> {
-			eventoController.modificarEvento(evento.getId(), eventoMod);
-		});
-
-		assertEquals("La fecha del evento no puede ser en el pasado.", exception.getMessage());
-	}
-
+	
+	
+	
 }

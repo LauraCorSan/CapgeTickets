@@ -47,6 +47,7 @@ public class EventoController {
 		evento.setId(id);
 		Evento event = eventoService.aniadirEvento(eventoAdapter.toEntity(evento));
 		return eventoAdapter.toDTO(event);
+
 	}
 
 	/**
