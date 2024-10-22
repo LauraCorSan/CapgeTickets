@@ -11,7 +11,8 @@ public class EventoInvalidoException extends RuntimeException{
 	  private static final long serialVersionUID = 1L;
 
 	    public EventoInvalidoException(String message) {
-	        super("{error: " + message + " }");
+	        super("{ \"error\": \"Solicitud incorrecta.\", \"details\": \""+ message+"\" }");
+
 	    }
 
 }

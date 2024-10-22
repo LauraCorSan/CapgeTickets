@@ -1,6 +1,8 @@
 package com.capgeticket.resteventos;
 
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
 import java.time.LocalDateTime;
@@ -14,7 +16,6 @@ import org.mockito.MockitoAnnotations;
 import com.capgeticket.resteventos.error.EventoInvalidoException;
 import com.capgeticket.resteventos.model.Evento;
 import com.capgeticket.resteventos.repository.EventoRepository;
-import com.capgeticket.resteventos.service.EventoService;
 import com.capgeticket.resteventos.service.EventoServiceImpl;
 
 /**
@@ -22,8 +23,8 @@ import com.capgeticket.resteventos.service.EventoServiceImpl;
  * evento, comprueba que se realice correctamente, si los datos estan
  * incompletos o si estan incorrectos 
  * Fecha: 21/10/24 
- * Versión: 1.0 Autores:
- * Laura Gregorio
+ * Versión: 1.0 
+ * Autores: Laura Gregorio
  */
 public class AniadirEventoTests {
 
@@ -43,13 +44,16 @@ public class AniadirEventoTests {
 		evento.setNombre("Concierto");
 		evento.setDescripcion("Concierto de rock.");
 		evento.setGenero("Rock");
-		evento.setFecha_evento(LocalDateTime.now().plusDays(1));
-		evento.setPrecio_min(10.0);
-		evento.setPrecio_max(50.0);
+		evento.setFechaEvento(LocalDateTime.now().plusDays(1));
+		evento.setPrecioMin(10.0);
+		evento.setPrecioMax(50.0);
 		evento.setLocalidad("Madrid");
 		evento.setRecinto("Palacio de los Deportes");
 	}
 
+	/**
+	 * Test que comprueba si un evento se ha creado correctamente
+	 */
 	@Test
 	public void eventCreatedSuccess() {
 		when(eventoRepository.save(evento)).thenReturn(evento);
@@ -60,13 +64,16 @@ public class AniadirEventoTests {
 		assertEquals(evento.getNombre(), result.getNombre());
 		assertEquals(evento.getDescripcion(), result.getDescripcion());
 		assertEquals(evento.getGenero(), result.getGenero());
-		assertEquals(evento.getFecha_evento(), result.getFecha_evento());
-		assertEquals(evento.getPrecio_min(), result.getPrecio_min());
-		assertEquals(evento.getPrecio_max(), result.getPrecio_max());
+		assertEquals(evento.getFechaEvento(), result.getFechaEvento());
+		assertEquals(evento.getPrecioMin(), result.getPrecioMin());
+		assertEquals(evento.getPrecioMax(), result.getPrecioMax());
 		assertEquals(evento.getLocalidad(), result.getLocalidad());
 		assertEquals(evento.getRecinto(), result.getRecinto());
 	}
 
+	/**
+	 * Test que comprueba si los campos del evento están vacíos salta la excepción correspondiente
+	 */
 	@Test
 	public void incompleteData() {
 		evento.setNombre(null);
@@ -75,17 +82,20 @@ public class AniadirEventoTests {
 			eventoService.aniadirEvento(evento);
 		});
 
-		assertEquals("El nombre del evento no puede estar vacío.", exception.getMessage());
+		assertEquals("{error: El nombre del evento no puede estar vacío. }", exception.getMessage());
 	}
 
+	/**
+	 * Test que comprueba si los campos del evento son incorrectos salta la excepción correspondiente
+	 */
 	@Test
 	public void invalidaData() {
-		evento.setFecha_evento(LocalDateTime.now().minusDays(1));
+		evento.setFechaEvento(LocalDateTime.now().minusDays(1));
 
 		EventoInvalidoException exception = assertThrows(EventoInvalidoException.class, () -> {
 			eventoService.aniadirEvento(evento);
 		});
 
-		assertEquals("La fecha del evento no puede ser en el pasado.", exception.getMessage());
+		assertEquals("{error: La fecha del evento no puede ser en el pasado. }", exception.getMessage());
 	}
 }
