@@ -74,7 +74,7 @@ class ModificarEventoTests {
 	}
 
 	@Test
-	public void eventModifiedSuccess() {
+	public void shouldSuccessfullyModifyEvento() {
 		when(eventoService.buscarPorId(evento.getId())).thenReturn(Optional.of(evento));
 
 		when(eventoAdapter.toEntity(eventoMod)).thenReturn(evento);
@@ -97,7 +97,7 @@ class ModificarEventoTests {
 	}
 
 	@Test
-	public void notFoundEvento() {
+	public void shouldReturnException_NotFound() {
 		Long id = 1234L;
 
 		when(eventoService.buscarPorId(id)).thenReturn(Optional.empty());
@@ -111,7 +111,7 @@ class ModificarEventoTests {
 	}
 
 	@Test
-	public void incompleteData() {
+	public void shouldReturnException_InvalidName() {
 	    when(eventoService.buscarPorId(evento.getId())).thenReturn(Optional.of(evento));
 	    
 	    eventoMod.setNombre(null);

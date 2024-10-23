@@ -46,7 +46,7 @@ public class DetallesEventoTests {
 		 */
 	 
 	 @Test
-	    void testDetallesEventoExistente() {
+	    void shouldSuccessfullyGetDetailsEvento() {
 	        Long eventoId = 1L;
 	        Evento evento = new Evento();
 	        evento.setId(eventoId);
@@ -59,7 +59,7 @@ public class DetallesEventoTests {
 		 * Test que comprueba un ID incorrecto
 		 */
 	    @Test
-	    void testDetallesEventoNoExistente() {
+	    void shouldReturnException_NotFound() {
 	        Long eventoId = 2L;
 	        when(eventoRepository.findById(eventoId)).thenReturn(Optional.empty());
 	        Exception exception = assertThrows(RuntimeException.class, () -> {

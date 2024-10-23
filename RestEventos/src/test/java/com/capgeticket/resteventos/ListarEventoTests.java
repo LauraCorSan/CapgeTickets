@@ -84,7 +84,7 @@ class ListarEventoTests {
      * cuando existen eventos en la base de datos.
      */
     @Test
-    void testGetEventoAll_ReturnsListOfEventos() {
+    void shouldSuccessfullyListEvento() {
         when(eventoService.buscarTodos()).thenReturn(Arrays.asList(evento1, evento2));  
    
         ResponseEntity<List<EventoResponse>> response = eventoController.getEventoAll();
@@ -103,7 +103,7 @@ class ListarEventoTests {
      * cuando no hay eventos en la base de datos.
      */
     @Test
-    void testGetEventoAll_NoEventos_Returns404() {
+    void shouldReturnException_NotFound() {
         when(eventoService.buscarTodos()).thenReturn(Collections.emptyList());  // Mocking eventoService con lista vacía
        
         ResponseEntity<List<EventoResponse>> response = eventoController.getEventoAll();
@@ -117,7 +117,7 @@ class ListarEventoTests {
      * si la solicitud al endpoint no es válida.
      */
     @Test
-    void testGetEventoAll_BadRequest_Returns400() {
+    void shouldReturnException_BadRequest() {
         doThrow(new RuntimeException("Error en la solicitud")).when(eventoService).buscarTodos();  // Simula excepción
 
         ResponseEntity<List<EventoResponse>> response;

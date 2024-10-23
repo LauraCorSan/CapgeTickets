@@ -50,7 +50,7 @@ public class EliminarEventoTests {
      * @throws Exception Si ocurre un error durante la prueba.
      */
 	@Test
-	void testDeleteEvento_ExistingEvent_Returns200() {
+	void shouldSuccessfullyDeleteEvento() {
 	    Long eventId = 20L; 
 	    Evento evento = new Evento(); 
 	    evento.setId(eventId);
@@ -70,7 +70,7 @@ public class EliminarEventoTests {
      * @throws Exception Si ocurre un error durante la prueba.
      */
 	@Test
-	void testDeleteEvento_NonExistingEvent_Returns404() {
+	void shouldReturnException_NotFound() {
 	    Long eventId = 20L; 
 	    when(eventoService.eliminarEvento(eventId)).thenReturn(null); // Simulamos que no se encuentra el evento
 
