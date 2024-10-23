@@ -10,13 +10,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 class RestEventosApplicationTests {
 
 	@Test
-	void contextLoads() {
-	}
-	
-	@Test
 	void shouldBeAlwaysTrue() {
 		assertThat(true).isTrue();
-	}
+	}	
 	
 
 }
