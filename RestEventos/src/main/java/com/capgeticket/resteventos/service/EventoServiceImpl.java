@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.capgeticket.resteventos.adapter.EventoAdapter;
 import com.capgeticket.resteventos.error.EventoInvalidoException;
 import com.capgeticket.resteventos.error.EventoNotFoundException;
+import com.capgeticket.resteventos.error.NoEventosException;
 import com.capgeticket.resteventos.model.Evento;
 import com.capgeticket.resteventos.repository.EventoRepository;
 
@@ -46,18 +47,50 @@ public class EventoServiceImpl implements EventoService {
 	 * @return objeto evento 
 	 */
 
-	public Evento eliminarEvento(Long id) {
-		Optional<Evento> eventoOpt = eventoRepository.findById(id);
-		if (eventoOpt.isPresent()) {
-			Evento evento = eventoOpt.get();
-			eventoRepository.delete(evento);
-			return evento;
-
-		} else {
-			throw new EntityNotFoundException("Evento no encontrado con ID: " + id);
-		}
+	public void eliminarEvento(Long id) {
+		eventoRepository.deleteById(id);
 	}
 
+
+	/**
+	 * Busca los detalles de un evento por su ID.
+	 * 
+	 * @author vparragr
+	 * @param id El ID del evento que se desea buscar.
+	 * @return El objeto correspondiente al ID proporcionado.
+	 * @throws RuntimeException si no se encuentra un evento con el ID
+	 *                          proporcionado.
+	 */
+
+	@Override
+	public Optional<Evento> detallesEvento(Long id) {
+		return eventoRepository.findById(id);
+
+	}
+
+	/**
+	 * Llama al repositorio de evento para realizar la búsqueda por id
+	 *
+	 * @param Recibe un id
+	 * @return Un Evento opcional
+	 */
+	@Override
+	public Optional<Evento> buscarPorId(Long id) {
+		return eventoRepository.findById(id);
+	}
+
+	/**
+	 * Llama al repositorio de evento para realizar la búsqueda de todos los eventos
+	 * @author elena
+	 * @return Lista de Evento
+	 */
+	@Override
+	public List<Evento> buscarTodos() {
+		List<Evento> lista = eventoRepository.findAll();		
+		return lista;
+	}
+	
+	
 	/**
 	 * Se encarga de validar los campos del evento para poder añadirlo
 	 * 
@@ -69,9 +102,7 @@ public class EventoServiceImpl implements EventoService {
 			throw new EventoInvalidoException("El nombre del evento no puede estar vacío.");
 		}
 
-		if (evento.getGenero() == null || evento.getGenero().trim().isEmpty())
-
-		{
+		if (evento.getGenero() == null || evento.getGenero().trim().isEmpty()){
 			throw new EventoInvalidoException("El género del evento no puede estar vacío.");
 		}
 		if (evento.getFechaEvento() == null) {
@@ -96,42 +127,6 @@ public class EventoServiceImpl implements EventoService {
 			throw new EventoInvalidoException("El recinto no puede estar vacío.");
 		}
 	}
-
-	/**
-	 * Busca los detalles de un evento por su ID.
-	 * 
-	 * @author vparragr
-	 * @param id El ID del evento que se desea buscar.
-	 * @return El objeto correspondiente al ID proporcionado.
-	 * @throws RuntimeException si no se encuentra un evento con el ID
-	 *                          proporcionado.
-	 */
-
-	@Override
-	public Evento detallesEvento(Long id) {
-		return eventoRepository.findById(id)
-	            .orElseThrow(() -> new EventoNotFoundException("El id " + id + " no se ha encontrado")); 
-
-	}
-
-	/**
-	 * Llama al repositorio de evento para realizar la búsqueda por id
-	 *
-	 * @param Recibe un id
-	 * @return Un Evento opcional
-	 */
-	@Override
-	public Optional<Evento> buscarPorId(Long id) {
-		return eventoRepository.findById(id);
-	}
-
-	/**
-	 * Llama al repositorio de evento para realizar la búsqueda de todos los eventos
-	 * @author elena
-	 * @return Lista de Evento
-	 */
-	@Override
-	public List<Evento> buscarTodos() {
-		return eventoRepository.findAll();
-	}
+	
+	
 }
