@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.servlet.NoHandlerFoundException;
 
 /**
  * Clase: GlobalExceptionHandler
@@ -35,6 +36,12 @@ public class GlobalExceptionHandler {
 	    public ResponseEntity<String> handleEventoNotFoundException(EventoNotFoundException ex) {
 	        logger.error("Evento inválido: {}", ex.getMessage());
 	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+	    }
+	    
+	    @ExceptionHandler(NoHandlerFoundException.class)
+	    public ResponseEntity<String> handleNoHandlerFoundException(NoHandlerFoundException ex) {
+	        String error = "La ruta solicitada no existe: " + ex.getRequestURL();
+	        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
 	    }
 
 }
