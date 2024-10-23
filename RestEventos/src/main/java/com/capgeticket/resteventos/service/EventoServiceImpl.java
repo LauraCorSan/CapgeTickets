@@ -134,4 +134,6 @@ public class EventoServiceImpl implements EventoService {
 	public List<Evento> buscarTodos() {
 		return eventoRepository.findAll();
 	}
+	
+	
 }

@@ -1,6 +1,9 @@
 package com.capgeticket.resteventos.model;
 
 import java.time.LocalDateTime;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -39,9 +42,10 @@ public class Evento {
 
 	@Column(name = "genero")
 	private String genero;
-
-	@Column(name = "fecha_evento")
-	private LocalDateTime fechaEvento;
+	
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+    @Column(name = "fecha_evento")
+    private LocalDateTime fechaEvento;
 
 	@Column(name = "precio_min")
 	private double precioMin;

@@ -2,6 +2,9 @@ package com.capgeticket.resteventos.response;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -29,7 +32,8 @@ public class EventoResponse implements Serializable {
 	private String descripcion;
 
 	private String genero;
-
+	
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
 	private LocalDateTime fechaEvento;
 
 	private double precioMin;
