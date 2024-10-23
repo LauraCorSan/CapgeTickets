@@ -181,6 +181,24 @@ public class EventoController {
 	 * @param id El ID del evento que se desea buscar.
 	 * @return El objeto correspondiente al nombre proporcionado.
 	 */
+	 @Operation(
+				summary = "Buscar eventos por nombre", description = "Listado de eventos por su nombre"
+            )
+	 @ApiResponses(value = {
+			 @ApiResponse(
+					 responseCode = "200", 
+					 description = "Eventos encontrados."
+					     ),
+			 @ApiResponse(
+					 responseCode = "404", 
+					 description = "Eventos no encontrados."
+					     ),
+			 @ApiResponse(
+					 responseCode = "500", 
+					 description = "Error interno del servidor."
+					     )
+	 				}
+			 )
 	@GetMapping("/nombre/{nombre}")
 	public List<EventoResponse> listarPorNombre(@PathVariable String nombre) {
 		List<EventoResponse> eventos = eventoAdapter.toDTOList(eventoService.buscarPorNombre(nombre));
