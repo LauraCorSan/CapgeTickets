@@ -57,7 +57,6 @@ class ListarEventoTests {
 
     @BeforeEach
     void setUp() {
-        // Creamos algunos eventos para las pruebas
         evento1 = new Evento();
         evento1.setId(1L);
         evento1.setNombre("Concierto de Rock");

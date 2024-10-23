@@ -23,6 +23,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.capgeticket.resteventos.service.EventoService;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+
+
 import com.capgeticket.resteventos.adapter.EventoAdapter;
 import com.capgeticket.resteventos.error.EventoNotFoundException;
 
@@ -51,6 +57,22 @@ public class EventoController {
 	 * @param Recibe un id del objeto a editar y objeto de tipo Evento en formato json
 	 * @return Un evento dto
 	 */
+	
+	@Operation(
+			summary = "Modificar un evento existente", 
+            description = "Llama al servicio de evento para modificar un evento existente dado su ID."
+              )
+	@ApiResponses(value = {
+			@ApiResponse(
+						responseCode = "200", 
+						description = "Evento modificado correctamente."
+						),
+			@ApiResponse(
+						responseCode = "404", 
+						description = "El evento con el ID proporcionado no fue encontrado."
+						)
+				}
+			)
 	@PutMapping("/modificar/{id}")
 	public EventoResponse modificarEvento(@PathVariable Long id, @RequestBody EventoResponse evento){
 		final Optional<Evento> e = eventoService.buscarPorId(id);
@@ -67,7 +89,21 @@ public class EventoController {
 	 * @param Recibe un objeto de tipo Evento en formato json
 	 * @return Un evento dto
 	 */
-
+	@Operation(
+			summary = "Añadir un nuevo evento", 
+            description = "Crea un nuevo evento con la información proporcionada."
+              )
+	@ApiResponses(value = {
+			@ApiResponse(
+						responseCode = "201", 
+						description = "Evento creado correctamente."
+						),
+			@ApiResponse(
+						responseCode = "400", 
+						description = "Solicitud inválida."
+						)
+					}
+			)
 	@PostMapping("/aniadir")
 	public EventoResponse aniadirEvento(@RequestBody Evento evento) {
 		Evento e = eventoService.aniadirEvento(evento);
@@ -80,6 +116,21 @@ public class EventoController {
 	 * @return Una lista de objetos EventoResponse que representan todos los
 	 *         eventos.
 	 */
+	@Operation(
+			summary = "Listar todos los eventos", 
+            description = "Devuelve una lista de todos los eventos disponibles."
+              )
+	@ApiResponses(value = {
+			@ApiResponse(
+					responseCode = "200", 
+					description = "Lista de eventos devuelta correctamente."
+						),
+			@ApiResponse(
+					responseCode = "404", 
+					description = "No se encontraron eventos."
+						)
+				}
+			)
 	@GetMapping("/listarEventos")
 	public ResponseEntity<List<EventoResponse>> getEventoAll() {
 		List<EventoResponse> eventos = eventoAdapter.toDTOList(eventoService.buscarTodos());
@@ -98,6 +149,21 @@ public class EventoController {
 	 * @param id El ID del evento que se desea buscar.
 	 * @return El objeto correspondiente al ID proporcionado.
 	 */
+	 @Operation(
+			 summary = "Detalles de un evento", 
+             description = "Devuelve los detalles del evento dado su ID."
+               )
+  @ApiResponses(value = {
+		  @ApiResponse(
+				  responseCode = "200", 
+				  description = "Detalles del evento devueltos correctamente."
+				  	  ),
+		  @ApiResponse(
+				  responseCode = "404", 
+				  description = "El evento con el ID proporcionado no fue encontrado."
+				      )
+  				}
+		  )
 	@GetMapping("/{id}")
 	public EventoResponse detallesEvento(@PathVariable Long id) {
 
@@ -133,6 +199,24 @@ public class EventoController {
 	 *         200: Si el evento fue eliminado correctamente. - Código 404: Si no se
 	 *         encontró el evento con el ID proporcionado.
 	 */
+	 @Operation(
+				summary = "Eliminar un evento", description = "Elimina un evento específico dado su ID."
+               )
+	 @ApiResponses(value = {
+			 @ApiResponse(
+					 responseCode = "200", 
+					 description = "Evento eliminado correctamente."
+					     ),
+			 @ApiResponse(
+					 responseCode = "404", 
+					 description = "Evento no encontrado."
+					     ),
+			 @ApiResponse(
+					 responseCode = "500", 
+					 description = "Error interno del servidor."
+					     )
+	 				}
+			 )
 	@DeleteMapping("/eliminar/{id}")
 	public ResponseEntity<String> deleteEvento(@PathVariable Long id) {
 		try {
