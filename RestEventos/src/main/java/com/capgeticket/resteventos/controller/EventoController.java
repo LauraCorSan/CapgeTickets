@@ -14,7 +14,7 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 
-import org.apache.hc.core5.http.HttpStatus;
+import org.springframework.http.HttpStatus;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 
@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.capgeticket.resteventos.service.EventoService;
@@ -108,11 +109,11 @@ public class EventoController {
 					}
 			)
 	@PostMapping("/aniadir")
+	@ResponseStatus(HttpStatus.CREATED)  
 	public EventoResponse aniadirEvento(@RequestBody Evento evento) {
-		Evento e = eventoService.aniadirEvento(evento);
-		return eventoAdapter.toDTO(e);
+	    Evento e = eventoService.aniadirEvento(evento);
+	    return eventoAdapter.toDTO(e);
 	}
-
 	/**
 	 * Solicitud GET para listar todos los eventos.
 	 *
@@ -244,12 +245,12 @@ public class EventoController {
 			Evento eventoEliminado = eventoService.eliminarEvento(id);
 
 			if (eventoEliminado == null) {
-				return ResponseEntity.status(HttpStatus.SC_NOT_FOUND).body("Evento no encontrado.");
+				return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Evento no encontrado.");
 			}
 
 			return ResponseEntity.ok("Evento eliminado correctamente.");
 		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.SC_INTERNAL_SERVER_ERROR).body("Error al eliminar el evento.");
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al eliminar el evento.");
 		}
 	}
 
