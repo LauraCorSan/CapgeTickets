@@ -1,9 +1,7 @@
 package com.capgeticket.resteventos.response;
 
 import java.io.Serializable;
-
 import java.time.LocalDateTime;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -32,14 +30,17 @@ public class EventoResponse implements Serializable {
 
 	private String genero;
 
-	private LocalDateTime fecha_evento;
+	private LocalDateTime fechaEvento;
 
-	private double precio_min;
+	private double precioMin;
 
-	private double precio_max;
+	private double precioMax;
 
 	private String localidad;
 
 	private String recinto;
+
+
+
 
 }

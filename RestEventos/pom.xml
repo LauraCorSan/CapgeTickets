@@ -84,6 +84,13 @@
 			<artifactId>postgresql</artifactId>
 			<version>42.5.0</version> 
 		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>3.9.0</version>
+			<scope>test</scope>
+		</dependency>
+
 	</dependencies>
 	<dependencyManagement>
 		<dependencies>
@@ -94,6 +101,12 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
+			
+			<dependency>
+    <groupId>org.mockito</groupId>
+    <artifactId>mockito-core</artifactId>
+    <scope>test</scope>
+</dependency>
 		</dependencies>
 	</dependencyManagement>
 
