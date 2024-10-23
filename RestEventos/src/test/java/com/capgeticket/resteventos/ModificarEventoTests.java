@@ -74,7 +74,7 @@ class ModificarEventoTests {
 	}
 
 	@Test
-	public void eventModifiedSuccess() {
+	public void shouldSuccessfullyModifyEvento() {
 		when(eventoService.buscarPorId(evento.getId())).thenReturn(Optional.of(evento));
 
 		when(eventoAdapter.toEntity(eventoMod)).thenReturn(evento);
@@ -97,7 +97,7 @@ class ModificarEventoTests {
 	}
 
 	@Test
-	public void notFoundEvento() {
+	public void shouldReturnException_NotFound() {
 		Long id = 1234L;
 
 		when(eventoService.buscarPorId(id)).thenReturn(Optional.empty());
@@ -106,12 +106,12 @@ class ModificarEventoTests {
 			eventoController.modificarEvento(id, eventoMod);
 		});
 
-		assertEquals("{ \"error\": \"Evento no encontrado.\", \"details\": \"El id 1234 no se ha encontrado\" }",
+		assertEquals("El evento con id 1234 no se ha encontrado",
 				exception.getMessage());
 	}
 
 	@Test
-	public void incompleteData() {
+	public void shouldReturnException_InvalidName() {
 	    when(eventoService.buscarPorId(evento.getId())).thenReturn(Optional.of(evento));
 	    
 	    eventoMod.setNombre(null);
@@ -124,6 +124,6 @@ class ModificarEventoTests {
 	        eventoController.modificarEvento(evento.getId(), eventoMod);
 	    });
 
-	    assertEquals("{ \"error\": \"Solicitud incorrecta.\", \"details\": \"El nombre del evento no puede estar vacío.\" }", exception.getMessage());
+	    assertEquals("El nombre del evento no puede estar vacío." , exception.getMessage());
 	}
 }
