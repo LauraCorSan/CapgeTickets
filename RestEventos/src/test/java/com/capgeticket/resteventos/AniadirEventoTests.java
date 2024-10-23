@@ -55,7 +55,7 @@ public class AniadirEventoTests {
 	 * Test que comprueba si un evento se ha creado correctamente
 	 */
 	@Test
-	public void eventCreatedSuccess() {
+	public void shouldSuccessfullyCreateEvento() {
 		when(eventoRepository.save(evento)).thenReturn(evento);
 
 		Evento result = eventoService.aniadirEvento(evento);
@@ -75,7 +75,7 @@ public class AniadirEventoTests {
 	 * Test que comprueba si los campos del evento están vacíos salta la excepción correspondiente
 	 */
 	@Test
-	public void incompleteData() {
+	public void shouldReturnException_InvalidName() {
 		evento.setNombre(null);
 
 		EventoInvalidoException exception = assertThrows(EventoInvalidoException.class, () -> {
@@ -89,7 +89,7 @@ public class AniadirEventoTests {
 	 * Test que comprueba si los campos del evento son incorrectos salta la excepción correspondiente
 	 */
 	@Test
-	public void invalidaData() {
+	public void shouldReturnException_InvalidDate() {
 		evento.setFechaEvento(LocalDateTime.now().minusDays(1));
 
 		EventoInvalidoException exception = assertThrows(EventoInvalidoException.class, () -> {
