@@ -107,6 +107,23 @@ public class EventoController {
 	    Evento evento = eventoService.detallesEvento(id);
 	    return eventoAdapter.toDTO(evento);
 	}
+	
+	/**
+	 * Lista eventos por nombre
+	 * 
+	 * @author laura gregorio
+	 * @param id El ID del evento que se desea buscar.
+	 * @return El objeto correspondiente al nombre proporcionado.
+	 */
+	@GetMapping("/nombre/{nombre}")
+	public List<EventoResponse> listarPorNombre(@PathVariable String nombre) {
+		List<EventoResponse> eventos = eventoAdapter.toDTOList(eventoService.buscarPorNombre(nombre));
+		if (eventos.isEmpty()) {
+	        throw new EventoNotFoundException("No existe ningún evento con el nombre " + nombre); 
+
+		}
+		return eventos;
+	}
 
 	/**
 	 * Elimina un evento específico basado en su ID.

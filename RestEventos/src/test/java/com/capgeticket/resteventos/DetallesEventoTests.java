@@ -32,7 +32,6 @@ public class DetallesEventoTests {
 	private EventoRepository eventoRepository;
 	@InjectMocks
 	private EventoServiceImpl eventoService;
-	private Evento evento;
 	
 	 @BeforeEach
 	    void setUp() {

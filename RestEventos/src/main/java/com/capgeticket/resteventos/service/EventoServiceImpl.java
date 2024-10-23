@@ -134,4 +134,17 @@ public class EventoServiceImpl implements EventoService {
 	public List<Evento> buscarTodos() {
 		return eventoRepository.findAll();
 	}
+
+	/**
+	 * Llama al repositorio para realizar la busqueda de eventos por nombreç
+	 * @author lgregori
+	 * @param nombre
+	 * @return lista de Evento
+	 */
+	@Override
+	public List<Evento> buscarPorNombre(String nombre) {
+		return eventoRepository.findByNombre(nombre);
+	}
+	
+	
 }
