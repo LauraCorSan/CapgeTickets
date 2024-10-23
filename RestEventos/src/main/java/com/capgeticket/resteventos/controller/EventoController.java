@@ -242,5 +242,6 @@ public class EventoController {
 		return String.format("El evento %s con id %d se ha eliminado correctamente", nombre, id);
 		
 	 }
+	}
 
-}
+
