@@ -49,9 +49,10 @@ public class GlobalExceptionHandler {
 	    }
 	    
 	    @ExceptionHandler(NoHandlerFoundException.class)
-	    public ResponseEntity<String> handleNoHandlerFoundException(NoHandlerFoundException ex) {
-	        String error = "La ruta solicitada no existe: " + ex.getRequestURL();
-	        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+	    public ResponseEntity<ErrorResponse> handleRouteNotFoundException(NoHandlerFoundException ex) {
+	        logger.error("La ruta solicitada no existe: " + ex.getRequestURL());
+	        ErrorResponse errorResponse = new ErrorResponse( HttpStatus.NOT_FOUND.value(),"La ruta solicitada no existe",ex.getMessage());
+	        return  ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
 	    }
 
 }

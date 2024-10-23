@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.capgeticket.resteventos.service.EventoService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -30,6 +29,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
 
 import com.capgeticket.resteventos.adapter.EventoAdapter;
+import com.capgeticket.resteventos.error.ErrorResponse;
 import com.capgeticket.resteventos.error.EventoNotFoundException;
 import com.capgeticket.resteventos.error.NoEventosException;
 import com.capgeticket.resteventos.response.EventoResponse;
@@ -50,6 +50,8 @@ public class EventoController {
 
 	@Autowired
 	private EventoAdapter eventoAdapter;
+	
+	
 
 	/**
 	 * Llama al servicio de evento para realizar la operacion de guardado

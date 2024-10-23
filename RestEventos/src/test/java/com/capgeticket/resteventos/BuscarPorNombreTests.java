@@ -85,7 +85,7 @@ class BuscarPorNombreTests {
             eventoController.listarPorNombre(nombreEvento);
         });
 
-        assertEquals("{ \"error\": \"Evento no encontrado.\", \"details\": \"No existe ningún evento con el nombre Evento Inexistente\" }" , exception.getMessage());
+        assertEquals("No existe ningún evento con el nombre Evento Inexistente" , exception.getMessage());
 
         verify(eventoService, times(1)).buscarPorNombre(nombreEvento);
     }
