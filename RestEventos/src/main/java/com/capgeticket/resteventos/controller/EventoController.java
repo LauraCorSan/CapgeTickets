@@ -240,7 +240,6 @@ public class EventoController {
 		String nombre= e.get().getNombre();
 		eventoService.eliminarEvento(id);
 		return String.format("El evento %s con id %d se ha eliminado correctamente", nombre, id);
-		
 
 	}
 
