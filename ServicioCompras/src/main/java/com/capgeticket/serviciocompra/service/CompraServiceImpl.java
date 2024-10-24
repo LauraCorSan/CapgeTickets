@@ -2,20 +2,13 @@ package com.capgeticket.serviciocompra.service;
 
 import java.time.LocalDateTime;
 
-import com.capgeticket.resteventos.model.Evento;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import com.capgeticket.resteventos.model.Evento;
+import com.capgeticket.serviciocompra.adapter.CompraAdapter;
+import com.capgeticket.serviciocompra.model.Compra;
+import com.capgeticket.serviciocompra.repository.CompraRepository;
 
 /**
 * Clase: CompraServiceImpl Descripción: clase de servicio que utiliza el
@@ -23,6 +16,23 @@ import lombok.NoArgsConstructor;
 * Versión: 2.0
 *  Autores: Laura Gregorio, Laura Cordero, Elena, Guillermo, Veronica
 */
+@Service
 public class CompraServiceImpl implements CompraService {
-
+	@Autowired
+	private CompraRepository compraRepository;
+	
+	@Autowired
+	CompraAdapter compraAdapter;
+	/**
+	 * Llama al repositorio de compra para realizar una compra en eventos
+	 *
+	 * @author Guillermo
+	 * @param Recibe un objeto de tipo Compra
+	 * @return Resultado de la llamada al metodo save en repositorio 
+	 */
+	@Override
+	public Compra nuevaCompra(Compra compra) {
+		
+		return compraRepository.save(compra);
+	}
 }

@@ -3,6 +3,7 @@ package com.capgeticket.serviciocompra.service;
 import java.time.LocalDateTime;
 
 import com.capgeticket.resteventos.model.Evento;
+import com.capgeticket.serviciocompra.model.Compra;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -29,5 +30,6 @@ import lombok.NoArgsConstructor;
 
 public interface CompraService {
 	
+	public Compra nuevaCompra(Compra compra);
 	
 }
