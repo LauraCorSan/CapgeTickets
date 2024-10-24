@@ -58,6 +58,12 @@
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
 		</dependency>
 		<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-test</artifactId>
+    <scope>test</scope>
+</dependency>
+
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 			<scope>runtime</scope>
@@ -80,15 +86,25 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
+			<groupId>com.capgeticket</groupId>
+			<artifactId>ConfigServer</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			</dependency>
+			<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<version>42.5.0</version> 
 		</dependency>
 		<dependency>
-			<groupId>org.mockito</groupId>
-			<artifactId>mockito-core</artifactId>
-			<version>3.9.0</version>
-			<scope>test</scope>
+		<groupId>org.postgresql</groupId>
+		<artifactId>postgresql</artifactId>
+		<version>42.5.0</version>
+		</dependency>
+		<dependency> 
+		<groupId>org.mockito</groupId>
+		<artifactId>mockito-core</artifactId>
+		<version>3.9.0</version>
+		<scope>test</scope>
 		</dependency>
 
 		<dependency>
@@ -96,7 +112,7 @@
 			<artifactId>ConfigServer</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
-	</dependencies>
+		</dependencies>
 	<dependencyManagement>
 		<dependencies>
 			<dependency>

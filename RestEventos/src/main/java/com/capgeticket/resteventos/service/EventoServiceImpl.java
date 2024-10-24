@@ -7,11 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.capgeticket.resteventos.adapter.EventoAdapter;
 import com.capgeticket.resteventos.error.EventoInvalidoException;
-import com.capgeticket.resteventos.error.EventoNotFoundException;
 import com.capgeticket.resteventos.model.Evento;
 import com.capgeticket.resteventos.repository.EventoRepository;
 
-import jakarta.persistence.EntityNotFoundException;
 
 /**
 * Clase: EventoServiceImpl Descripción: clase de servicio que utiliza el
