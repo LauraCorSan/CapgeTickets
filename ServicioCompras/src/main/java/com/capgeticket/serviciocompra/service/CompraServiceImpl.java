@@ -9,7 +9,6 @@ import com.capgeticket.serviciocompra.model.Evento;
 
 import jakarta.transaction.Transactional;
 
-import com.capgeticket.resteventos.model.Evento;
 import com.capgeticket.serviciocompra.repository.CompraRepository;
 
 
@@ -50,4 +49,5 @@ public class CompraServiceImpl implements CompraService {
 	    
 	    return nombreTitular[0];
 	}
+}
 
