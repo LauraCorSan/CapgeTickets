@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.capgeticket.resteventos.response.EventoResponse;
 
-@FeignClient(name = "eventos", url= "http://localhost:2222")
+@FeignClient(name = "eventos", url= "http://localhost:8080")
 public interface EventosFeignClient {
 	
 
