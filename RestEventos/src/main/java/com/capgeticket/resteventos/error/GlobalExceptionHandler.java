@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.servlet.NoHandlerFoundException;
 
 /**
  * Clase: GlobalExceptionHandler
@@ -45,6 +46,13 @@ public class GlobalExceptionHandler {
 	        logger.error("No hay eventos: {}", ex.getMessage());
 	        ErrorResponse errorResponse = new ErrorResponse( HttpStatus.NO_CONTENT.value(),"No existen datos",ex.getMessage());
 	        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(errorResponse);
+	    }
+	    
+	    @ExceptionHandler(NoHandlerFoundException.class)
+	    public ResponseEntity<ErrorResponse> handleRouteNotFoundException(NoHandlerFoundException ex) {
+	        logger.error("La ruta solicitada no existe: " + ex.getRequestURL());
+	        ErrorResponse errorResponse = new ErrorResponse( HttpStatus.NOT_FOUND.value(),"La ruta solicitada no existe",ex.getMessage());
+	        return  ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
 	    }
 
 }

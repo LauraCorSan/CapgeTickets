@@ -23,6 +23,8 @@ public interface EventoService {
 	public Optional<Evento> buscarPorId(Long id);
 
 	public List<Evento> buscarTodos();
+	
+	public List<Evento> buscarPorNombre(String nombre);
 
 	public void eliminarEvento(Long id);
 

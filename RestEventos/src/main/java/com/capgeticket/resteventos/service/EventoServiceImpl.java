@@ -8,29 +8,28 @@ import org.springframework.stereotype.Service;
 import com.capgeticket.resteventos.adapter.EventoAdapter;
 import com.capgeticket.resteventos.error.EventoInvalidoException;
 import com.capgeticket.resteventos.error.EventoNotFoundException;
-import com.capgeticket.resteventos.error.NoEventosException;
 import com.capgeticket.resteventos.model.Evento;
 import com.capgeticket.resteventos.repository.EventoRepository;
 
 import jakarta.persistence.EntityNotFoundException;
 
 /**
- * Clase: EventoServiceImpl Descripción: clase de servicio que utiliza el
- * repositorio para la gestion de datos Fecha: 18/10/24 Versión: 2.0 Autores:
- * Laura Gregorio, Laura Cordero, Elena, Guillermo, Veronica
- */
+* Clase: EventoServiceImpl Descripción: clase de servicio que utiliza el
+* repositorio para la gestion de datos Fecha: 18/10/24 Versión: 2.0 Autores:
+* Laura Gregorio, Laura Cordero, Elena, Guillermo, Veronica
+*/
 @Service
 public class EventoServiceImpl implements EventoService {
-
+ 
 	@Autowired
 	private EventoRepository eventoRepository;
-
+ 
 	@Autowired
 	EventoAdapter eventoAdapter;
-
+ 
 	/**
 	 * Llama al repositorio de evento para realizar la operacion de guardado
-	 * 
+	 *
 	 * @author lgregori
 	 * @param Recibe un objeto de tipo Evento
 	 * @return Resultado de la llamada al metodo save en repositorio
@@ -44,30 +43,30 @@ public class EventoServiceImpl implements EventoService {
 	/**
 	 * LLama al repositorio, encuentra un evento por id y si está presente lo elimina, si no lanza excepción
 	 * @param id
-	 * @return objeto evento 
+	 * @return objeto evento
 	 */
-
+ 
 	public void eliminarEvento(Long id) {
-		eventoRepository.deleteById(id);
+		eventoRepository.deleteById(id);	
 	}
-
-
+ 
+ 
 	/**
 	 * Busca los detalles de un evento por su ID.
-	 * 
+	 *
 	 * @author vparragr
 	 * @param id El ID del evento que se desea buscar.
 	 * @return El objeto correspondiente al ID proporcionado.
 	 * @throws RuntimeException si no se encuentra un evento con el ID
 	 *                          proporcionado.
 	 */
-
+ 
 	@Override
 	public Optional<Evento> detallesEvento(Long id) {
 		return eventoRepository.findById(id);
-
+ 
 	}
-
+ 
 	/**
 	 * Llama al repositorio de evento para realizar la búsqueda por id
 	 *
@@ -78,7 +77,7 @@ public class EventoServiceImpl implements EventoService {
 	public Optional<Evento> buscarPorId(Long id) {
 		return eventoRepository.findById(id);
 	}
-
+ 
 	/**
 	 * Llama al repositorio de evento para realizar la búsqueda de todos los eventos
 	 * @author elena
@@ -90,10 +89,20 @@ public class EventoServiceImpl implements EventoService {
 		return lista;
 	}
 	
+	/**
+	 * Llama al repositorio para realizar la busqueda de eventos por nombreç
+	 * @author lgregori
+	 * @param nombre
+	 * @return lista de Evento
+	 */
+	@Override
+	public List<Evento> buscarPorNombre(String nombre) {
+		return eventoRepository.findByNombre(nombre);
+	}
 	
 	/**
 	 * Se encarga de validar los campos del evento para poder añadirlo
-	 * 
+	 *
 	 * @author lgregori
 	 * @param evento
 	 */
@@ -101,7 +110,7 @@ public class EventoServiceImpl implements EventoService {
 		if (evento.getNombre() == null || evento.getNombre().trim().isEmpty()) {
 			throw new EventoInvalidoException("El nombre del evento no puede estar vacío.");
 		}
-
+ 
 		if (evento.getGenero() == null || evento.getGenero().trim().isEmpty()){
 			throw new EventoInvalidoException("El género del evento no puede estar vacío.");
 		}
