@@ -3,6 +3,7 @@ package com.capgeticket.feignclients;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.capgeticket.serviciocompra.response.DatosCompraResponse;
 import com.capgeticket.serviciocompra.response.ReciboCompraResponse;
@@ -11,8 +12,8 @@ import com.capgeticket.serviciocompra.response.ReciboCompraResponse;
 public interface BancoFeignClient {
 	
  
-	@PostMapping("/")
-	public ReciboCompraResponse comprarTicket(@PathVariable DatosCompraResponse datosCompra);
+	@PostMapping("/pasarela/compra")
+	public ReciboCompraResponse comprarTicket(@RequestBody DatosCompraResponse datosCompra);
 	
 
 }

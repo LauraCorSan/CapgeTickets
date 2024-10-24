@@ -1,4 +1,5 @@
 package com.capgeticket.serviciocompra.model;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import com.capgeticket.resteventos.model.Evento;
@@ -23,7 +24,12 @@ import lombok.NoArgsConstructor;
 @Builder
 @Entity
 @Table(name = "compra")
-public class Compra {
+public class Compra  implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_compra")

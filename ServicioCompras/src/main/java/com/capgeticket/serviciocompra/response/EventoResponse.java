@@ -1,4 +1,4 @@
-package com.capgeticket.resteventos.response;
+package com.capgeticket.serviciocompra.response;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;

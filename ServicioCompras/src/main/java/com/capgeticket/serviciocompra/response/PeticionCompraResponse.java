@@ -27,7 +27,7 @@ public class PeticionCompraResponse implements Serializable {
 
 	private Long idEvento;
 
-	private String numTrajeta;
+	private String numeroTarjeta;
 	
 	private int mesCaducidad;
 	

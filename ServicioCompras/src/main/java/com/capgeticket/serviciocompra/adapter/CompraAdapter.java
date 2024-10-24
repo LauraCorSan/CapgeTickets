@@ -39,7 +39,7 @@ public class CompraAdapter {
 	public DatosCompraResponse toDatosCompraDto(String nombreTitular, String nombreEvento, Double cantidad,PeticionCompraResponse peticion ) {
 		return DatosCompraResponse.builder()
 				.nombreTitular(nombreTitular)
-				.numeroTarjeta(peticion.getNumTrajeta())
+				.numeroTarjeta(peticion.getNumeroTarjeta())
 				.mesCaducidad(peticion.getMesCaducidad())
 				.yearCaducidad(peticion.getYearCaducidad())
 				.cvv(peticion.getCvv())
