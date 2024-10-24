@@ -58,6 +58,12 @@
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
 		</dependency>
 		<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-test</artifactId>
+    <scope>test</scope>
+</dependency>
+
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 			<scope>runtime</scope>
@@ -78,6 +84,16 @@
 			<artifactId>lombok</artifactId>
 			<version>1.18.28</version>
 			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.capgeticket</groupId>
+			<artifactId>ConfigServer</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>42.5.0</version> 
 		</dependency>
 		<dependency>
 			<groupId>org.postgresql</groupId>

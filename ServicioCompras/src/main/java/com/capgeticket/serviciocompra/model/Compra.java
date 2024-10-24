@@ -2,7 +2,7 @@ package com.capgeticket.serviciocompra.model;
 
 import java.time.LocalDateTime;
 
-import com.capgeticket.resteventos.model.Evento;
+
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -14,25 +14,27 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Builder;
 import lombok.NoArgsConstructor;
 
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Entity
-@Table(name = "compras")
+@Table(name = "compra")
 public class Compra {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_compra")
-	private Long id_compra;
+	private Long idCompra;
 	
 	@ManyToOne
     @JoinColumn(name = "id_evento", nullable = false) 
     private Evento evento;
 	
-	@Column(name = "precio_compra")
+	@Column(name = "precio_evento")
 	private double precio;
 	
 	@Column(name = "fecha_compra")
