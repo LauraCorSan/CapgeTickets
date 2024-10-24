@@ -33,7 +33,7 @@ public class CompraAdapter {
 	    return compras.stream().map(this::toDTO).collect(Collectors.toList());
 	}
 
-	public Compra toEntity(CompraResponse compraDto, Evento evento) {
+	public Compra toEntity(CompraResponse compraDto, com.capgeticket.resteventos.model.Evento evento) {
 	    return Compra.builder()
 	            .idCompra(compraDto.getId())        
 	            .evento(evento)                           

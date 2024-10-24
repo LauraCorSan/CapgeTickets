@@ -2,30 +2,46 @@ package com.capgeticket.serviciocompra.controller;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.capgeticket.serviciocompra.response.CompraConfirmadaResponse;
 import com.capgeticket.serviciocompra.response.PeticionCompraResponse;
-
+import com.capgeticket.serviciocompra.service.CompraService;
+import org.springframework.http.HttpStatus;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
 /**
- * Clase: CompraController
- * Descripción: clase de control (recepcion y procesamiento) de endpoints
+ * Clase: CompraController Descripción: clase de control (recepcion y
+ * procesamiento) de endpoints 
  * Fecha: 24/10/24
- * Versión: 1.0
- * Autores: Laura Gregorio
+ *  Versión: 1.0 
+ *  Autores: Laura
+ * Gregorio
  */
 @RestController
 public class CompraController {
-	
-	
-	@PostMapping
+	private final CompraService compraService;
+
+	public CompraController(CompraService compraService) {
+		this.compraService = compraService;
+	}
+	/**
+	 * Crea una nueva compra 
+	 *
+	 * @param  Un objeto de tipo Compra en formato json con los detalles de la compra confirmada.
+	 * @return Un objeto dto
+	 */
+	@Operation(summary = "Crear una nueva compra", description = "Crea una nueva compra con la información proporcionada.")
+	@ApiResponses(value = { @ApiResponse(responseCode = "201", description = "Compra creada correctamente."),
+			@ApiResponse(responseCode = "400", description = "Solicitud inválida.") })
+	@PostMapping("/nuevaCompra")
+	@ResponseStatus(HttpStatus.CREATED)
 	public CompraConfirmadaResponse nuevaCompra(@RequestBody PeticionCompraResponse peticionCompraResponse) {
-		return null;
-//		if peticionCompraResponse.email is empty throw exception
-//		if peticionCompraResponse.idEvento is empty throw exception
-//		CompraConfirmadaResponse compraConfirmada = compraService.nuevaCompra(peticionCompraResponse)
-//		return compraConfirmada;
+		CompraConfirmadaResponse compraConfirmada = compraService.nuevaCompra(peticionCompraResponse);
+		return compraConfirmada;
 	}
 
 }

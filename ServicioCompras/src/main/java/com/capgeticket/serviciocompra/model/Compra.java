@@ -1,8 +1,7 @@
 package com.capgeticket.serviciocompra.model;
-
 import java.time.LocalDateTime;
 
-
+import com.capgeticket.resteventos.model.Evento;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
