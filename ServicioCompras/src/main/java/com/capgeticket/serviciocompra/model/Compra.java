@@ -30,9 +30,8 @@ public class Compra {
 	@Column(name = "id_compra")
 	private Long idCompra;
 	
-	@ManyToOne
-    @JoinColumn(name = "id_evento", nullable = false) 
-    private Evento evento;
+	@Column(name = "id_evento", nullable = false) 
+    private Long idEvento;
 	
 	@Column(name = "precio_evento")
 	private double precio;

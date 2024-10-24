@@ -23,7 +23,7 @@ public class DatosCompraResponse implements Serializable {
 	
 	private String nombreTitular;
 	
-	private String nombreTarjeta;
+	private String numeroTarjeta;
 	
 	private int mesCaducidad;
 	

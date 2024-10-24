@@ -1,6 +1,7 @@
 package com.capgeticket.serviciocompra.response;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,15 +23,15 @@ import lombok.NoArgsConstructor;
 public class ReciboCompraResponse implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private String timestamp;
+	private LocalDateTime timestamp;
 
-	private int status;
+	private String status;
 
 	private String error;
 	
 	private String message;
 	
-	//private DatosCompraResponse info;
+	private DatosCompraResponse info;
 	
 	private String infoadicional;
 	

@@ -9,7 +9,11 @@ import org.springframework.stereotype.Component;
 
 import com.capgeticket.serviciocompra.model.Compra;
 import com.capgeticket.serviciocompra.model.Evento;
+import com.capgeticket.serviciocompra.response.CompraConfirmadaResponse;
 import com.capgeticket.serviciocompra.response.CompraResponse;
+import com.capgeticket.serviciocompra.response.DatosCompraResponse;
+import com.capgeticket.serviciocompra.response.PeticionCompraResponse;
+import com.capgeticket.serviciocompra.response.ReciboCompraResponse;
 
 
 
@@ -18,29 +22,53 @@ public class CompraAdapter {
 	public CompraResponse toDTO(Compra compra) {
 	    return CompraResponse.builder()
 	            .id(compra.getIdCompra())                
-	            .idEvento(compra.getEvento().getId())     
+	            .idEvento(compra.getIdEvento())     
 	            .precio(compra.getPrecio())               
 	            .fecha(compra.getFecha())                 
 	            .email(compra.getEmail())                 
 	            .build();
 	}
-	/**
-	 * Convierte una lista de objetos Compra en una lista de objetos CompraResponse.
-	 * @param compras La lista de objetos Compra que se van a convertir.
-	 * @return Una lista de objetos CompraResponse resultantes.
-	 */
-	public List<CompraResponse> toDTOList(List<Compra> compras) {
-	    return compras.stream().map(this::toDTO).collect(Collectors.toList());
-	}
 
-	public Compra toEntity(CompraResponse compraDto, Evento evento) {
+	public Compra toEntity(CompraResponse compraDto) {
 	    return Compra.builder()
 	            .idCompra(compraDto.getId())        
-	            .evento(evento)                           
+	            .idEvento(compraDto.getIdEvento())                           
 	            .precio(compraDto.getPrecio())         
 	            .fecha(compraDto.getFecha())              
 	            .email(compraDto.getEmail())          
 	            .build();                                  
+	}
+	
+	
+	public DatosCompraResponse toDatosCompraDto(String nombreTitular, String nombreEvento, Double cantidad,PeticionCompraResponse peticion ) {
+		return DatosCompraResponse.builder()
+				.nombreTitular(nombreTitular)
+				.numeroTarjeta(peticion.getNumTrajeta())
+				.mesCaducidad(peticion.getMesCaducidad())
+				.yearCaducidad(peticion.getYearCaducidad())
+				.cvv(peticion.getCvv())
+				.emisor(peticion.getEmisor())
+				.concepto(nombreEvento)
+				.cantidad(cantidad)
+				.build();
+	}
+	
+	public CompraConfirmadaResponse toCompraConfirmadaDto(String email, ReciboCompraResponse recibo) {
+		return CompraConfirmadaResponse.builder()
+				.nombreEvento(recibo.getInfo().getConcepto())
+				.fecha(recibo.getTimestamp())
+				.precio(recibo.getInfo().getCantidad())
+				.email(email)
+				.build();
+	}
+	
+	public CompraResponse toCompraResponse(Long idEvento, Double precio, LocalDateTime fecha , String email) {
+		return CompraResponse.builder()
+				.idEvento(idEvento)
+				.precio(precio)
+				.fecha(fecha)
+				.email(email)
+				.build();
 	}
 
 	
