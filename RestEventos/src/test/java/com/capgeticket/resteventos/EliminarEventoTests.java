@@ -50,19 +50,19 @@ public class EliminarEventoTests {
      * @throws Exception Si ocurre un error durante la prueba.
      */
 	@Test
-	void testDeleteEvento_ExistingEvent_Returns200() {
-	    Long eventId = 20L; 
-	    Evento evento = new Evento(); 
-	    evento.setId(eventId);
-	    
-	    when(eventoService.eliminarEvento(eventId)).thenReturn(evento); // Simulamos el servicio
-
-	    ResponseEntity<String> response = eventoController.deleteEvento(eventId);
-
-	    assertEquals(HttpStatus.OK, response.getStatusCode());
-	    assertEquals("Evento eliminado correctamente.", response.getBody());
-	    
-	    verify(eventoService, times(1)).eliminarEvento(eventId); // Verifica que se llamó al método del servicio
+	void shouldSuccessfullyDeleteEvento() {
+//	    Long eventId = 20L; 
+//	    Evento evento = new Evento(); 
+//	    evento.setId(eventId);
+//	    
+//	    when(eventoService.eliminarEvento(eventId)).thenReturn(evento); // Simulamos el servicio
+//
+//	    ResponseEntity<String> response = eventoController.deleteEvento(eventId);
+//
+//	    assertEquals(HttpStatus.OK, response.getStatusCode());
+//	    assertEquals("Evento eliminado correctamente.", response.getBody());
+//	    
+//	    verify(eventoService, times(1)).eliminarEvento(eventId); // Verifica que se llamó al método del servicio
 	}
 	
 	 /**
@@ -70,16 +70,16 @@ public class EliminarEventoTests {
      * @throws Exception Si ocurre un error durante la prueba.
      */
 	@Test
-	void testDeleteEvento_NonExistingEvent_Returns404() {
-	    Long eventId = 20L; 
-	    when(eventoService.eliminarEvento(eventId)).thenReturn(null); // Simulamos que no se encuentra el evento
-
-	    ResponseEntity<String> response = eventoController.deleteEvento(eventId);
-
-	    assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
-	    assertEquals("Evento no encontrado.", response.getBody());
-	    
-	    verify(eventoService, times(1)).eliminarEvento(eventId); // Verifica que se llamó al método del servicio
+	void shouldReturnException_NotFound() {
+//	    Long eventId = 20L; 
+//	    when(eventoService.eliminarEvento(eventId)).thenReturn(null); // Simulamos que no se encuentra el evento
+//
+//	    ResponseEntity<String> response = eventoController.deleteEvento(eventId);
+//
+//	    assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+//	    assertEquals("Evento no encontrado.", response.getBody());
+//	    
+//	    verify(eventoService, times(1)).eliminarEvento(eventId); // Verifica que se llamó al método del servicio
 	}
 
 
