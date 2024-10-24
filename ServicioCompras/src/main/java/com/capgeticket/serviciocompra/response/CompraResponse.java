@@ -30,6 +30,5 @@ public class CompraResponse implements Serializable {
     private double precio;          
     private String email;  
     
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss")
     private LocalDateTime fecha;        
 }

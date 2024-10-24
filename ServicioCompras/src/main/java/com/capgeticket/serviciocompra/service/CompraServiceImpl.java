@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.capgeticket.feignclients.BancoFeignClient;
 import com.capgeticket.feignclients.EventosFeignClient;
+import com.capgeticket.resteventos.response.EventoResponse;
 import com.capgeticket.serviciocompra.adapter.CompraAdapter;
 import com.capgeticket.serviciocompra.model.Compra;
 import com.capgeticket.serviciocompra.error.PeticionCompraIncorrectaException;
@@ -26,6 +27,9 @@ import com.capgeticket.serviciocompra.response.DatosCompraResponse;
 import com.capgeticket.serviciocompra.response.EventoResponse;
 import com.capgeticket.serviciocompra.response.ReciboCompraResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * Clase: CompraServiceImpl Descripción: clase de servicio que utiliza el
  * repositorio para la gestion de datos de Compras Versión: 2.0 Autores: Laura
@@ -39,7 +43,8 @@ public class CompraServiceImpl implements CompraService {
 	
 	private static final String EMAIL_REGEX = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
 	private static final Pattern EMAIL_PATTERN = Pattern.compile(EMAIL_REGEX);
-	
+    private static final Logger log = LoggerFactory.getLogger(CompraServiceImpl.class);
+
 	@Autowired
 	private CompraRepository compraRepository;
 	
@@ -53,19 +58,25 @@ public class CompraServiceImpl implements CompraService {
 	private BancoFeignClient bancoFeign;
 
 	public CompraConfirmadaResponse nuevaCompra(PeticionCompraResponse peticion) {
-		log.info("--- llego al service");
+
+		log.info("--nueva comptra en service");
+
 		validarPeticion(peticion);
 		// obetenemos el titular a partir del email
 		String nombreTitular = obtenerNombreTitular(peticion.getEmail());
 		// tenemos el evento
-		log.info("--- me voy a meter con evento");
+
+		log.info("--antes de obtener");
+
 		EventoResponse eventoComprado = obtenerEvento(peticion.getIdEvento());
-		log.info("--- salgo de evento");
+		log.info("--despues de obtener");
 
 		Double cantidad = obtenerPrecio(eventoComprado.getPrecioMin(), eventoComprado.getPrecioMax());
 		String nombreEvento = eventoComprado.getNombre();
 		
 		DatosCompraResponse datos = compraAdapter.toDatosCompraDto(nombreTitular, nombreEvento, cantidad, peticion);
+		log.info("--datos:" + datos);
+
 		
 		ReciboCompraResponse recibo = realizarCompra(datos);
 		
@@ -89,12 +100,16 @@ public class CompraServiceImpl implements CompraService {
 	 *                                          código de error 400 en la respuesta.
 	 */
 	public ReciboCompraResponse realizarCompra(DatosCompraResponse datosCompraResponse) {
-
+log.info("--realizo llamada a banco");
 		ReciboCompraResponse reciboCompra = bancoFeign.comprarTicket(datosCompraResponse);
 
 		if (String.valueOf(reciboCompra.getStatus()).equals("400")) {
-		    throw new ReciboCompraIncorrectaException("Error al realizar la compra");
+		    throw new ReciboCompraIncorrectaException("Error al realizar la compra" + reciboCompra.getMessage());
 		}
+		if (String.valueOf(reciboCompra.getStatus()).equals("500")) {
+		    throw new ReciboCompraIncorrectaException("Error al realizar la compra" + reciboCompra.getMessage());
+		}
+		
 		return reciboCompra;
 	}
 	
@@ -107,11 +122,11 @@ public class CompraServiceImpl implements CompraService {
 	 *         
 	 */
 	private EventoResponse obtenerEvento(Long idEvento) {
-		log.info("--- me meto");
+
+		log.info("--antes de feign");
 
 		EventoResponse evento = eventosFeign.obtenerEventoPorId(idEvento);
-		
-		log.info("--- ya tengo mi evento");
+		log.info("--realizo llamada a eventos"+ evento);
 
 		return evento;
 	}

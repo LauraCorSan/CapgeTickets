@@ -11,7 +11,6 @@ import com.capgeticket.serviciocompra.response.ReciboCompraResponse;
 @FeignClient(name = "banco", url= "http://banco.eu-west-3.elasticbeanstalk.com")
 public interface BancoFeignClient {
 	
- 
 	@PostMapping("/pasarela/compra")
 	public ReciboCompraResponse comprarTicket(@RequestBody DatosCompraResponse datosCompra);
 

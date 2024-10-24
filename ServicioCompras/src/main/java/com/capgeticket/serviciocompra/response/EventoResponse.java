@@ -3,24 +3,23 @@ package com.capgeticket.serviciocompra.response;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
+<<<<<<< HEAD
  * Clase: Evento 
  * Descripción: modelo Evento con sus atributos 
  * Fecha: 21/10/24
  * Versión: 1.0 
+=======
+ * Clase: EventoResponse
+ * Descripción: clase dto con los datos más relevantes
+ * Fecha: 21/10/24
+ * Versión: 1.0
+>>>>>>> 435c4a2ab9dbd904e9d56c5d7277ff9b3f7a9684
  * Autores: Laura Gregorio
  */
 @Builder
@@ -39,8 +38,7 @@ public class EventoResponse implements Serializable {
 
 	private String genero;
 	
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
-    private LocalDateTime fechaEvento;
+	private LocalDateTime fechaEvento;
 
 	private double precioMin;
 
