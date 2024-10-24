@@ -9,6 +9,9 @@ import com.capgeticket.serviciocompra.model.Evento;
 
 import jakarta.transaction.Transactional;
 
+import com.capgeticket.resteventos.model.Evento;
+import com.capgeticket.serviciocompra.repository.CompraRepository;
+
 
 /**
 * Clase: CompraServiceImpl Descripción: clase de servicio que utiliza el
@@ -20,6 +23,9 @@ import jakarta.transaction.Transactional;
 @Service
 public class CompraServiceImpl implements CompraService {
 	
+	@Autowired
+    private CompraRepository compraRepository;
+	
 	@Autowired 
 	private EventosFeignClient eventosFeign;
 	
@@ -30,5 +36,18 @@ public class CompraServiceImpl implements CompraService {
 		return evento;
 		
 	}
+	
+	/**
+	 * Método para para obtener el nombre del titular.
+	 *
+	 * @author elena
+	 * @param email Dirección de correo electrónico de la cual se extrae el nombre del titular.
+	 * @return Nombre del titular.
+	 */
+	public String obtenerNombreTitular(String email) {
+	    
+	    String[] nombreTitular = email.split("@");
+	    
+	    return nombreTitular[0];
+	}
 
-}
