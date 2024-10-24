@@ -23,6 +23,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class CompraConfirmadaResponse implements Serializable {
 	private static final long serialVersionUID = 1L;
+	
+	private String mensaje;
 
 	private String nombreEvento;
 

@@ -23,7 +23,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
  * Gregorio
  */
 @RestController
-@RequestMapping("/compras")
 public class CompraController {
 	private final CompraService compraService;
 
@@ -40,6 +39,7 @@ public class CompraController {
 	@ApiResponses(value = { @ApiResponse(responseCode = "201", description = "Compra creada correctamente."),
 			@ApiResponse(responseCode = "400", description = "Solicitud inválida.") })
 	@PostMapping("/nuevaCompra")
+	@ResponseStatus(HttpStatus.CREATED)
 	public CompraConfirmadaResponse nuevaCompra(@RequestBody PeticionCompraResponse peticionCompraResponse) {
 		CompraConfirmadaResponse compraConfirmada = compraService.nuevaCompra(peticionCompraResponse);
 		return compraConfirmada;

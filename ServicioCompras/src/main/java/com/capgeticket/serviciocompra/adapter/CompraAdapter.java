@@ -1,6 +1,7 @@
 package com.capgeticket.serviciocompra.adapter;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import org.springframework.stereotype.Component;
 
@@ -15,22 +16,25 @@ import com.capgeticket.serviciocompra.response.ReciboCompraResponse;
 
 @Component
 public class CompraAdapter {
+	private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 	public CompraResponse toDTO(Compra compra) {
+
 	    return CompraResponse.builder()
 	            .id(compra.getIdCompra())                
 	            .idEvento(compra.getIdEvento())     
 	            .precio(compra.getPrecio())               
-	            .fecha(compra.getFecha())                 
+	            .fecha(compra.getFecha().toString())              
 	            .email(compra.getEmail())                 
 	            .build();
 	}
 
 	public Compra toEntity(CompraResponse compraDto) {
+	
 	    return Compra.builder()
 	            .idCompra(compraDto.getId())        
 	            .idEvento(compraDto.getIdEvento())                           
 	            .precio(compraDto.getPrecio())         
-	            .fecha(compraDto.getFecha())              
+	            .fecha(LocalDateTime.parse(compraDto.getFecha(), FORMATTER))
 	            .email(compraDto.getEmail())          
 	            .build();                                  
 	}
@@ -51,6 +55,13 @@ public class CompraAdapter {
 	
 	public CompraConfirmadaResponse toCompraConfirmadaDto(String email, ReciboCompraResponse recibo) {
 		return CompraConfirmadaResponse.builder()
+				.mensaje(String.format(
+		                "Compra registrada con éxito el día %s para el evento: %s, precio: %.2f, usuario: %s.",
+		                recibo.getTimestamp(),  
+		                recibo.getInfo().getConcepto(),
+		                recibo.getInfo().getCantidad(),   
+		                recibo.getInfo().getNombreTitular() 
+		            ))
 				.nombreEvento(recibo.getInfo().getConcepto())
 				.fecha(recibo.getTimestamp())
 				.precio(recibo.getInfo().getCantidad())
