@@ -26,7 +26,7 @@ public class CompraConfirmadaResponse implements Serializable {
 
 	private String nombreEvento;
 
-	private LocalDateTime fecha;
+	private String fecha;
 
 	private double precio;
 

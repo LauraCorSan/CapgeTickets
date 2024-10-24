@@ -30,5 +30,5 @@ public class CompraResponse implements Serializable {
     private double precio;          
     private String email;  
     
-    private LocalDateTime fecha;        
+    private String fecha;        
 }

@@ -58,7 +58,7 @@ public class CompraAdapter {
 				.build();
 	}
 	
-	public CompraResponse toCompraResponse(Long idEvento, Double precio, LocalDateTime fecha , String email) {
+	public CompraResponse toCompraResponse(Long idEvento, double precio, String fecha , String email) {
 		return CompraResponse.builder()
 				.idEvento(idEvento)
 				.precio(precio)

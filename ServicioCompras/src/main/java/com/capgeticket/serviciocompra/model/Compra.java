@@ -42,7 +42,7 @@ public class Compra  implements Serializable{
 	private double precio;
 	
 	@Column(name = "fecha_compra")
-	private LocalDateTime fecha;
+	private String fecha;
 	
 	@Column(name = "email")
 	private String email;

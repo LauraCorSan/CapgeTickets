@@ -63,7 +63,7 @@ public class CompraServiceImpl implements CompraService {
 		EventoResponse eventoComprado = obtenerEvento(peticion.getIdEvento());
 		log.info("--despues de obtener");
 
-		Double cantidad = obtenerPrecio(eventoComprado.getPrecioMin(), eventoComprado.getPrecioMax());
+		double cantidad = obtenerPrecio(eventoComprado.getPrecioMin(), eventoComprado.getPrecioMax());
 		String nombreEvento = eventoComprado.getNombre();
 		
 		DatosCompraResponse datos = compraAdapter.toDatosCompraDto(nombreTitular, nombreEvento, cantidad, peticion);
@@ -78,7 +78,7 @@ public class CompraServiceImpl implements CompraService {
 		
 		Compra compraAlmacenada = compraAdapter.toEntity(compraRealizada);
 		
-		compraRepository.save(compraAlmacenada);
+		//compraRepository.save(compraAlmacenada);
 		
 		return confirmada;
 	}
@@ -92,18 +92,29 @@ public class CompraServiceImpl implements CompraService {
 	 *                                          código de error 400 en la respuesta.
 	 */
 	public ReciboCompraResponse realizarCompra(DatosCompraResponse datosCompraResponse) {
-log.info("--realizo llamada a banco");
-		ReciboCompraResponse reciboCompra = bancoFeign.comprarTicket(datosCompraResponse);
+	    log.info("--realizo llamada a banco");
+	    ReciboCompraResponse reciboCompra = bancoFeign.comprarTicket(datosCompraResponse);
 
-		if (String.valueOf(reciboCompra.getStatus()).equals("400")) {
-		    throw new ReciboCompraIncorrectaException("Error al realizar la compra" + reciboCompra.getMessage());
-		}
-		if (String.valueOf(reciboCompra.getStatus()).equals("500")) {
-		    throw new ReciboCompraIncorrectaException("Error al realizar la compra" + reciboCompra.getMessage());
-		}
-		
-		return reciboCompra;
+	    if (reciboCompra == null) {
+	        throw new ReciboCompraIncorrectaException("La respuesta del banco es nula");
+	    }
+
+	    log.info("--recibo banco: " + reciboCompra);
+
+	    switch (reciboCompra.getStatus()) {
+	        case "400":
+	            log.info("--Error 400 al realizar la compra: " + reciboCompra.getMessage());
+	            throw new ReciboCompraIncorrectaException("Error al realizar la compra: " + reciboCompra.getMessage());
+	        case "500":
+	            log.info("--Error 500 al realizar la compra: " + reciboCompra.getMessage());
+	            throw new ReciboCompraIncorrectaException("Error al realizar la compra: " + reciboCompra.getMessage());
+	        default:
+	            log.info("--Compra realizada con éxito: " + reciboCompra.getMessage());
+	    }
+
+	    return reciboCompra;
 	}
+
 	
 	
 	/**
