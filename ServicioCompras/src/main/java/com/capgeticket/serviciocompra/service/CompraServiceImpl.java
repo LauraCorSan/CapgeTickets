@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.capgeticket.resteventos.model.Evento;
 import com.capgeticket.serviciocompra.repository.CompraRepository;
+import com.capgeticket.serviciocompra.response.DatosCompraResponse;
+import com.capgeticket.serviciocompra.response.ReciboCompraResponse;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -46,5 +48,9 @@ public class CompraServiceImpl implements CompraService {
 	    return nombreTitular[0];
 	}
 
-
+	
+	public ReciboCompraResponse realizarCompra(DatosCompraResponse datosCompraResponse) {
+		return null;
+		
+	}
 }
