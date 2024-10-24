@@ -24,7 +24,7 @@ public class ReciboCompraResponse implements Serializable {
 
 	private String timestamp;
 
-	private int status;
+	private String status;
 
 	private String error;
 	
