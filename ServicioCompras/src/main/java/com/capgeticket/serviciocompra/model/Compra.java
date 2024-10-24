@@ -23,6 +23,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @Entity
 @Table(name = "compra")
+
 public class Compra {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
