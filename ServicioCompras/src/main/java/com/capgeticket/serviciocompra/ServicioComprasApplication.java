@@ -7,7 +7,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-@EnableFeignClients
+@EnableFeignClients(basePackages = "com.capgeticket.feignclients")
 public class ServicioComprasApplication {
 
 	public static void main(String[] args) {
