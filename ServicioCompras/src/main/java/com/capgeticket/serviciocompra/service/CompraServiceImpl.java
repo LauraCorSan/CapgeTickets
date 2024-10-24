@@ -27,10 +27,9 @@ public class CompraServiceImpl implements CompraService {
 	@Autowired
 	private EventosFeignClient eventosFeign;
 
-	public Evento evento;
 
 	private Evento obtenerEvento(Long idEvento) {
-		this.evento = eventosFeign.obtenerEventoPorId(idEvento);
+		Evento evento = eventosFeign.obtenerEventoPorId(idEvento);
 		return evento;
 
 	}
