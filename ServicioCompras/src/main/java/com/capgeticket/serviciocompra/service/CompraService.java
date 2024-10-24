@@ -29,5 +29,4 @@ import lombok.NoArgsConstructor;
 
 public interface CompraService {
 	
-	
 }
