@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.servlet.NoHandlerFoundException;
 
 /**
  * Clase: GlobalExceptionHandler
@@ -20,21 +21,38 @@ public class GlobalExceptionHandler {
 	  private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
 	    @ExceptionHandler(Exception.class) 
-	    public ResponseEntity<String> handleGenericException(Exception ex) {
+	    public ResponseEntity<ErrorResponse> handleGenericException(Exception ex) {
 	        logger.error("Ocurrió un error: {}", ex.getMessage()); 
-	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Ha ocurrido un error en el servidor.");
+	        ErrorResponse errorResponse = new ErrorResponse( HttpStatus.INTERNAL_SERVER_ERROR.value(),"Error en el servidor","Ha ocurrido un error en el servidor, vuelva a intentarlo más tarde");
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
 	    }
 
 	    @ExceptionHandler(EventoInvalidoException.class)
-	    public ResponseEntity<String> handleEventoInvalidoException(EventoInvalidoException ex) {
+	    public ResponseEntity<ErrorResponse> handleEventoInvalidoException(EventoInvalidoException ex) {
 	        logger.error("Evento inválido: {}", ex.getMessage());
-	        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+	        ErrorResponse errorResponse = new ErrorResponse( HttpStatus.BAD_REQUEST.value(),"La solicitud es incorrecta. Verifica los datos enviados.",ex.getMessage());
+	        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
 	    }
 	    
 	    @ExceptionHandler(EventoNotFoundException.class)
-	    public ResponseEntity<String> handleEventoNotFoundException(EventoNotFoundException ex) {
-	        logger.error("Evento inválido: {}", ex.getMessage());
-	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+	    public ResponseEntity<ErrorResponse> handleEventoNotFoundException(EventoNotFoundException ex) {
+	        logger.error("Evento no encontrado: {}", ex.getMessage());
+	        ErrorResponse errorResponse = new ErrorResponse( HttpStatus.NOT_FOUND.value(),"Evento no encontrado",ex.getMessage());
+	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
+	    }
+	    
+	    @ExceptionHandler(NoEventosException.class)
+	    public ResponseEntity<ErrorResponse> handleNoEventosException(NoEventosException ex) {
+	        logger.error("No hay eventos: {}", ex.getMessage());
+	        ErrorResponse errorResponse = new ErrorResponse( HttpStatus.NO_CONTENT.value(),"No existen datos",ex.getMessage());
+	        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(errorResponse);
+	    }
+	    
+	    @ExceptionHandler(NoHandlerFoundException.class)
+	    public ResponseEntity<ErrorResponse> handleRouteNotFoundException(NoHandlerFoundException ex) {
+	        logger.error("La ruta solicitada no existe: " + ex.getRequestURL());
+	        ErrorResponse errorResponse = new ErrorResponse( HttpStatus.NOT_FOUND.value(),"La ruta solicitada no existe",ex.getMessage());
+	        return  ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
 	    }
 
 }

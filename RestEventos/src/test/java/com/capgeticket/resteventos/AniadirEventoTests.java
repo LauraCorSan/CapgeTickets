@@ -82,7 +82,7 @@ public class AniadirEventoTests {
 			eventoService.aniadirEvento(evento);
 		});
 
-		assertEquals("{error: El nombre del evento no puede estar vacío. }", exception.getMessage());
+		assertEquals("El nombre del evento no puede estar vacío.", exception.getMessage());
 	}
 
 	/**
@@ -96,6 +96,6 @@ public class AniadirEventoTests {
 			eventoService.aniadirEvento(evento);
 		});
 
-		assertEquals("{error: La fecha del evento no puede ser en el pasado. }", exception.getMessage());
+		assertEquals("La fecha del evento no puede ser en el pasado.", exception.getMessage());
 	}
 }

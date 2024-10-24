@@ -25,15 +25,14 @@ public interface EventoService {
 
 	public Evento aniadirEvento(Evento evento);
 
-	public Evento detallesEvento(Long id);
+	public Optional<Evento> detallesEvento(Long id);
 
 	public Optional<Evento> buscarPorId(Long id);
 
 	public List<Evento> buscarTodos();
-
-	public Evento eliminarEvento(Long id);
 	
 	public List<Evento> buscarPorNombre(String nombre);
 
+	public void eliminarEvento(Long id);
 
 }
