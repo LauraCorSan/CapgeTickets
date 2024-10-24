@@ -1,6 +1,8 @@
 package com.capgeticket.serviciocompra.service;
 
 import java.util.Random;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +14,6 @@ import com.capgeticket.serviciocompra.adapter.CompraAdapter;
 import com.capgeticket.serviciocompra.model.Compra;
 import com.capgeticket.serviciocompra.error.PeticionCompraIncorrectaException;
 import com.capgeticket.serviciocompra.error.ReciboCompraIncorrectaException;
-import com.capgeticket.serviciocompra.model.Evento;
 import com.capgeticket.serviciocompra.response.CompraConfirmadaResponse;
 import com.capgeticket.serviciocompra.response.PeticionCompraResponse;
 
@@ -22,6 +23,7 @@ import com.capgeticket.serviciocompra.repository.CompraRepository;
 
 import com.capgeticket.serviciocompra.response.CompraResponse;
 import com.capgeticket.serviciocompra.response.DatosCompraResponse;
+import com.capgeticket.serviciocompra.response.EventoResponse;
 import com.capgeticket.serviciocompra.response.ReciboCompraResponse;
 
 /**
@@ -32,6 +34,9 @@ import com.capgeticket.serviciocompra.response.ReciboCompraResponse;
 @Transactional
 @Service
 public class CompraServiceImpl implements CompraService {
+	
+    private static final Logger log = LoggerFactory.getLogger(CompraServiceImpl.class);
+	
 	private static final String EMAIL_REGEX = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
 	private static final Pattern EMAIL_PATTERN = Pattern.compile(EMAIL_REGEX);
 	
@@ -48,11 +53,15 @@ public class CompraServiceImpl implements CompraService {
 	private BancoFeignClient bancoFeign;
 
 	public CompraConfirmadaResponse nuevaCompra(PeticionCompraResponse peticion) {
+		log.info("--- llego al service");
 		validarPeticion(peticion);
 		// obetenemos el titular a partir del email
 		String nombreTitular = obtenerNombreTitular(peticion.getEmail());
 		// tenemos el evento
-		Evento eventoComprado = obtenerEvento(peticion.getIdEvento());
+		log.info("--- me voy a meter con evento");
+		EventoResponse eventoComprado = obtenerEvento(peticion.getIdEvento());
+		log.info("--- salgo de evento");
+
 		Double cantidad = obtenerPrecio(eventoComprado.getPrecioMin(), eventoComprado.getPrecioMax());
 		String nombreEvento = eventoComprado.getNombre();
 		
@@ -97,8 +106,13 @@ public class CompraServiceImpl implements CompraService {
 	 * @return Evento Un objeto  que representa el evento solicitado.
 	 *         
 	 */
-	private Evento obtenerEvento(Long idEvento) {
-		Evento evento = eventosFeign.obtenerEventoPorId(idEvento);
+	private EventoResponse obtenerEvento(Long idEvento) {
+		log.info("--- me meto");
+
+		EventoResponse evento = eventosFeign.obtenerEventoPorId(idEvento);
+		
+		log.info("--- ya tengo mi evento");
+
 		return evento;
 	}
 

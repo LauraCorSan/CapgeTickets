@@ -22,7 +22,7 @@ public class GlobalExceptionHandler {
 	    @ExceptionHandler(Exception.class) 
 	    public ResponseEntity<ErrorResponse> handleGenericException(Exception ex) {
 	        logger.error("Ocurrió un error: {}", ex.getMessage()); 
-	        ErrorResponse errorResponse = new ErrorResponse( HttpStatus.INTERNAL_SERVER_ERROR.value(),"Error en el servidor","Ha ocurrido un error en el servidor, vuelva a intentarlo más tarde");
+	        ErrorResponse errorResponse = new ErrorResponse( HttpStatus.INTERNAL_SERVER_ERROR.value(),"Error en el servidor",ex.getMessage());
 	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
 	    }
 

@@ -1,5 +1,6 @@
-package com.capgeticket.serviciocompra.model;
+package com.capgeticket.serviciocompra.response;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -26,37 +27,27 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "eventos")
-public class Evento {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_evento")
+public class EventoResponse implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
 	private Long id;
 
-	@Column(name = "nombre")
 	private String nombre;
 
-	@Column(name = "descripcion")
 	private String descripcion;
 
-	@Column(name = "genero")
 	private String genero;
 	
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
-    @Column(name = "fecha_evento")
     private LocalDateTime fechaEvento;
 
-	@Column(name = "precio_min")
 	private double precioMin;
 
-	@Column(name = "precio_max")
 	private double precioMax;
 
-	@Column(name = "localidad")
 	private String localidad;
 
-	@Column(name = "recinto")
 	private String recinto;
 
 }
