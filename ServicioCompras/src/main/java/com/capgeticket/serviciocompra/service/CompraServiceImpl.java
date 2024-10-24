@@ -1,21 +1,14 @@
 package com.capgeticket.serviciocompra.service;
 
-import java.time.LocalDateTime;
 
-import com.capgeticket.resteventos.model.Evento;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import com.capgeticket.feignclients.EventosFeignClient;
+import com.capgeticket.serviciocompra.model.Evento;
+
+import jakarta.transaction.Transactional;
+
 
 /**
 * Clase: CompraServiceImpl Descripción: clase de servicio que utiliza el
@@ -23,6 +16,19 @@ import lombok.NoArgsConstructor;
 * Versión: 2.0
 *  Autores: Laura Gregorio, Laura Cordero, Elena, Guillermo, Veronica
 */
+@Transactional
+@Service
 public class CompraServiceImpl implements CompraService {
+	
+	@Autowired 
+	private EventosFeignClient eventosFeign;
+	
+	public Evento evento;
+	
+	public Evento obtenerEvento(Long idEvento) {
+		this.evento = eventosFeign.obtenerEventoPorId(idEvento);		
+		return evento;
+		
+	}
 
 }
