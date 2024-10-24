@@ -124,6 +124,6 @@ class ModificarEventoTests {
 	        eventoController.modificarEvento(evento.getId(), eventoMod);
 	    });
 
-	    assertEquals("El nombre del evento no puede estar vacío." , exception.getMessage());
+	    assertEquals("El nombre del evento no puede estar vacío.", exception.getMessage());
 	}
 }
