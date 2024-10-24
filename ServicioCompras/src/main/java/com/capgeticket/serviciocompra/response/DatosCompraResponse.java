@@ -20,6 +20,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class DatosCompraResponse implements Serializable {
+	
 	private String nombreTitular;
 	
 	private String nombreTarjeta;
