@@ -1,6 +1,5 @@
 package com.capgeticket.serviciocompra.service;
 
-
 import java.util.Random;
 import java.util.regex.Pattern;
 
@@ -148,6 +147,8 @@ public class CompraServiceImpl implements CompraService {
 				|| !EMAIL_PATTERN.matcher(peticionCompra.getEmail()).matches()) {
 			throw new PeticionCompraIncorrectaException("El email no puede ser nulo o tener un formato incorrecto.");
 		}
-	}
 
+	}
+	
+	 
 }

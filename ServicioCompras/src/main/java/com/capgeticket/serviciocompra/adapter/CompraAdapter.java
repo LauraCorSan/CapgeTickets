@@ -2,13 +2,9 @@ package com.capgeticket.serviciocompra.adapter;
 
 import java.time.LocalDateTime;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.springframework.stereotype.Component;
 
 import com.capgeticket.serviciocompra.model.Compra;
-import com.capgeticket.serviciocompra.model.Evento;
 import com.capgeticket.serviciocompra.response.CompraConfirmadaResponse;
 import com.capgeticket.serviciocompra.response.CompraResponse;
 import com.capgeticket.serviciocompra.response.DatosCompraResponse;

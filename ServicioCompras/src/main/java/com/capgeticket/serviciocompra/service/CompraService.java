@@ -15,4 +15,7 @@ import com.capgeticket.serviciocompra.response.PeticionCompraResponse;
 
 public interface CompraService {
 	public CompraConfirmadaResponse nuevaCompra(PeticionCompraResponse peticion); 
+	
 }
+	
+
