@@ -1,13 +1,14 @@
 package com.capgeticket.serviciocompra.adapter;
 
 import java.time.LocalDateTime;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
 
-import com.capgeticket.resteventos.model.Evento;
 import com.capgeticket.serviciocompra.model.Compra;
+import com.capgeticket.serviciocompra.model.Evento;
 import com.capgeticket.serviciocompra.response.CompraResponse;
 
 
@@ -16,7 +17,7 @@ import com.capgeticket.serviciocompra.response.CompraResponse;
 public class CompraAdapter {
 	public CompraResponse toDTO(Compra compra) {
 	    return CompraResponse.builder()
-	            .id(compra.getId_compra())                
+	            .id(compra.getIdCompra())                
 	            .idEvento(compra.getEvento().getId())     
 	            .precio(compra.getPrecio())               
 	            .fecha(compra.getFecha())                 
@@ -34,12 +35,12 @@ public class CompraAdapter {
 
 	public Compra toEntity(CompraResponse compraDto, Evento evento) {
 	    return Compra.builder()
-	            .id_compra(compraDto.getId())             // Asignar ID de la compra
-	            .evento(evento)                            // Asignar evento
-	            .precio(compraDto.getPrecio())            // Asignar precio
-	            .fecha(compraDto.getFecha())              // Asignar fecha
-	            .email(compraDto.getEmail())              // Asignar correo
-	            .build();                                  // Crear el objeto Compra
+	            .idCompra(compraDto.getId())        
+	            .evento(evento)                           
+	            .precio(compraDto.getPrecio())         
+	            .fecha(compraDto.getFecha())              
+	            .email(compraDto.getEmail())          
+	            .build();                                  
 	}
 
 	
