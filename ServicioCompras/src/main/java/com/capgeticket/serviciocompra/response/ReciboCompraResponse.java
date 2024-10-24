@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 
 /**
  * Clase: ReciboCompraResponse
- * Descripción: clase dto con los datos que nos proporciona el usuario en postman
+ * Descripción: clase dto con los datos que nos proporciona el microservicio Banco
  * Fecha: 23/10/24
  * Versión: 1.0
  * Autores: Laura Cordero
