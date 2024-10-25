@@ -90,7 +90,7 @@ public class CompraServiceImpl implements CompraService {
 	 * @throws ReciboCompraIncorrectaException Si hay un error en la compra,
 	 *                                         devuelve un código de error 400 en la
 	 *                                         respuesta.
-	 * @author lgregori                                        
+	 * @author lgregori
 	 */
 
 	public ReciboCompraResponse realizarCompra(DatosCompraResponse datosCompraResponse) {
@@ -101,7 +101,6 @@ public class CompraServiceImpl implements CompraService {
 			if (reciboCompra == null) {
 				throw new ReciboCompraIncorrectaException("La respuesta del banco es nula porque hubo un error.");
 			}
-	
 
 			return reciboCompra;
 
@@ -134,14 +133,15 @@ public class CompraServiceImpl implements CompraService {
 				throw new ReciboCompraIncorrectaException(
 						"Error al realizar la compra: El formato del nombre no es correcto.");
 
-
 			} else {
-				throw new ReciboCompraIncorrectaException("Error desconocido al realizar la compra");
+				throw new ReciboCompraIncorrectaException(
+						"Error al realizar la compra: falta alguno de los datos de la tarjeta.");
 			}
 
 		} catch (FeignException e) {
 			log.error("Error Feign: " + e.contentUTF8());
-			throw new ReciboCompraIncorrectaException("Error en la comunicación con el banco: el sistema se encuentra inestable");
+			throw new ReciboCompraIncorrectaException(
+					"Error en la comunicación con el banco: el sistema se encuentra inestable");
 		}
 	}
 
@@ -198,7 +198,7 @@ public class CompraServiceImpl implements CompraService {
 		if (peticionCompra.getIdEvento() == null) {
 			throw new PeticionCompraIncorrectaException("El id del evento no puede estar vacío.");
 		}
-		if ( peticionCompra.getIdEvento() < 0) {
+		if (peticionCompra.getIdEvento() < 0) {
 			throw new PeticionCompraIncorrectaException("El id del evento no puede ser negativo.");
 		}
 		if (peticionCompra.getIdEvento() == 0) {
@@ -208,11 +208,10 @@ public class CompraServiceImpl implements CompraService {
 		if (peticionCompra.getEmail() == null) {
 			throw new PeticionCompraIncorrectaException("El email no puede ser nulo.");
 		}
-		if (peticionCompra.getEmail().trim().isEmpty()
-				) {
+		if (peticionCompra.getEmail().trim().isEmpty()) {
 			throw new PeticionCompraIncorrectaException("El email no puede estar vacío.");
 		}
-		if ( !EMAIL_PATTERN.matcher(peticionCompra.getEmail()).matches()) {
+		if (!EMAIL_PATTERN.matcher(peticionCompra.getEmail()).matches()) {
 			throw new PeticionCompraIncorrectaException("El email tiene un formato incorrecto.");
 		}
 
