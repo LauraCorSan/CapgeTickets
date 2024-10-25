@@ -1,25 +1,21 @@
 package com.capgeticket.job;
 
 
-import java.time.LocalDateTime;
+
 import java.util.Iterator;
-import java.util.List;
 
 import org.springframework.batch.core.StepExecution;
 import org.springframework.batch.core.annotation.BeforeStep;
 import org.springframework.batch.item.ItemReader;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import com.capgeticket.serviciocompra.model.Compra;
 import com.capgeticket.serviciocompra.repository.CompraRepository;
 
-import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-@Component
 public class EstadisticasItemReader implements ItemReader<Compra> {
 
     @Autowired
@@ -47,7 +43,7 @@ public class EstadisticasItemReader implements ItemReader<Compra> {
             return compra;
         } else {
             log.info("---- read(): No hay más datos");
-            return null; // Indica fin de datos para el lector
+            return null; 
         }
     }
 }
