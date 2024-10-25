@@ -18,13 +18,8 @@ import com.capgeticket.serviciocompra.response.ReciboCompraResponse;
 public interface BancoFeignClient {
 	
 	@PostMapping("/pasarela/compra")
-<<<<<<< HEAD
 
 	public ReciboCompraResponse comprarTicket(@RequestBody DatosCompraResponse datosCompra);
 
-	
-=======
-	public ReciboCompraResponse comprarTicket(@RequestBody DatosCompraResponse datosCompra);
->>>>>>> b8b596bf54347eff9c7b5613dee4cd0cd8aa9abc
 
 }
