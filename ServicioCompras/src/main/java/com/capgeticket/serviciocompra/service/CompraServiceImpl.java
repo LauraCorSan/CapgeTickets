@@ -145,7 +145,7 @@ public class CompraServiceImpl implements CompraService {
 		} catch (FeignException e) {
 			log.error("Error Feign: " + e.contentUTF8());
 			throw new ReciboCompraIncorrectaException(
-					"Error en la comunicación con el banco: el sistema se encuentra inestable");
+					"Error en la comunicación con el banco: el sistema se encuentra inestable.");
 		}
 	}
 

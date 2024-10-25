@@ -24,7 +24,7 @@ public class GlobalExceptionHandler {
 
 	@ExceptionHandler(PeticionCompraIncorrectaException.class)
 	public ResponseEntity<ErrorResponse> handlePeticionCompraIncorrectaException(PeticionCompraIncorrectaException ex) {
-		logger.error("Peticion de compra inválida: {}", ex.getMessage());
+		logger.error("Peticion de compra inválida.: {}", ex.getMessage());
 		ErrorResponse errorResponse = new ErrorResponse(HttpStatus.BAD_REQUEST.value(),
 				"La solicitud es incorrecta. Verifica los datos enviados.", ex.getMessage());
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
@@ -32,25 +32,25 @@ public class GlobalExceptionHandler {
 
 	@ExceptionHandler(ReciboCompraIncorrectaException.class)
 	public ResponseEntity<ErrorResponse> handleReciboCompraIncorrectaException(ReciboCompraIncorrectaException ex) {
-		logger.error("Intento de compra fallido: {}", ex.getMessage());
-		ErrorResponse errorResponse = new ErrorResponse(HttpStatus.BAD_REQUEST.value(), "Intento de compra fallido",
+		logger.error("Intento de compra fallido.: {}", ex.getMessage());
+		ErrorResponse errorResponse = new ErrorResponse(HttpStatus.BAD_REQUEST.value(), "Intento de compra fallido.",
 				ex.getMessage());
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
 	}
 
 	@ExceptionHandler(NoHandlerFoundException.class)
 	public ResponseEntity<ErrorResponse> handleRouteNotFoundException(NoHandlerFoundException ex) {
-		logger.error("La ruta solicitada no existe: " + ex.getRequestURL());
-		ErrorResponse errorResponse = new ErrorResponse(HttpStatus.NOT_FOUND.value(), "La ruta solicitada no existe",
+		logger.error("La ruta solicitada no existe.: " + ex.getRequestURL());
+		ErrorResponse errorResponse = new ErrorResponse(HttpStatus.NOT_FOUND.value(), "La ruta solicitada no existe.",
 				ex.getMessage());
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
 	}
 
 	@ExceptionHandler(FeignException.NotFound.class)
 	public ResponseEntity<ErrorResponse> handleFeignNotFoundException(FeignException.NotFound ex) {
-		logger.error("Error Feign NotFound: {}", ex.getMessage());
+		logger.error("Error Feign NotFound.: {}", ex.getMessage());
 
-		ErrorResponse errorResponse = new ErrorResponse(HttpStatus.NOT_FOUND.value(), "Evento no encontrado",
+		ErrorResponse errorResponse = new ErrorResponse(HttpStatus.NOT_FOUND.value(), "Evento no encontrado.",
 				"El evento solicitado no existe o no se encuentra disponible.");
 
 		return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
