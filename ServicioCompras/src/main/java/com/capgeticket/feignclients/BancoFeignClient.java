@@ -12,6 +12,8 @@ import com.capgeticket.serviciocompra.response.ReciboCompraResponse;
 public interface BancoFeignClient {
 	
  
-
+	@PostMapping("/pasarela/compra")
+	public ReciboCompraResponse comprarTicket(@RequestBody DatosCompraResponse datosCompra);
+	
 
 }

@@ -13,7 +13,6 @@ import com.capgeticket.serviciocompra.response.PeticionCompraResponse;
 import com.capgeticket.serviciocompra.response.ReciboCompraResponse;
 
 
-
 @Component
 public class CompraAdapter {
 	private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
@@ -43,7 +42,6 @@ public class CompraAdapter {
 	public DatosCompraResponse toDatosCompraDto(String nombreTitular, String nombreEvento, Double cantidad,PeticionCompraResponse peticion ) {
 		return DatosCompraResponse.builder()
 				.nombreTitular(nombreTitular)
-				.numeroTarjeta(peticion.getNumTarjeta())
 				.numeroTarjeta(peticion.getNumeroTarjeta())
 				.mesCaducidad(peticion.getMesCaducidad())
 				.yearCaducidad(peticion.getYearCaducidad())
