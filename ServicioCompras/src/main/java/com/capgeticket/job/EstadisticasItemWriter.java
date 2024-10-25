@@ -11,22 +11,19 @@ import org.springframework.stereotype.Component;
 import com.capgeticket.serviciocompra.model.EstadisticasCompra;
 import com.capgeticket.serviciocompra.repository.EstadisticasRepository;
 
+public class EstadisticasItemWriter implements ItemWriter<EstadisticasCompra> {
 
-//public class EstadisticasItemWriter implements ItemWriter<EstadisticasCompra> {
-//
-//	@Autowired
-//	private EstadisticasRepository estadisticasRepository;
-//
-//	/**
-//	 * Método write que guarda la lista de EstadisticasCompra en la base de datos.
-//	 */
-//	@Override
-//	public void write(List<? extends EstadisticasCompra> list) throws Exception {
-//		estadisticasRepository.saveAll(list);
-//
-//	}
-//
-//
-//
-//
-//}
+	@Autowired
+	private EstadisticasRepository estadisticasRepository;
+
+	/**
+	 * Método write que guarda cada EstadisticasCompra en la base de datos.
+	 */
+	@Override
+	public void write(Chunk<? extends EstadisticasCompra> chunk) throws Exception {
+		List<EstadisticasCompra> estadisticasList = (List<EstadisticasCompra>) chunk.getItems();
+
+		estadisticasRepository.saveAll(estadisticasList);
+	}
+
+}

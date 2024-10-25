@@ -15,33 +15,28 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-//@Slf4j
-//public class EstadisticasItemProcessor implements ItemProcessor<Compra, EstadisticasCompra> {
-//
-//	/**
-//	 * Este método calcula la media de los precios de una lista de compras y devuelve 
-//	 * una lista de objetos EstadisticasCompra, cada uno con el promedio de precios por evento.
-//	 */
-//	@Override
-//	public EstadisticasCompra process(Compra compras) {
-//		if (compras == null || compras.isEmpty()) {
-//			log.info("--No hay compras para procesar.");
-//			return Collections.emptyList();
-//		}
-//
-//		Map<Long, Double> mediaPreciosPorEvento = compras.stream()
-//				.filter(compra -> compra.getFecha().toLocalDate().isEqual(LocalDate.now()))
-//				.collect(Collectors.groupingBy(Compra::getIdEvento, Collectors.averagingDouble(Compra::getPrecio)));
-//
-//		List<EstadisticasCompra> estadisticasCompra = mediaPreciosPorEvento.entrySet().stream()
-//				.map(entry -> EstadisticasCompra.builder()
-//					.idEvento(entry.getKey())
-//					.precioMedio(entry.getValue())
-//					.diaActual(LocalDate.now())
-//					.build())
-//				.collect(Collectors.toList());
-//
-//		log.info("Estadísticas calculadas: " + estadisticasCompra);
-//		return estadisticasCompra;
-//	}
-//}
+@Slf4j
+public class EstadisticasItemProcessor implements ItemProcessor<Compra, EstadisticasCompra> {
+
+
+	/**
+	 * Este método procesa una sola compra y devuelve un objeto EstadisticasCompra con el evento y precio.
+	 */
+	@Override
+	public EstadisticasCompra process(Compra compra) {
+		if (compra == null) {
+			log.info("--La compra es nula y no será procesada.");
+			return null;
+		}
+
+		// Creación de EstadisticasCompra basada en una única compra
+		EstadisticasCompra estadistica = EstadisticasCompra.builder()
+				.idEvento(compra.getIdEvento())
+				.precioMedio(compra.getPrecio())
+				.diaActual(compra.getFecha().toLocalDate())
+				.build();
+
+		log.info("Estadística calculada: " + estadistica);
+		return estadistica;
+	}
+}
