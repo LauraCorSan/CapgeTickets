@@ -7,5 +7,20 @@ import org.springframework.batch.core.ItemReadListener;
 import com.capgeticket.serviciocompra.model.EstadisticasCompra;
 
 public class EstadisticasItemReaderListener implements ItemReadListener<EstadisticasCompra> {
-   
+    private static final Logger LOGGER = LoggerFactory.getLogger(EstadisticasItemReaderListener.class);
+
+    @Override
+    public void beforeRead() {
+        LOGGER.info("##### beforeRead");
+    }
+
+    @Override
+    public void afterRead(EstadisticasCompra estadisticaCompra) {
+        LOGGER.info("##### afterRead");
+    }
+
+    @Override
+    public void onReadError(Exception e) {
+        LOGGER.info("onReadError");
+    }
 }
