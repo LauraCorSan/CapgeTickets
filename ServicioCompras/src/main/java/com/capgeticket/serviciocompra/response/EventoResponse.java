@@ -3,8 +3,6 @@ package com.capgeticket.serviciocompra.response;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -42,8 +40,5 @@ public class EventoResponse implements Serializable {
 	private String localidad;
 
 	private String recinto;
-
-
-
 
 }

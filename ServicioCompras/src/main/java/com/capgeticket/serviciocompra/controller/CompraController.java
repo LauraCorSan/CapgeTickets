@@ -16,9 +16,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  * Clase: CompraController Descripción: clase de control (recepcion y
  * procesamiento) de endpoints 
  * Fecha: 24/10/24
- *  Versión: 1.0 
- *  Autores: Laura
- * Gregorio
+ * Versión: 1.0 
+ * Autores: Laura Gregorio
  */
 @RestController
 public class CompraController {

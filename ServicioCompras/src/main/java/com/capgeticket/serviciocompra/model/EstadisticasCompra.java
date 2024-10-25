@@ -1,25 +1,25 @@
 package com.capgeticket.serviciocompra.model;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
-
-import com.capgeticket.resteventos.model.Evento;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * Clase: Compra Descripción: entidad Compra con sus atributos
- * Fecha: 23/10/24 Versión: 1.0 Autores: Guillermo Garcia
+ * Clase: EstadisticasCompra 
+ * Descripción: entidad de estadisticas de compra segun evento por dia 
+ * Fecha: 24/10/24 
+ * Versión: 1.0 
+ * Autores: Laura Cordero
  */
 
 @Data
@@ -27,25 +27,22 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "compra")
-public class Compra implements Serializable  {
+@Table(name = "estadisticas")
+public class EstadisticasCompra implements Serializable{
 	private static final long serialVersionUID = 1L;
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_compra")
-	private Long idCompra;
+	@Column(name = "id")
+	private Long id;
 	
 	@Column(name = "id_evento", nullable = false) 
     private Long idEvento;
 	
-	@Column(name = "precio_evento")
-	private double precio;
+	@Column(name = "precio_medio")
+	private double precioMedio;
 	
-	@Column(name = "fecha_compra")
-	private LocalDateTime fecha;
-	
-	@Column(name = "email")
-	private String email;
+	@Column(name = "timestamp")
+	private LocalDateTime diaActual;
 	
 }
