@@ -24,11 +24,8 @@ import com.capgeticket.serviciocompra.repository.CompraRepository;
 
 import com.capgeticket.serviciocompra.response.CompraResponse;
 import com.capgeticket.serviciocompra.response.DatosCompraResponse;
-import com.capgeticket.serviciocompra.response.EventoResponse;
 import com.capgeticket.serviciocompra.response.ReciboCompraResponse;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * Clase: CompraServiceImpl Descripción: clase de servicio que utiliza el
@@ -43,7 +40,6 @@ public class CompraServiceImpl implements CompraService {
 	
 	private static final String EMAIL_REGEX = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
 	private static final Pattern EMAIL_PATTERN = Pattern.compile(EMAIL_REGEX);
-    private static final Logger log = LoggerFactory.getLogger(CompraServiceImpl.class);
 
 	@Autowired
 	private CompraRepository compraRepository;
