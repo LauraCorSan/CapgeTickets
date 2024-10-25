@@ -135,7 +135,8 @@ public class CompraServiceImpl implements CompraService {
 						"Error al realizar la compra: El formato del nombre no es correcto.");
 
 			} else {
-				throw new ReciboCompraIncorrectaException("Error desconocido al realizar la compra");
+				throw new ReciboCompraIncorrectaException(
+						"Error al realizar la compra: falta alguno de los datos de la tarjeta.");
 			}
 
 		} catch (FeignException e) {
