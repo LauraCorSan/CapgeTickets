@@ -187,8 +187,7 @@ public class CompraServiceImpl implements CompraService {
 	}
 
 	/**
-	 * validarPeticion() Se encarga de validar los campos de
-	 * peticionCompraResponse
+	 * validarPeticion() Se encarga de validar los campos de peticionCompraResponse
 	 *
 	 * @param PeticionCompraResponse
 	 */
