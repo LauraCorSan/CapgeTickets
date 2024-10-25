@@ -1,6 +1,8 @@
 package com.capgeticket.serviciocompra.service;
 
 import java.util.Random;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +13,6 @@ import com.capgeticket.feignclients.EventosFeignClient;
 import com.capgeticket.resteventos.response.EventoResponse;
 import com.capgeticket.serviciocompra.adapter.CompraAdapter;
 import com.capgeticket.serviciocompra.model.Compra;
-import com.capgeticket.serviciocompra.error.ErrorResponse;
 import com.capgeticket.serviciocompra.error.PeticionCompraIncorrectaException;
 import com.capgeticket.serviciocompra.error.ReciboCompraIncorrectaException;
 import com.capgeticket.serviciocompra.response.CompraConfirmadaResponse;
@@ -27,9 +28,6 @@ import com.capgeticket.serviciocompra.response.ReciboCompraResponse;
 
 import feign.FeignException;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 /**
  * Clase: CompraServiceImpl Descripción: clase de servicio que utiliza el
  * repositorio para la gestion de datos de Compras Versión: 2.0 Autores: Laura
@@ -38,9 +36,11 @@ import org.slf4j.LoggerFactory;
 @Transactional
 @Service
 public class CompraServiceImpl implements CompraService {
+
+	private static final Logger log = LoggerFactory.getLogger(CompraServiceImpl.class);
+
 	private static final String EMAIL_REGEX = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
 	private static final Pattern EMAIL_PATTERN = Pattern.compile(EMAIL_REGEX);
-	private static final Logger log = LoggerFactory.getLogger(CompraServiceImpl.class);
 
 	@Autowired
 	private CompraRepository compraRepository;
@@ -153,6 +153,7 @@ public class CompraServiceImpl implements CompraService {
 	 * 
 	 */
 	private EventoResponse obtenerEvento(Long idEvento) {
+
 		log.info("--antes de feign");
 
 		EventoResponse evento = eventosFeign.obtenerEventoPorId(idEvento);
@@ -187,10 +188,9 @@ public class CompraServiceImpl implements CompraService {
 
 	/**
 	 * validarPeticion() Se encarga de validar los campos de
-	 * CompraConfirmadaResponse
+	 * peticionCompraResponse
 	 *
-	 * @author vparrag
-	 * @param CompraConfirmadaResponse
+	 * @param PeticionCompraResponse
 	 */
 
 	public void validarPeticion(PeticionCompraResponse peticionCompra) {

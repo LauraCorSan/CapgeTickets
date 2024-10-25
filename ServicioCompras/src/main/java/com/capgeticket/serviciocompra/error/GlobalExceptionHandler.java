@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
 import com.capgeticket.resteventos.error.ErrorResponse;
-import com.capgeticket.resteventos.error.EventoNotFoundException;
 
 import feign.FeignException;
 
@@ -21,6 +20,7 @@ import feign.FeignException;
 public class GlobalExceptionHandler {
 
 	private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
+
 
 	@ExceptionHandler(PeticionCompraIncorrectaException.class)
 	public ResponseEntity<ErrorResponse> handlePeticionCompraIncorrectaException(PeticionCompraIncorrectaException ex) {

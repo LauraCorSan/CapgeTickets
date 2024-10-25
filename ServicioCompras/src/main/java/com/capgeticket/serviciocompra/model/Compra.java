@@ -17,6 +17,10 @@ import lombok.Data;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 
+/**
+ * Clase: Compra Descripción: entidad Compra con sus atributos
+ * Fecha: 23/10/24 Versión: 1.0 Autores: Guillermo Garcia
+ */
 
 @Data
 @NoArgsConstructor
@@ -24,11 +28,15 @@ import lombok.NoArgsConstructor;
 @Builder
 @Entity
 @Table(name = "compra")
+<<<<<<< HEAD
 
 public class Compra  implements Serializable{
 	/**
 	 * 
 	 */
+=======
+public class Compra implements Serializable  {
+>>>>>>> b8b596bf54347eff9c7b5613dee4cd0cd8aa9abc
 	private static final long serialVersionUID = 1L;
 
 	@Id
