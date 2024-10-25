@@ -13,9 +13,9 @@ import com.capgeticket.resteventos.error.ErrorResponse;
 import feign.FeignException;
 
 /**
- * Clase: GlobalExceptionHandler Descripción: gestionar excepciones customizadas
- * Fecha: 24/10/24 Versión: 1.0 Autores: Laura Cordero
- */
+* Clase: GlobalExceptionHandler Descripción: gestionar excepciones customizadas
+* Fecha: 24/10/24 Versión: 1.0 Autores: Laura Cordero
+*/
 @ControllerAdvice
 public class GlobalExceptionHandler {
 

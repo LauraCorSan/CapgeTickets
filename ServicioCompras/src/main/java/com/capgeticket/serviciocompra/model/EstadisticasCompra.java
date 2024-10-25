@@ -1,6 +1,7 @@
 package com.capgeticket.serviciocompra.model;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
@@ -43,6 +44,6 @@ public class EstadisticasCompra implements Serializable{
 	private double precioMedio;
 	
 	@Column(name = "timestamp")
-	private LocalDateTime diaActual;
+	private LocalDate diaActual;
 	
 }

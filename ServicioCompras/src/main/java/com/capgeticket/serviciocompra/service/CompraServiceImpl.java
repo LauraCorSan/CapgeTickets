@@ -28,6 +28,10 @@ import com.capgeticket.serviciocompra.response.ReciboCompraResponse;
 
 import feign.FeignException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+
 /**
  * Clase: CompraServiceImpl Descripción: clase de servicio que utiliza el
  * repositorio para la gestion de datos de Compras Versión: 2.0 Autores: Laura
