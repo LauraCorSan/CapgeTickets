@@ -2,13 +2,12 @@ package com.capgeticket.serviciocompra.controller;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.capgeticket.serviciocompra.response.CompraConfirmadaResponse;
 import com.capgeticket.serviciocompra.response.PeticionCompraResponse;
 import com.capgeticket.serviciocompra.service.CompraService;
-import org.springframework.http.HttpStatus;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -22,6 +21,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
  * Gregorio
  */
 @RestController
+@RequestMapping("/compras")
 public class CompraController {
 	private final CompraService compraService;
 
@@ -38,7 +38,6 @@ public class CompraController {
 	@ApiResponses(value = { @ApiResponse(responseCode = "201", description = "Compra creada correctamente."),
 			@ApiResponse(responseCode = "400", description = "Solicitud inválida.") })
 	@PostMapping("/nuevaCompra")
-	@ResponseStatus(HttpStatus.CREATED)
 	public CompraConfirmadaResponse nuevaCompra(@RequestBody PeticionCompraResponse peticionCompraResponse) {
 		CompraConfirmadaResponse compraConfirmada = compraService.nuevaCompra(peticionCompraResponse);
 		return compraConfirmada;

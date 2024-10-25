@@ -40,6 +40,7 @@ public class CompraAdapter {
 		return DatosCompraResponse.builder()
 				.nombreTitular(nombreTitular)
 				.numeroTarjeta(peticion.getNumTarjeta())
+				.numeroTarjeta(peticion.getNumeroTarjeta())
 				.mesCaducidad(peticion.getMesCaducidad())
 				.yearCaducidad(peticion.getYearCaducidad())
 				.cvv(peticion.getCvv())

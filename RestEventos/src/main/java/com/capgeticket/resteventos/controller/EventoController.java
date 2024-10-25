@@ -2,6 +2,8 @@ package com.capgeticket.resteventos.controller;
 
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -53,6 +55,8 @@ public class EventoController {
 
 	@Autowired
 	private EventoAdapter eventoAdapter;
+    private static final Logger log = LoggerFactory.getLogger(EventoController.class);
+
 
 	/**
 	 * Llama al servicio de evento para realizar la operacion de guardado lanza una
@@ -125,6 +129,7 @@ public class EventoController {
 			@ApiResponse(responseCode = "404", description = "El evento con el ID proporcionado no fue encontrado.") })
 	@GetMapping("/{id}")
 	public EventoResponse detallesEvento(@PathVariable Long id) {
+		log.info("--dentro de eventos rest");
 
 		Optional<Evento> evento = eventoService.detallesEvento(id);
 		if (evento.isEmpty())
