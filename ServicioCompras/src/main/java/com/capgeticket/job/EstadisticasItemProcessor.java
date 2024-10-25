@@ -1,6 +1,6 @@
 package com.capgeticket.job;
 
-import org.springframework.batch.item.ItemProcessor;
+//import org.springframework.batch.item.ItemProcessor;
 import org.springframework.stereotype.Component;
 
 import com.capgeticket.serviciocompra.model.Compra;
