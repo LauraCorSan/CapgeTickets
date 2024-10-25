@@ -20,13 +20,13 @@ public class EstadisticasItemWriterListener implements ItemWriteListener<Compra>
     }
 
 
-    public void afterWrite(List<? extends EstadisticasCompra> list) {
-        for (EstadisticasCompra creditCardRisk : list) {
-            LOGGER.info("##### afterWrite :" + creditCardRisk);
+    public void afterWrite(List<? extends Compra> list) {
+        for (Compra compra : list) {
+            LOGGER.info("##### afterWrite :" + compra);
         }
     }
 
-    public void onWriteError(Exception e, List<? extends EstadisticasCompra> list) {
+    public void onWriteError(Exception e, List<? extends Compra> list) {
         LOGGER.info("onWriteError");
     }
 }
