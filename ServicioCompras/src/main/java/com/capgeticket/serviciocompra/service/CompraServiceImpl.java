@@ -13,7 +13,6 @@ import com.capgeticket.feignclients.EventosFeignClient;
 import com.capgeticket.resteventos.response.EventoResponse;
 import com.capgeticket.serviciocompra.adapter.CompraAdapter;
 import com.capgeticket.serviciocompra.model.Compra;
-import com.capgeticket.serviciocompra.error.ErrorResponse;
 import com.capgeticket.serviciocompra.error.PeticionCompraIncorrectaException;
 import com.capgeticket.serviciocompra.error.ReciboCompraIncorrectaException;
 import com.capgeticket.serviciocompra.response.CompraConfirmadaResponse;
