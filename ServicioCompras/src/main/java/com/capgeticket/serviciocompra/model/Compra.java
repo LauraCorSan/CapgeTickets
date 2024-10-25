@@ -17,6 +17,10 @@ import lombok.Data;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 
+/**
+ * Clase: Compra Descripción: entidad Compra con sus atributos
+ * Fecha: 23/10/24 Versión: 1.0 Autores: Guillermo Garcia
+ */
 
 @Data
 @NoArgsConstructor

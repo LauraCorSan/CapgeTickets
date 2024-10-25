@@ -29,7 +29,6 @@ import com.capgeticket.serviciocompra.response.ReciboCompraResponse;
 
 import feign.FeignException;
 
-
 /**
  * Clase: CompraServiceImpl Descripción: clase de servicio que utiliza el
  * repositorio para la gestion de datos de Compras Versión: 2.0 Autores: Laura
@@ -38,9 +37,9 @@ import feign.FeignException;
 @Transactional
 @Service
 public class CompraServiceImpl implements CompraService {
-	
-    private static final Logger log = LoggerFactory.getLogger(CompraServiceImpl.class);
-	
+
+	private static final Logger log = LoggerFactory.getLogger(CompraServiceImpl.class);
+
 	private static final String EMAIL_REGEX = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
 	private static final Pattern EMAIL_PATTERN = Pattern.compile(EMAIL_REGEX);
 
@@ -92,7 +91,7 @@ public class CompraServiceImpl implements CompraService {
 	 * @throws ReciboCompraIncorrectaException Si hay un error en la compra,
 	 *                                         devuelve un código de error 400 en la
 	 *                                         respuesta.
-	 * @author lgregori                                        
+	 * @author lgregori
 	 */
 
 	public ReciboCompraResponse realizarCompra(DatosCompraResponse datosCompraResponse) {
@@ -103,7 +102,6 @@ public class CompraServiceImpl implements CompraService {
 			if (reciboCompra == null) {
 				throw new ReciboCompraIncorrectaException("La respuesta del banco es nula porque hubo un error.");
 			}
-	
 
 			return reciboCompra;
 
@@ -142,7 +140,8 @@ public class CompraServiceImpl implements CompraService {
 
 		} catch (FeignException e) {
 			log.error("Error Feign: " + e.contentUTF8());
-			throw new ReciboCompraIncorrectaException("Error en la comunicación con el banco: el sistema se encuentra inestable");
+			throw new ReciboCompraIncorrectaException(
+					"Error en la comunicación con el banco: el sistema se encuentra inestable");
 		}
 	}
 
@@ -189,10 +188,9 @@ public class CompraServiceImpl implements CompraService {
 
 	/**
 	 * validarPeticion() Se encarga de validar los campos de
-	 * CompraConfirmadaResponse
+	 * peticionCompraResponse
 	 *
-	 * @author vparrag
-	 * @param CompraConfirmadaResponse
+	 * @param PeticionCompraResponse
 	 */
 
 	public void validarPeticion(PeticionCompraResponse peticionCompra) {
@@ -200,7 +198,7 @@ public class CompraServiceImpl implements CompraService {
 		if (peticionCompra.getIdEvento() == null) {
 			throw new PeticionCompraIncorrectaException("El id del evento no puede estar vacío.");
 		}
-		if ( peticionCompra.getIdEvento() < 0) {
+		if (peticionCompra.getIdEvento() < 0) {
 			throw new PeticionCompraIncorrectaException("El id del evento no puede ser negativo.");
 		}
 		if (peticionCompra.getIdEvento() == 0) {
@@ -210,11 +208,10 @@ public class CompraServiceImpl implements CompraService {
 		if (peticionCompra.getEmail() == null) {
 			throw new PeticionCompraIncorrectaException("El email no puede ser nulo.");
 		}
-		if (peticionCompra.getEmail().trim().isEmpty()
-				) {
+		if (peticionCompra.getEmail().trim().isEmpty()) {
 			throw new PeticionCompraIncorrectaException("El email no puede estar vacío.");
 		}
-		if ( !EMAIL_PATTERN.matcher(peticionCompra.getEmail()).matches()) {
+		if (!EMAIL_PATTERN.matcher(peticionCompra.getEmail()).matches()) {
 			throw new PeticionCompraIncorrectaException("El email tiene un formato incorrecto.");
 		}
 

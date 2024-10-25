@@ -12,7 +12,13 @@ import com.capgeticket.serviciocompra.response.DatosCompraResponse;
 import com.capgeticket.serviciocompra.response.PeticionCompraResponse;
 import com.capgeticket.serviciocompra.response.ReciboCompraResponse;
 
-
+/**
+ * Clase: CompraAdapt 
+ * Descripción: la clase que parsea disitntos tipos de response a otros que son necesarios
+ * Fecha: 24/10/24
+ * Versión: 1.0 
+ * Autores: Guillermo
+ */
 
 @Component
 public class CompraAdapter {

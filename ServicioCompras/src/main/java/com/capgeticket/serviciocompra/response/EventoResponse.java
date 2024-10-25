@@ -9,17 +9,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
-<<<<<<< HEAD
- * Clase: Evento 
- * Descripción: modelo Evento con sus atributos 
- * Fecha: 21/10/24
- * Versión: 1.0 
-=======
  * Clase: EventoResponse
  * Descripción: clase dto con los datos más relevantes
  * Fecha: 21/10/24
  * Versión: 1.0
->>>>>>> 435c4a2ab9dbd904e9d56c5d7277ff9b3f7a9684
  * Autores: Laura Gregorio
  */
 @Builder

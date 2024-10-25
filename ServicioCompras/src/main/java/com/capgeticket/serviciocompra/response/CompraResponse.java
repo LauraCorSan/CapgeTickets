@@ -13,7 +13,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * Clase: CompraResponse Descripción: clase dto con los datos más relevantes
+ * Clase: CompraResponse Descripción: clase dto con los datos de Compra
  * Fecha: 23/10/24 Versión: 1.0 Autores: Guillermo Garcia
  */
 @Builder
