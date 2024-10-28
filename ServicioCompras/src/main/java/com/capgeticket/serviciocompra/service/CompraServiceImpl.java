@@ -15,6 +15,7 @@ import com.capgeticket.serviciocompra.adapter.CompraAdapter;
 import com.capgeticket.serviciocompra.model.Compra;
 import com.capgeticket.serviciocompra.error.PeticionCompraIncorrectaException;
 import com.capgeticket.serviciocompra.error.ReciboCompraIncorrectaException;
+import com.capgeticket.serviciocompra.error.SistemaBancoInestableException;
 import com.capgeticket.serviciocompra.response.CompraConfirmadaResponse;
 import com.capgeticket.serviciocompra.response.PeticionCompraResponse;
 
@@ -109,8 +110,12 @@ public class CompraServiceImpl implements CompraService {
 			return reciboCompra;
 
 		} catch (FeignException.BadRequest e) {
-
 			String errorBody = e.contentUTF8();
+			
+			System.out.println("----- Error body: "+errorBody);
+			System.out.println("----- Status: "+e.status());
+			System.out.println("----- Status: "+e.getCause());
+
 
 			if (errorBody.contains("400.0001")) {
 				throw new ReciboCompraIncorrectaException(
@@ -137,15 +142,15 @@ public class CompraServiceImpl implements CompraService {
 				throw new ReciboCompraIncorrectaException(
 						"Error al realizar la compra: El formato del nombre no es correcto.");
 
-			} else {
+			}else {
 				throw new ReciboCompraIncorrectaException(
 						"Error al realizar la compra: falta alguno de los datos de la tarjeta.");
 			}
 
 		} catch (FeignException e) {
 			log.error("Error Feign: " + e.contentUTF8());
-			throw new ReciboCompraIncorrectaException(
-					"Error en la comunicación con el banco: el sistema se encuentra inestable.");
+			throw new SistemaBancoInestableException(
+					"Error en la comunicación con el banco: El sistema se encuentra inestable. Intentelo de nuevo más tarde.");
 		}
 	}
 
