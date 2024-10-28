@@ -1,6 +1,7 @@
 package com.capgeticket.serviciocompra.service;
 
 import java.util.Random;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.util.regex.Pattern;
@@ -8,13 +9,13 @@ import java.util.regex.Pattern;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.capgeticket.feignclients.BancoFeignClient;
-import com.capgeticket.feignclients.EventosFeignClient;
 import com.capgeticket.resteventos.response.EventoResponse;
 import com.capgeticket.serviciocompra.adapter.CompraAdapter;
 import com.capgeticket.serviciocompra.model.Compra;
 import com.capgeticket.serviciocompra.error.PeticionCompraIncorrectaException;
 import com.capgeticket.serviciocompra.error.ReciboCompraIncorrectaException;
+import com.capgeticket.serviciocompra.feignclients.BancoFeignClient;
+import com.capgeticket.serviciocompra.feignclients.EventosFeignClient;
 import com.capgeticket.serviciocompra.response.CompraConfirmadaResponse;
 import com.capgeticket.serviciocompra.response.PeticionCompraResponse;
 
@@ -28,8 +29,7 @@ import com.capgeticket.serviciocompra.response.ReciboCompraResponse;
 
 import feign.FeignException;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 
 
 /**

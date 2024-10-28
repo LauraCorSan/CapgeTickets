@@ -1,4 +1,4 @@
-package com.capgeticket.feignclients;
+package com.capgeticket.serviciocompra.feignclients;
 
 import org.springframework.cloud.openfeign.FeignClient;
 

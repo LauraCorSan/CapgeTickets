@@ -10,21 +10,21 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-@EnableFeignClients(basePackages = "com.capgeticket.feignclients")
-public class ServicioComprasApplication implements CommandLineRunner {
+@EnableFeignClients(basePackages = "com.capgeticket.serviciocompra.feignclients")
+@EnableScheduling
+public class ServicioComprasApplication implements CommandLineRunner{
 	@Autowired
 	JobLauncher jobLauncher;
 
 	@Autowired
 	Job job;
-
 	public static void main(String[] args) {
 		SpringApplication.run(ServicioComprasApplication.class, args);
 	}
-	
 	
 	@Override
 	public void run(String... args) throws Exception {

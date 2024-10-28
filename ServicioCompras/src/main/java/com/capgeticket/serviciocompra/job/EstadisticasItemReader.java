@@ -1,4 +1,4 @@
-package com.capgeticket.job;
+package com.capgeticket.serviciocompra.job;
 
 
 
@@ -16,6 +16,7 @@ import com.capgeticket.serviciocompra.repository.CompraRepository;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
+@Component
 public class EstadisticasItemReader implements ItemReader<Compra> {
 
     @Autowired
@@ -23,18 +24,12 @@ public class EstadisticasItemReader implements ItemReader<Compra> {
 
     private Iterator<Compra> comprasIterator;
 
-    /**
-     * Método before que inicializa el iterador de datos de la tabla Compra.
-     */
     @BeforeStep
     public void before(StepExecution stepExecution) {
         comprasIterator = compraRepository.findAll().iterator();
         log.info("-- Datos cargados de la BBDD: " + compraRepository.findAll());
     }
 
-    /**
-     * Método read que entrega cada ítem de la lista al Processor.
-     */
     @Override
     public Compra read() {
         if (comprasIterator != null && comprasIterator.hasNext()) {

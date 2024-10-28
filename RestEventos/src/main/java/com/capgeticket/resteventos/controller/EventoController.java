@@ -17,7 +17,7 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 
 import org.springframework.http.HttpStatus;
-
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 
 
@@ -46,7 +46,7 @@ import com.capgeticket.resteventos.model.Evento;
  * procesamiento) de endpoints Fecha: 18/10/24 Versión: 2.0 Autores: Laura
  * Gregorio, Laura Cordero, Elena, Guillermo, Veronica
  */
-
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/evento")
 public class EventoController {

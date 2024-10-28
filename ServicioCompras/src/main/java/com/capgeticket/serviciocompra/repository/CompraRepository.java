@@ -12,4 +12,5 @@ import com.capgeticket.serviciocompra.model.Compra;
 
 @Repository
 public interface CompraRepository extends JpaRepository<Compra, Long> {
+	
 }
