@@ -27,6 +27,5 @@ public class CompraResponse implements Serializable {
 	private Long idEvento;
 	private double precio;
 	private String email;
-
 	private String fecha;
 }

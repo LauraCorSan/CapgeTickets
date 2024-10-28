@@ -29,8 +29,6 @@ import com.capgeticket.serviciocompra.response.ReciboCompraResponse;
 
 import feign.FeignException;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 
 /**

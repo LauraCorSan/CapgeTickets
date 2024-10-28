@@ -1,6 +1,6 @@
 package com.capgeticket.serviciocompra.adapter;
 
-import java.text.DecimalFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -24,6 +24,7 @@ import com.capgeticket.serviciocompra.response.ReciboCompraResponse;
 @Component
 public class CompraAdapter {
 	private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+	 // Definir el formato
 
 	public CompraResponse toDTO(Compra compra) {
 	    return CompraResponse.builder()
@@ -40,7 +41,7 @@ public class CompraAdapter {
 	            .idCompra(compraDto.getId())        
 	            .idEvento(compraDto.getIdEvento())                           
 	            .precio(compraDto.getPrecio())         
-	            .fecha(LocalDateTime.parse(compraDto.getFecha(), FORMATTER))
+	            .fecha( LocalDateTime.parse(compraDto.getFecha(), FORMATTER).toLocalDate())
 	            .email(compraDto.getEmail())          
 	            .build();                                  
 	}
@@ -64,13 +65,13 @@ public class CompraAdapter {
 		return CompraConfirmadaResponse.builder()
 				.mensaje(String.format(
 		                "Compra registrada con éxito el día %s para el evento: %s, precio: %.2f, usuario: %s.",
-		                recibo.getTimestamp(),  
+		                recibo.getTimestamp().split(" ")[0],  
 		                recibo.getInfo().getConcepto(),
 		                recibo.getInfo().getCantidad(),   
 		                recibo.getInfo().getNombreTitular() 
 		            ))
 				.nombreEvento(recibo.getInfo().getConcepto())
-				.fecha(recibo.getTimestamp())
+				.fecha(recibo.getTimestamp().split(" ")[0])
 				.precio(recibo.getInfo().getCantidad())
 				.email(email)
 				.build();
