@@ -33,6 +33,7 @@ public class EventoResponse implements Serializable {
 
 	private String genero;
 	
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm")
 	private LocalDateTime fechaEvento;
 
 	private double precioMin;

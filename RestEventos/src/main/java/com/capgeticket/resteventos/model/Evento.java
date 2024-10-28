@@ -43,7 +43,7 @@ public class Evento {
 	@Column(name = "genero")
 	private String genero;
 	
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm")
     @Column(name = "fecha_evento")
     private LocalDateTime fechaEvento;
 
