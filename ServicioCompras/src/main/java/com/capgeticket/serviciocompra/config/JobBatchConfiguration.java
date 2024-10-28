@@ -4,19 +4,17 @@ package com.capgeticket.serviciocompra.config;
 
 
 
+import java.util.List;
+
+
 import org.springframework.batch.core.Job;
 
 import org.springframework.batch.core.Step;
-
-
+import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.step.builder.StepBuilder;
-
 import org.springframework.batch.core.job.builder.JobBuilder;
-
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -71,7 +69,7 @@ public class JobBatchConfiguration {
     @Bean
     public Step estadisticasStep(JobRepository jobRepository, PlatformTransactionManager transactionManager) {
     	return new StepBuilder("estadisticasStep", jobRepository)
-    			.<Compra, EstadisticasCompra>chunk(100, transactionManager)
+    			.<List<Compra>, EstadisticasCompra>chunk(10, transactionManager)
     			.reader(reader())
     			.processor(processor())
     			.writer(writer())

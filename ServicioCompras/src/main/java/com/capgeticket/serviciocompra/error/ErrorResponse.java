@@ -1,8 +1,5 @@
 package com.capgeticket.serviciocompra.error;
 
-import java.io.IOException;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * Clase: ErrorResponse 
@@ -22,7 +19,6 @@ public class ErrorResponse {
 		this.details = details;
 	}
 	
-	// Getters y Setters
 	public int getStatus() {
 		return status;
 	}

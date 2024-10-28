@@ -1,12 +1,8 @@
 package com.capgeticket.serviciocompra.response;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
-import com.capgeticket.resteventos.model.Evento;
-import com.capgeticket.serviciocompra.model.Compra;
-import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

@@ -1,6 +1,7 @@
 package com.capgeticket.resteventos.response;
 
 import java.io.Serializable;
+
 import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonFormat;

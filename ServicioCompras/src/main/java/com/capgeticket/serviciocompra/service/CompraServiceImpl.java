@@ -2,6 +2,7 @@ package com.capgeticket.serviciocompra.service;
 
 import java.util.Random;
 
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.util.regex.Pattern;
@@ -14,12 +15,9 @@ import com.capgeticket.serviciocompra.adapter.CompraAdapter;
 import com.capgeticket.serviciocompra.model.Compra;
 import com.capgeticket.serviciocompra.error.PeticionCompraIncorrectaException;
 import com.capgeticket.serviciocompra.error.ReciboCompraIncorrectaException;
-<<<<<<< HEAD
 import com.capgeticket.serviciocompra.feignclients.BancoFeignClient;
 import com.capgeticket.serviciocompra.feignclients.EventosFeignClient;
-=======
 import com.capgeticket.serviciocompra.error.SistemaBancoInestableException;
->>>>>>> 5baea02a08a4d64edda8ff67e48844deae16f76f
 import com.capgeticket.serviciocompra.response.CompraConfirmadaResponse;
 import com.capgeticket.serviciocompra.response.PeticionCompraResponse;
 

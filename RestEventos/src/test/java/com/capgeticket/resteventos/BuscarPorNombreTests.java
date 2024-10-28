@@ -1,33 +1,30 @@
 package com.capgeticket.resteventos;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.anyList;
-import static org.mockito.Mockito.doThrow;
-import static org.mockito.Mockito.never;
+
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+
 
 import com.capgeticket.resteventos.adapter.EventoAdapter;
 import com.capgeticket.resteventos.controller.EventoController;
 import com.capgeticket.resteventos.error.EventoNotFoundException;
 import com.capgeticket.resteventos.model.Evento;
-import com.capgeticket.resteventos.repository.EventoRepository;
 import com.capgeticket.resteventos.response.EventoResponse;
-import com.capgeticket.resteventos.service.EventoService;
 import com.capgeticket.resteventos.service.EventoServiceImpl;
 
 /**

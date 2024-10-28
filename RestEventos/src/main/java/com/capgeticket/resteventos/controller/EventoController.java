@@ -2,6 +2,7 @@ package com.capgeticket.resteventos.controller;
 
 import java.util.Optional;
 
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 
 import java.util.List;
 
-import org.springframework.http.ResponseEntity;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -34,7 +34,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
 import com.capgeticket.resteventos.adapter.EventoAdapter;
-import com.capgeticket.resteventos.error.ErrorResponse;
 import com.capgeticket.resteventos.error.EventoNotFoundException;
 import com.capgeticket.resteventos.error.NoEventosException;
 import com.capgeticket.resteventos.response.EventoResponse;

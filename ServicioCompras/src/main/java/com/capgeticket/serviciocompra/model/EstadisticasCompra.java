@@ -1,8 +1,8 @@
 package com.capgeticket.serviciocompra.model;
 
 import java.io.Serializable;
+
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

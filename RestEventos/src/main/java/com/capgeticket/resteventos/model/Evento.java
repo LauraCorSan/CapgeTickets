@@ -2,6 +2,7 @@ package com.capgeticket.resteventos.model;
 
 import java.time.LocalDateTime;
 
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.Column;

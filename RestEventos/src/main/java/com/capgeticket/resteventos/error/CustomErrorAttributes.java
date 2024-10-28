@@ -1,6 +1,7 @@
 package com.capgeticket.resteventos.error;
 
 import org.springframework.stereotype.Component;
+
 import org.springframework.web.context.request.WebRequest;
 
 import com.capgeticket.resteventos.controller.EventoController;

@@ -1,20 +1,19 @@
 package com.capgeticket.resteventos;
 
-import static org.junit.jupiter.api.Assertions.*;
 
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
-
 import java.time.LocalDateTime;
 import java.util.Optional;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-
 import com.capgeticket.resteventos.adapter.EventoAdapter;
-
 import com.capgeticket.resteventos.controller.EventoController;
 import com.capgeticket.resteventos.error.EventoInvalidoException;
 import com.capgeticket.resteventos.error.EventoNotFoundException;

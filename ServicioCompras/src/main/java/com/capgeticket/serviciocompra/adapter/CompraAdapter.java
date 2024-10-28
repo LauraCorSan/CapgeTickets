@@ -1,6 +1,6 @@
 package com.capgeticket.serviciocompra.adapter;
 
-import java.time.LocalDate;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -24,7 +24,6 @@ import com.capgeticket.serviciocompra.response.ReciboCompraResponse;
 @Component
 public class CompraAdapter {
 	private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-	 // Definir el formato
 
 	public CompraResponse toDTO(Compra compra) {
 	    return CompraResponse.builder()

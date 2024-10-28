@@ -1,24 +1,13 @@
 package com.capgeticket.resteventos;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-
-
-import org.springframework.http.HttpStatus;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.http.ResponseEntity;
-
 import com.capgeticket.resteventos.adapter.EventoAdapter;
 import com.capgeticket.resteventos.controller.EventoController;
-import com.capgeticket.resteventos.model.Evento;
 import com.capgeticket.resteventos.repository.EventoRepository;
 import com.capgeticket.resteventos.service.EventoService;
 

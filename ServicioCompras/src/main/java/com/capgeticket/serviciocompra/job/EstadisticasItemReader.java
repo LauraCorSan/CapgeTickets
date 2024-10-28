@@ -1,6 +1,9 @@
 package com.capgeticket.serviciocompra.job;
 
-import java.util.Iterator;
+
+
+
+import java.util.List;
 
 import org.springframework.batch.core.StepExecution;
 import org.springframework.batch.core.annotation.BeforeStep;
@@ -22,28 +25,31 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 @Component
-public class EstadisticasItemReader implements ItemReader<Compra> {
+public class EstadisticasItemReader implements ItemReader<List<Compra>> {
 
     @Autowired
     private CompraRepository compraRepository;
 
-    private Iterator<Compra> comprasIterator;
+    private List<Compra> compras;
+
+    private boolean hasRead = false;  
 
     @BeforeStep
     public void before(StepExecution stepExecution) {
-        comprasIterator = compraRepository.findAll().iterator();
-        log.info("-- Datos cargados de la BBDD: " + compraRepository.findAll());
+        if (!hasRead) {
+            compras = compraRepository.findAll();
+            log.info("-- Datos cargados de la BBDD: " + compras);
+        }
     }
 
     @Override
-    public Compra read() {
-        if (comprasIterator != null && comprasIterator.hasNext()) {
-            Compra compra = comprasIterator.next();
-            log.info("-- Elemento leído: " + compra);
-            return compra;
+    public List<Compra> read() {
+        if (!hasRead) {
+            hasRead = true;  
+            return compras;
         } else {
-            log.info("---- read(): No hay más datos");
-            return null; 
+            return null;  
         }
     }
 }
+
