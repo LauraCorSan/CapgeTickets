@@ -37,7 +37,7 @@ import com.capgeticket.resteventos.adapter.EventoAdapter;
 import com.capgeticket.resteventos.error.EventoNotFoundException;
 import com.capgeticket.resteventos.error.NoEventosException;
 import com.capgeticket.resteventos.response.EventoResponse;
-
+import com.capgeticket.resteventos.response.MessageDeletedResponse;
 import com.capgeticket.resteventos.model.Evento;
 
 /**
@@ -170,13 +170,14 @@ public class EventoController {
 			@ApiResponse(responseCode = "404", description = "Evento no encontrado."),
 			@ApiResponse(responseCode = "500", description = "Error interno del servidor.") })
 	@DeleteMapping("/eliminar/{id}")
-	public String deleteEvento(@PathVariable Long id) {
+	public MessageDeletedResponse deleteEvento(@PathVariable Long id) {
 		final Optional<Evento> e = eventoService.buscarPorId(id);
 		if (e.isEmpty())
 			throw new EventoNotFoundException("El evento con id " + id + " no se ha encontrado");
 		String nombre = e.get().getNombre();
 		eventoService.eliminarEvento(id);
-		return String.format("El evento %s con id %d se ha eliminado correctamente", nombre, id);
+		MessageDeletedResponse message = new MessageDeletedResponse(200,"Evento eliminado correctamente.",String.format("El evento %s con id %d se ha eliminado", nombre, id));
+		return message;
 
 	}
 
