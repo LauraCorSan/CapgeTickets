@@ -19,10 +19,6 @@ public class EstadisticasItemWriter implements ItemWriter<EstadisticasCompra> {
 	@Autowired
 	private EstadisticasRepository estadisticasRepository;
 
-	/**
-	 * Método write que guarda cada EstadisticasCompra en la base de datos.
-	 */
-
 	@Override
 	public void write(Chunk<? extends EstadisticasCompra> items) throws Exception {
 		// TODO Auto-generated method stub

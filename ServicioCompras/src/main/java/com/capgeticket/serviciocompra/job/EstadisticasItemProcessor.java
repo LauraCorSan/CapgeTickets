@@ -22,8 +22,7 @@ import java.util.stream.Collectors;
 @Component
 public class EstadisticasItemProcessor implements ItemProcessor<List<Compra>, EstadisticasCompra> {
 
-    private List<EstadisticasCompra> estadisticasCompra; 
-    private Iterator<EstadisticasCompra> iterator;
+    private Iterator<EstadisticasCompra> estadisticasIterator;
 
     @Override
     public EstadisticasCompra process(List<Compra> compras) {
@@ -32,9 +31,7 @@ public class EstadisticasItemProcessor implements ItemProcessor<List<Compra>, Es
             return null;
         }
 
-        // Recalcula solo si el iterator es nulo o ya terminó
-        if (iterator == null || !iterator.hasNext()) {
-            // Agrupa las compras por evento y calcula el precio medio solo para la fecha actual
+        if (estadisticasIterator == null || !estadisticasIterator.hasNext()) {
             Map<Long, Double> mediaPreciosPorEvento = compras.stream()
                 .filter(compra -> compra.getFecha().isEqual(LocalDate.now()))
                 .collect(Collectors.groupingBy(
@@ -42,25 +39,26 @@ public class EstadisticasItemProcessor implements ItemProcessor<List<Compra>, Es
                     Collectors.averagingDouble(Compra::getPrecio)
                 ));
 
-            estadisticasCompra = mediaPreciosPorEvento.entrySet().stream()
+            List<EstadisticasCompra> estadisticasCompra = mediaPreciosPorEvento.entrySet().stream()
                 .map(entry -> EstadisticasCompra.builder()
                     .idEvento(entry.getKey())
                     .precioMedio(entry.getValue())
                     .diaActual(LocalDate.now())
                     .build())
                 .collect(Collectors.toList());
-            log.info("Lista de estadisticas para cada evento de hoy",estadisticasCompra);
 
-            iterator = estadisticasCompra.iterator(); 
+            log.info("Lista de estadísticas para cada evento de hoy: {}", estadisticasCompra);
+
+            estadisticasIterator = estadisticasCompra.iterator();
         }
 
-        if (iterator.hasNext()) {
-            EstadisticasCompra estadistica = iterator.next();
+        if (estadisticasIterator.hasNext()) {
+            EstadisticasCompra estadistica = estadisticasIterator.next();
             log.info("Estadística calculada para el evento {}: {}", estadistica.getIdEvento(), estadistica);
             return estadistica;
         } else {
             log.info("-- No hay más estadísticas para procesar.");
-            return null; 
+            return null;
         }
     }
 }

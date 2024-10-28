@@ -9,6 +9,13 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
 import com.zaxxer.hikari.HikariDataSource;
 
+/**
+ * Clase: DataSourceConfiguration
+ * Descripción: clase que contiene la configuracion de la base de datos
+ * Fecha: 25/10/24
+ * Versión: 1.0 
+ * Autores: Laura Gregorio
+ */
 @Configuration
 public class DataSourceConfiguration {
     

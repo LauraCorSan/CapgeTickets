@@ -13,7 +13,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.web.error.ErrorAttributeOptions;
 import org.springframework.boot.web.servlet.error.DefaultErrorAttributes;
 
-
+/**
+ * Clase: CustomErrorAttributes
+ * Descripción: clase que edita los parametros que muestra el error
+ * Fecha: 28/10/24
+ * Versión: 1.0 
+ * Autores: Laura Cordero
+ */
 @Component
 public class CustomErrorAttributes extends DefaultErrorAttributes {
 	
