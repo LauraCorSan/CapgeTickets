@@ -37,6 +37,14 @@ public class GlobalExceptionHandler {
 				ex.getMessage());
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
 	}
+	
+	@ExceptionHandler(SistemaBancoInestableException.class)
+	public ResponseEntity<ErrorResponse> sistemaBancoInestableException(SistemaBancoInestableException ex) {
+		logger.error("Intento de compra fallido.: {}", ex.getMessage());
+		ErrorResponse errorResponse = new ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Intento de compra fallido.",
+				ex.getMessage());
+		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
+	}
 
 	@ExceptionHandler(NoHandlerFoundException.class)
 	public ResponseEntity<ErrorResponse> handleRouteNotFoundException(NoHandlerFoundException ex) {

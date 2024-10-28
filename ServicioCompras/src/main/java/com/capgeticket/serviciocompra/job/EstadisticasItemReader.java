@@ -1,7 +1,5 @@
 package com.capgeticket.serviciocompra.job;
 
-
-
 import java.util.Iterator;
 
 import org.springframework.batch.core.StepExecution;

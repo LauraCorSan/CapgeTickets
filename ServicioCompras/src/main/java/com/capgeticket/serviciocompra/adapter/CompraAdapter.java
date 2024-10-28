@@ -1,5 +1,6 @@
 package com.capgeticket.serviciocompra.adapter;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -23,8 +24,9 @@ import com.capgeticket.serviciocompra.response.ReciboCompraResponse;
 @Component
 public class CompraAdapter {
 	private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-	public CompraResponse toDTO(Compra compra) {
+	 // Definir el formato
 
+	public CompraResponse toDTO(Compra compra) {
 	    return CompraResponse.builder()
 	            .id(compra.getIdCompra())                
 	            .idEvento(compra.getIdEvento())     
@@ -35,18 +37,18 @@ public class CompraAdapter {
 	}
 
 	public Compra toEntity(CompraResponse compraDto) {
-	
 	    return Compra.builder()
 	            .idCompra(compraDto.getId())        
 	            .idEvento(compraDto.getIdEvento())                           
 	            .precio(compraDto.getPrecio())         
-	            .fecha(LocalDateTime.parse(compraDto.getFecha(), FORMATTER))
+	            .fecha( LocalDateTime.parse(compraDto.getFecha(), FORMATTER).toLocalDate())
 	            .email(compraDto.getEmail())          
 	            .build();                                  
 	}
 	
 	
 	public DatosCompraResponse toDatosCompraDto(String nombreTitular, String nombreEvento, Double cantidad,PeticionCompraResponse peticion ) {
+	    double cantidadDosDecimales = Math.floor(cantidad * 100) / 100;
 		return DatosCompraResponse.builder()
 				.nombreTitular(nombreTitular)
 				.numeroTarjeta(peticion.getNumeroTarjeta())
@@ -55,7 +57,7 @@ public class CompraAdapter {
 				.cvv(peticion.getCvv())
 				.emisor(peticion.getEmisor())
 				.concepto(nombreEvento)
-				.cantidad(cantidad)
+				.cantidad(cantidadDosDecimales)
 				.build();
 	}
 	
@@ -63,13 +65,13 @@ public class CompraAdapter {
 		return CompraConfirmadaResponse.builder()
 				.mensaje(String.format(
 		                "Compra registrada con éxito el día %s para el evento: %s, precio: %.2f, usuario: %s.",
-		                recibo.getTimestamp(),  
+		                recibo.getTimestamp().split(" ")[0],  
 		                recibo.getInfo().getConcepto(),
 		                recibo.getInfo().getCantidad(),   
 		                recibo.getInfo().getNombreTitular() 
 		            ))
 				.nombreEvento(recibo.getInfo().getConcepto())
-				.fecha(recibo.getTimestamp())
+				.fecha(recibo.getTimestamp().split(" ")[0])
 				.precio(recibo.getInfo().getCantidad())
 				.email(email)
 				.build();

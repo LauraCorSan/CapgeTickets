@@ -108,7 +108,9 @@ public class EventoServiceImpl implements EventoService {
 		if (evento.getNombre() == null || evento.getNombre().trim().isEmpty()) {
 			throw new EventoInvalidoException("El nombre del evento no puede estar vacío.");
 		}
- 
+		if (evento.getDescripcion() == null || evento.getDescripcion().trim().isEmpty()){
+			throw new EventoInvalidoException("La descripción del evento no puede estar vacía.");
+		}
 		if (evento.getGenero() == null || evento.getGenero().trim().isEmpty()){
 			throw new EventoInvalidoException("El género del evento no puede estar vacío.");
 		}
