@@ -1,25 +1,20 @@
 package com.capgeticket.serviciocompra.config;
 
-import java.util.List;
 
 
 
-import javax.sql.DataSource;
 
 import org.springframework.batch.core.Job;
 
 import org.springframework.batch.core.Step;
-import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
+
 
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.step.builder.StepBuilder;
-import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
-import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
+
 import org.springframework.batch.core.job.builder.JobBuilder;
-import org.springframework.batch.item.ItemProcessor;
-import org.springframework.batch.item.ItemReader;
-import org.springframework.batch.item.ItemWriter;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -33,9 +28,16 @@ import com.capgeticket.serviciocompra.listener.EstadisticaExecutionListener;
 import com.capgeticket.serviciocompra.model.Compra;
 import com.capgeticket.serviciocompra.model.EstadisticasCompra;
 
-import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
+
+
+/**
+ * Clase: JobBatchConfiguration
+ * Descripción: clase que contiene la configuracion, inyecta los jobs y los ejecuta
+ * Fecha: 28/10/24
+ * Versión: 1.0 
+ * Autores: Laura Gregorio
+ */
 @Configuration
 public class JobBatchConfiguration {
     @Bean

@@ -15,6 +15,13 @@ import com.capgeticket.serviciocompra.repository.CompraRepository;
 
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * Clase: EstadisticasItemReader
+ * Descripción: clase que recupera los datos de la base 
+ * Fecha: 28/10/24
+ * Versión: 1.0 
+ * Autores: Laura Gregorio
+ */
 @Slf4j
 @Component
 public class EstadisticasItemReader implements ItemReader<Compra> {

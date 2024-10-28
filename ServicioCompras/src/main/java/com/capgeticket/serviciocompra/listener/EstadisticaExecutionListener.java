@@ -8,6 +8,13 @@ import org.springframework.stereotype.Component;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * Clase: EstadisticaExecutionListener
+ * Descripción: listener general  
+ * Fecha: 28/10/24
+ * Versión: 1.0 
+ * Autores: Laura Gregorio
+ */
 @Component
 @RequiredArgsConstructor
 @Slf4j
